@@ -1,0 +1,26 @@
+{
+  "curricula": [
+    {
+      "curriculum": "Sample",
+      "groups": [
+        {
+          "group": "Sample",
+          "lists": [
+            {
+              "list_id": "Sample-list01",
+              "list_name": "Sample - Greetings",
+              "count": 8,
+              "file": "sample/list01.json"
+            },
+            {
+              "list_id": "Sample-list02",
+              "list_name": "Sample - Numbers & Time",
+              "count": 8,
+              "file": "sample/list02.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

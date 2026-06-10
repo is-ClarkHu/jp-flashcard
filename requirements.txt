@@ -1,0 +1,10 @@
+# Python dependencies for convert.py (the data-prep tool).
+# The app itself is a web frontend and does NOT depend on these.
+
+pdfplumber>=0.11      # PDF text-layer table extraction (primary raw source)
+pandas>=2.0           # spreadsheet (xlsx/xls/csv) reading
+openpyxl>=3.1         # .xlsx engine for pandas
+
+# LLM enrichment (--fill-meanings / --explain) uses the standard library only
+# (urllib) and talks to whichever provider you pick with --provider, so there are
+# no extra Python deps. Put the provider's key in a .env file (see .env.example).

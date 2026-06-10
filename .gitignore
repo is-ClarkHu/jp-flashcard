@@ -1,0 +1,39 @@
+# --- Raw input (disposable; not a runtime dependency) ---
+raw_data/
+
+# --- Exported user progress (personal data; never commit) ---
+*.progress.json
+*-progress-*.json
+
+# --- Secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Python (project-local venv for convert.py) ---
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# --- Node / build output ---
+node_modules/
+dist/
+dist-standalone/
+dist-electron/
+release/
+
+# --- Generated word library (built from copyrighted sources; NOT distributed) ---
+# Build your own from raw_data/ with convert.py. Only the small demo deck under
+# data/sample/ is committed (whitelisted below). Pre-generated audio
+# (data/audio/, large & regenerable via convert.py --tts) is also excluded here.
+data/*
+!data/sample/
+
+# --- Design doc (kept local, not published) ---
+docs/SPEC.md
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
