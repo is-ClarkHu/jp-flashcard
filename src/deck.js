@@ -10,10 +10,23 @@ export async function loadManifest() {
   // Fallback: the small bundled demo deck (data/sample/manifest.json), so a fresh
   // clone with no built library still runs out of the box. The demo manifest
   // points its list files at sample/… so loadListFile resolves them correctly.
-  let res = await fetch("./manifest.json");
-  if (!res.ok) res = await fetch("./sample/manifest.json");
-  if (!res.ok) throw new Error(`manifest.json: ${res.status}`);
-  return res.json();
+  //
+  // We can't rely on res.ok alone: a dev/static server with an SPA fallback returns
+  // index.html (HTTP 200) for a missing manifest, so we only accept a response that
+  // actually parses as a manifest object.
+  const tryLoad = async (url) => {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const data = JSON.parse(await res.text());
+      return data && Array.isArray(data.curricula) ? data : null;
+    } catch {
+      return null;
+    }
+  };
+  const manifest = (await tryLoad("./manifest.json")) || (await tryLoad("./sample/manifest.json"));
+  if (!manifest) throw new Error("Could not load manifest.json (or the sample demo).");
+  return manifest;
 }
 
 export async function loadListFile(file) {
@@ -60,7 +73,20 @@ export function cardListId(cardId) {
 
 // Load specific cards by id (e.g. a favorites deck), preserving the given order.
 export async function loadCardsByIds(ids) {
-  const files = [...new Set(ids.map(cardFile).filter(Boolean))];
+  // Resolve each id's list file via the manifest (list_id -> file), the single
+  // source of truth, so this works regardless of file layout (e.g. the sample/
+  // demo deck). Fall back to the id-derived path if a lookup misses.
+  let fileByListId = new Map();
+  try {
+    const manifest = await loadManifest();
+    for (const c of manifest.curricula)
+      for (const g of c.groups)
+        for (const l of g.lists) fileByListId.set(l.list_id, l.file);
+  } catch {
+    /* manifest unavailable; fall back to id-derived paths below */
+  }
+  const fileFor = (id) => fileByListId.get(cardListId(id)) || cardFile(id);
+  const files = [...new Set(ids.map(fileFor).filter(Boolean))];
   const byId = new Map();
   await Promise.all(
     files.map(async (file) => {

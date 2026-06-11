@@ -1,22 +1,88 @@
 {
   "curricula": [
     {
-      "curriculum": "Sample",
+      "curriculum": "Greetings",
       "groups": [
         {
-          "group": "Sample",
+          "group": "Greetings",
           "lists": [
             {
-              "list_id": "Sample-list01",
-              "list_name": "Sample - Greetings",
+              "list_id": "greet-list01",
+              "list_name": "Hellos",
               "count": 8,
-              "file": "sample/list01.json"
+              "file": "sample/greet.json"
             },
             {
-              "list_id": "Sample-list02",
-              "list_name": "Sample - Numbers & Time",
+              "list_id": "polite-list01",
+              "list_name": "Polite phrases",
               "count": 8,
-              "file": "sample/list02.json"
+              "file": "sample/polite.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Numbers & Time",
+      "groups": [
+        {
+          "group": "Numbers & Time",
+          "lists": [
+            {
+              "list_id": "num-list01",
+              "list_name": "Numbers 1–10",
+              "count": 10,
+              "file": "sample/num.json"
+            },
+            {
+              "list_id": "cal-list01",
+              "list_name": "Days & Time",
+              "count": 8,
+              "file": "sample/cal.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Food & Drink",
+      "groups": [
+        {
+          "group": "Food & Drink",
+          "lists": [
+            {
+              "list_id": "food-list01",
+              "list_name": "Food",
+              "count": 8,
+              "file": "sample/food.json"
+            },
+            {
+              "list_id": "drink-list01",
+              "list_name": "Drinks",
+              "count": 8,
+              "file": "sample/drink.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Around Town",
+      "groups": [
+        {
+          "group": "Around Town",
+          "lists": [
+            {
+              "list_id": "place-list01",
+              "list_name": "Places",
+              "count": 8,
+              "file": "sample/place.json"
+            },
+            {
+              "list_id": "trans-list01",
+              "list_name": "Transport",
+              "count": 8,
+              "file": "sample/trans.json"
             }
           ]
         }
