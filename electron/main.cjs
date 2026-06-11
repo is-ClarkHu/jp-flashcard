@@ -8,6 +8,13 @@ const { pathToFileURL } = require("url");
 
 const DIST = path.join(__dirname, "..", "dist");
 
+// Set by `npm run electron:dev` (scripts/electron-dev.mjs): when present, load the
+// live Vite dev server instead of the built bundle, and open DevTools. Lets you
+// debug Electron-specific behavior (IndexedDB persistence, etc.) with hot reload,
+// without a full build. Note: the dev server is a localhost origin, so its
+// IndexedDB bucket differs from the production app:// origin below.
+const DEV_URL = process.env.ELECTRON_DEV_URL;
+
 protocol.registerSchemesAsPrivileged([
   { scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true } },
 ]);
@@ -24,7 +31,12 @@ function createWindow() {
       nodeIntegration: false,
     },
   });
-  win.loadURL("app://app/index.html");
+  if (DEV_URL) {
+    win.loadURL(DEV_URL);
+    win.webContents.openDevTools();
+  } else {
+    win.loadURL("app://app/index.html");
+  }
 }
 
 app.whenReady().then(() => {

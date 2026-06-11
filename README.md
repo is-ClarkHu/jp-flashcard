@@ -194,6 +194,62 @@ npm run build:electron        # -> release/  (.dmg on macOS, .exe on Windows)
 - All three are fully offline; the only network call is the optional Layer-2
   "Explain deeper" (your own API key, from Settings).
 
+### Desktop app (Electron) — details
+
+**Which command when:**
+
+| Command | Use it for | Loads | DevTools |
+|---|---|---|---|
+| `npm run dev` | **Everyday development** — pure web, hot reload, browser DevTools. Electron not involved. | Vite dev server in your browser | browser |
+| `npm run electron:dev` | **Debugging Electron-specific behavior** (esp. IndexedDB persistence) with hot reload. | Vite dev server, in an Electron window | auto-opened |
+| `npm run electron` | A final check of the **built** app exactly as it ships (same `app://` origin as the installer). | built `dist/` over `app://` | no |
+| `npm run build:electron` | **Producing the installer** for distribution. | — (writes `release/`) | — |
+
+```bash
+npm install                   # one-time: pulls electron + electron-builder
+npm run dev                   # daily web dev (browser, hot reload)
+npm run electron:dev          # debug inside Electron (dev server + auto DevTools)
+npm run electron              # run the built app as it ships (app:// origin)
+npm run build:electron        # build installers into release/
+```
+
+> **Heads-up:** `electron:dev` loads the dev server (a `http://localhost` origin), so
+> its IndexedDB lives in a *separate* bucket from the shipped app's `app://` origin.
+> It's perfect for confirming the *mechanism* (data survives restart), but the
+> packaged app — or `npm run electron` — is the true production-origin check.
+
+Output of `build:electron` lands in **`release/`** (gitignored):
+
+- **macOS:** `JP Flashcards-<version>.dmg`
+- **Windows:** `JP Flashcards Setup <version>.exe` (configured; build it on a Windows
+  machine, or cross-build from macOS with Wine installed)
+
+The installers are **unsigned**, so first launch needs a manual bypass — macOS:
+right-click → Open; Windows: "More info" → "Run anyway".
+
+**Why the desktop build matters — durable storage.** All your data (accounts,
+favorites, study log, wrong book, rounds, explanation cache) lives in **IndexedDB**.
+The desktop app loads from a stable, secure `app://` origin and uses Electron's
+persistent profile, so that data survives quits, restarts, and app updates. It is
+stored under the app's user-data directory:
+
+- **macOS:** `~/Library/Application Support/JP Flashcards/IndexedDB/`
+- **Windows:** `%APPDATA%/JP Flashcards/IndexedDB/`
+
+> Storage is keyed by the app's `productName` ("JP Flashcards"). Don't rename it in
+> `package.json` once you have real progress — a new name = a new (empty) profile.
+
+**Verify persistence (30 seconds):** launch the app → create an account and study a
+few cards (favorite one, mark some Known/Unknown so the wrong book and a round are
+written) → fully **quit** (⌘Q / close) → relaunch → your account and progress are
+still there.
+
+> ⚠️ **Private distribution only.** A built `.dmg` / `.exe` **inlines the full
+> vocabulary library**, which may be built from copyrighted sources. **Do not commit
+> the binaries and do not attach them to a public GitHub Release.** Share them
+> privately. Only the source (app code + `convert.py` + the small `data/sample/`
+> demo) belongs in this repository.
+
 ---
 
 ## Project structure

@@ -1009,7 +1009,25 @@ document.addEventListener("keydown", (e) => {
 
 window.addEventListener("hashchange", route);
 
+// Ask the browser to make storage persistent so the engine never evicts the
+// user's IndexedDB (favorites / study log / wrong book / rounds / accounts) under
+// disk pressure. In the Electron build the app loads from a stable app:// origin,
+// where this is granted automatically; best-effort and harmless elsewhere.
+async function requestPersistentStorage() {
+  try {
+    if (navigator.storage?.persist) {
+      const persisted = navigator.storage.persisted
+        ? await navigator.storage.persisted()
+        : false;
+      if (!persisted) await navigator.storage.persist();
+    }
+  } catch {
+    /* storage API unavailable; IndexedDB still works, just without the hint */
+  }
+}
+
 async function init() {
+  await requestPersistentStorage();
   applyTheme(state.settings.theme);
   try {
     state.manifest = await loadManifest();
