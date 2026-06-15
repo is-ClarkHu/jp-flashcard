@@ -71,6 +71,12 @@ function applyTheme(theme) {
   document.documentElement.dataset.theme = theme === "dark" ? "dark" : "light";
 }
 
+// Toggle furigana visibility app-wide (cards + self-test) via a root attribute;
+// CSS hides .card__reading / .card__reading-sub when off — no re-render needed.
+function applyShowReading(show) {
+  document.documentElement.dataset.hideReading = show ? "false" : "true";
+}
+
 // Tiny inline accuracy sparkline from an array of per-test accuracies (0..1).
 function sparkline(accs) {
   const w = 54;
@@ -257,6 +263,19 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     if (state.deck.size) showCard();
   });
   right.appendChild(faceBtn);
+
+  const readingBtn = el("button", "btn btn--ghost");
+  const readingLabel = () => (state.settings.showReading ? "Reading: on" : "Reading: off");
+  readingBtn.title = "Show/hide the kana reading (furigana)";
+  readingBtn.textContent = readingLabel();
+  readingBtn.classList.toggle("btn--active", state.settings.showReading);
+  readingBtn.addEventListener("click", () => {
+    state.settings = setSetting("showReading", !state.settings.showReading);
+    applyShowReading(state.settings.showReading);
+    readingBtn.textContent = readingLabel();
+    readingBtn.classList.toggle("btn--active", state.settings.showReading);
+  });
+  right.appendChild(readingBtn);
 
   bar.append(left, el("div", "deck-title", title), right);
   app.appendChild(bar);
@@ -641,6 +660,25 @@ function appearancePane() {
       },
     ),
   );
+  box.appendChild(el("h3", "pane__title", "Reading (furigana)"));
+  box.appendChild(
+    chipRow(
+      [["show", "Show"], ["hide", "Hide"]],
+      () => (state.settings.showReading ? "show" : "hide"),
+      (key) => {
+        state.settings = setSetting("showReading", key === "show");
+        applyShowReading(state.settings.showReading);
+      },
+    ),
+  );
+  box.appendChild(el("h3", "pane__title", "Card language (meaning shown)"));
+  box.appendChild(
+    chipRow(
+      [["zh", "中文"], ["en", "English"]],
+      () => state.settings.cardLang || "en",
+      (key) => (state.settings = setSetting("cardLang", key)),
+    ),
+  );
   return box;
 }
 
@@ -936,9 +974,9 @@ function renderSettings() {
 
   const cats = [
     ["appearance", "Appearance", appearancePane],
-    ["explanations", "Explanations", explanationsPane],
-    ["study", "Study", studyPane],
     ["accounts", "Accounts", accountsPane],
+    ["study", "Study", studyPane],
+    ["explanations", "Explanations", explanationsPane],
   ];
 
   const wrap = el("div", "settings");
@@ -1032,6 +1070,7 @@ async function requestPersistentStorage() {
 async function init() {
   await requestPersistentStorage();
   applyTheme(state.settings.theme);
+  applyShowReading(state.settings.showReading);
   try {
     state.manifest = await loadManifest();
   } catch (e) {

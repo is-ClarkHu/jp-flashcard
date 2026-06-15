@@ -493,17 +493,23 @@ body {
   gap: 6px;
 }
 .card__meaning {
-  font-size: 22px;
-  line-height: 1.4;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.35;
 }
 .card__meaning--empty {
   color: var(--muted);
 }
 .card__reading-sub {
   font-family: var(--jp-font);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--accent);
-  margin-top: 6px;
+  margin-top: 10px;
+}
+/* "Reading: off" toggle — keep layout (no jump), just hide the kana. */
+:root[data-hide-reading="true"] .card__reading,
+:root[data-hide-reading="true"] .card__reading-sub {
+  visibility: hidden;
 }
 .card__word-sub {
   font-family: var(--jp-font);

@@ -1,8 +1,11 @@
 // Single-card rendering + 3D flip. A card has two faces:
-//   - Japanese face: the word (front) + kana reading
-//   - Meaning face:  the meaning(s) + reading
+//   - Japanese face: the word (front) + kana reading (reading hideable globally)
+//   - Meaning face:  the meaning (chosen Card language) + kana reading
 // `defaultFace` ("front" = Japanese-first, "back" = meaning-first) decides which
-// face is shown un-rotated.
+// face shows un-rotated. The meaning face omits the kanji word so showing it
+// first doesn't spoil that answer; the reading stays as a pronunciation aid.
+
+import { getSettings } from "./settings.js";
 
 function el(tag, className, text) {
   const e = document.createElement(tag);
@@ -11,8 +14,17 @@ function el(tag, className, text) {
   return e;
 }
 
-function meanings(card) {
-  return [card.meaning_zh, card.meaning_en, card.meaning_ja].filter(Boolean);
+// The single meaning to show, in the user's chosen Card language, with a
+// graceful fallback if that language happens to be missing for this card.
+function cardMeaning(card) {
+  const lang = getSettings().cardLang || "en";
+  return (
+    card[`meaning_${lang}`] ||
+    card.meaning_en ||
+    card.meaning_zh ||
+    card.meaning_ja ||
+    ""
+  );
 }
 
 function japaneseFace(card) {
@@ -26,16 +38,13 @@ function japaneseFace(card) {
 
 function meaningFace(card) {
   const face = el("div", "card__face card__face--meaning");
-  const ms = meanings(card);
-  if (ms.length) {
-    const wrap = el("div", "card__meanings");
-    ms.forEach((m) => wrap.appendChild(el("div", "card__meaning", m)));
-    face.appendChild(wrap);
-  } else {
-    face.appendChild(el("div", "card__meaning card__meaning--empty", "—"));
-  }
+  const m = cardMeaning(card);
+  face.appendChild(
+    el("div", m ? "card__meaning" : "card__meaning card__meaning--empty", m || "—"),
+  );
+  // The kana reading goes on the meaning face too (pronunciation aid, not the
+  // answer like the kanji word) — still obeys the global show/hide-reading toggle.
   if (card.reading) face.appendChild(el("div", "card__reading-sub", card.reading));
-  face.appendChild(el("div", "card__word-sub", card.front));
   return face;
 }
 

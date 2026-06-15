@@ -74,9 +74,22 @@ export function renderQuiz(app, { title, cards, listId, favorites, onExit }) {
     if (!timerOn) clearTimer();
     else if (!revealed && !timedOut && queue[index]) startTimer();
   });
+  let showReading = settings.showReading !== false;
+  const readingBtn = el("button", "btn btn--ghost");
+  const readingLabel = () => (showReading ? "Reading: on" : "Reading: off");
+  readingBtn.title = "Show/hide the kana reading (furigana)";
+  readingBtn.textContent = readingLabel();
+  readingBtn.classList.toggle("btn--active", showReading);
+  readingBtn.addEventListener("click", () => {
+    showReading = !showReading;
+    setSetting("showReading", showReading);
+    document.documentElement.dataset.hideReading = showReading ? "false" : "true";
+    readingBtn.textContent = readingLabel();
+    readingBtn.classList.toggle("btn--active", showReading);
+  });
   const score = el("div", "quiz-score");
   const right = el("div", "deck-bar__side");
-  right.append(timerBtn, score);
+  right.append(timerBtn, readingBtn, score);
   bar.append(left, el("div", "deck-title", `Self-test · ${title}`), right);
   app.appendChild(bar);
 

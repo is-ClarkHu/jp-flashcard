@@ -6,6 +6,8 @@ const KEY = "settings";
 
 const DEFAULTS = {
   defaultFace: "front", // "front" = Japanese-first, "back" = meaning-first
+  showReading: true, // show the kana reading (furigana) on cards & self-test
+  cardLang: "en", // which meaning language the card's meaning face shows: "zh" | "en"
   speechRate: 1.0, // 0.5 – 1.5
   autoPlay: false, // auto-speak on flip
   autoSpeaker: "announcer", // which provider auto-plays
