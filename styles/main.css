@@ -1332,3 +1332,245 @@ body {
   .settings__nav { flex-direction: row; flex-wrap: wrap; position: static; flex-basis: auto; }
   .settings__pane { width: 100%; padding: 18px; }
 }
+
+/* ===== Kana module (§4B) ============================================== */
+
+.kana-intro { color: var(--muted); max-width: 620px; margin: 8px auto 18px; text-align: center; }
+
+/* Home: script chooser cards with progress ring */
+.kana-home { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.kana-home__card {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 24px 32px; min-width: 200px;
+  text-decoration: none; color: var(--text); transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.kana-home__card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(43,43,43,0.1); }
+.kana-home__head { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.kana-home__glyph { font-family: var(--jp-font); font-size: 40px; }
+.kana-home__sub { color: var(--muted); font-size: 14px; }
+
+.kana-ring { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.kana-ring__pct { fill: var(--text); font-size: 18px; font-family: var(--ui-font); font-weight: 600; }
+.kana-ring__label { color: var(--muted); font-size: 12.5px; }
+
+/* Study-mode launcher tiles */
+.kana-modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0 20px; }
+.kana-mode {
+  display: flex; flex-direction: column; gap: 3px; padding: 14px 16px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  text-decoration: none; color: var(--text); transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.kana-mode:hover { border-color: var(--accent); transform: translateY(-1px); }
+.kana-mode__label { font-weight: 600; }
+.kana-mode__desc { color: var(--muted); font-size: 12.5px; }
+
+/* Gojūon grid */
+.kana-grid-host { margin: 8px 0 4px; }
+.kana-grid { display: grid; gap: 8px; }
+.kana-grid--seion { grid-template-columns: repeat(5, 1fr); }
+.kana-grid--flow { grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); }
+/* inside the 50/50 overview, force a tidy 5-wide layout to fill the left half */
+.kana-board .kana-grid--seion,
+.kana-board .kana-grid--flow { grid-template-columns: repeat(5, 1fr); }
+.kana-cell {
+  position: relative; aspect-ratio: 1 / 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  cursor: pointer; font-family: var(--jp-font); transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.kana-cell:hover { transform: translateY(-2px); border-color: var(--accent); }
+.kana-cell__kana { font-size: 26px; line-height: 1; }
+.kana-cell__romaji { font-size: 12px; color: var(--muted); font-family: var(--ui-font); opacity: 0; transition: opacity 0.12s ease; }
+.kana-cell[data-flipped="true"] .kana-cell__romaji { opacity: 1; }
+.kana-cell--blank { background: transparent; border: none; cursor: default; }
+.kana-cell--blank:hover { transform: none; }
+/* selected cell — highlight follows clicks from one cell to the next */
+.kana-cell--selected {
+  border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent);
+  background: var(--accent-soft); transform: translateY(-2px);
+}
+.kana-cell--selected .kana-cell__romaji { opacity: 1; color: var(--accent); }
+/* always-visible romaji (review list / coverage heat) */
+.kana-cell--show .kana-cell__romaji { opacity: 1; }
+/* mastery tint */
+.kana-cell--m1 { background: var(--heat1); }
+.kana-cell--m2 { background: var(--heat2); }
+.kana-cell--m3 { background: var(--heat3); }
+
+/* Grid + detail share the width 50/50 so the table keeps a comfortable size */
+.kana-board { display: flex; gap: 24px; align-items: flex-start; }
+.kana-board .kana-grid-host { flex: 1 1 0; min-width: 0; margin: 0; }
+
+/* Detail / explain panel beside the grid (the other half) */
+.kana-detail {
+  flex: 1 1 0; min-width: 0; padding: 20px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.kana-detail__hint { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0; padding: 8px 0; }
+.kana-detail__head {
+  display: flex; align-items: center; gap: 22px; padding-bottom: 16px; margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+/* Hero glyph — large, centered in a soft tile */
+.kana-detail__hero { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 auto; }
+.kana-detail__glyph {
+  font-family: var(--jp-font); font-size: 104px; line-height: 1; cursor: pointer;
+  background: var(--accent-soft); color: var(--text); border: none; border-radius: 18px;
+  width: 150px; height: 150px; display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease;
+}
+.kana-detail__glyph:hover { transform: translateY(-2px); }
+.kana-detail__play { background: none; border: none; cursor: pointer; font-size: 22px; opacity: 0.8; }
+.kana-detail__play:hover { opacity: 1; }
+.kana-detail__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.kana-detail__romaji { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.kana-detail__pos { color: var(--muted); font-size: 14px; font-family: var(--jp-font); }
+.kana-detail__origin { color: var(--muted); font-size: 14px; }
+.kana-detail__stat { color: var(--accent); font-size: 13px; }
+
+/* Counterpart link (hiragana ⇄ katakana of the same sound) */
+.kana-cp {
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin-top: 8px;
+  padding: 6px 12px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 99px; cursor: pointer; color: var(--text); transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.kana-cp:hover { border-color: var(--accent); transform: translateY(-1px); }
+.kana-cp__arrow { color: var(--accent); font-size: 15px; }
+.kana-cp__glyph { font-family: var(--jp-font); font-size: 24px; line-height: 1; }
+.kana-cp__label { color: var(--muted); font-size: 12px; }
+
+/* Special notes (sokuon / long vowels) */
+.kana-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 18px; }
+.kana-note { padding: 14px 16px; background: var(--accent-soft); border-radius: 12px; }
+.kana-note__title { font-weight: 600; margin-bottom: 4px; font-family: var(--jp-font); }
+.kana-note__body { color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+/* Study sessions */
+.kana-quiz { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 18px; }
+.kana-quiz__progress { width: 100%; max-width: 420px; height: 6px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.kana-quiz__progress-fill { height: 100%; background: var(--accent); transition: width 0.25s ease; }
+.kana-quiz__bigglyph, .kana-flip__front { font-family: var(--jp-font); font-size: 96px; line-height: 1.1; }
+
+.kana-flip {
+  width: 220px; height: 220px; display: flex; align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); cursor: pointer; text-align: center;
+}
+.kana-flip__face { display: none; flex-direction: column; align-items: center; gap: 8px; }
+.kana-flip[data-flipped="false"] .kana-flip__front { display: flex; }
+.kana-flip[data-flipped="true"] .kana-flip__back { display: flex; }
+.kana-flip__romaji { font-size: 40px; font-weight: 600; }
+.kana-flip__origin { color: var(--muted); font-size: 15px; }
+
+.kana-quiz__grade { display: flex; gap: 12px; }
+.kana-quiz__done { font-size: 22px; font-weight: 600; }
+
+.kana-choices { display: grid; grid-template-columns: repeat(3, 80px); gap: 12px; }
+.kana-choice {
+  height: 80px; font-family: var(--jp-font); font-size: 34px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; cursor: pointer;
+  transition: transform 0.1s ease, border-color 0.1s ease;
+}
+.kana-choice:hover { transform: translateY(-2px); border-color: var(--accent); }
+.kana-choice--right { background: var(--heat2); border-color: var(--accent); }
+.kana-choice--wrong { background: var(--chart-warn); border-color: var(--warn); }
+
+.kana-quiz__listen { display: flex; justify-content: center; }
+.kana-quiz__playbtn { font-size: 40px; background: none; border: none; cursor: pointer; }
+.kana-quiz__prompt { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.kana-quiz__romaji { font-size: 40px; font-weight: 600; }
+
+.kana-quiz__inputrow { display: flex; gap: 10px; }
+.kana-quiz__input { width: 200px; text-align: center; font-size: 18px; }
+.kana-quiz__feedback { min-height: 26px; font-size: 18px; font-weight: 600; }
+.kana-quiz__feedback--ok { color: var(--accent); }
+.kana-quiz__feedback--no { color: var(--warn); }
+
+@media (max-width: 760px) {
+  .kana-board { flex-direction: column; }
+  .kana-detail { width: 100%; }
+}
+@media (max-width: 560px) {
+  .kana-grid--seion { max-width: 100%; }
+  .kana-quiz__bigglyph, .kana-flip__front { font-size: 72px; }
+  .kana-choices { grid-template-columns: repeat(3, 72px); }
+}
+
+/* Kana tools row (review / dashboard launchers) */
+.kana-tools { display: flex; gap: 10px; margin: 0 0 18px; }
+
+/* Kana review (wrong book) */
+.kana-review { margin-top: 16px; }
+.kana-review__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.kana-review__count { font-weight: 600; }
+
+/* Kana dashboard */
+.kana-dash { margin-top: 16px; }
+.kana-dash__top { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; margin-bottom: 8px; }
+.kana-dash__totals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; min-width: 260px; }
+.kana-stat { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 12px; text-align: center; }
+.kana-stat__val { font-size: 26px; font-weight: 600; }
+.kana-stat__label { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
+.kana-dash__h { font-size: 15px; margin: 22px 0 10px; color: var(--text); }
+
+.kana-prow { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+.kana-prow__label { width: 64px; font-family: var(--jp-font); }
+.kana-prow__track { flex: 1; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+.kana-prow__fill { height: 100%; background: var(--accent); border-radius: 6px; transition: width 0.3s ease; }
+.kana-prow__count { width: 56px; text-align: right; color: var(--muted); font-size: 13px; }
+
+.kana-heat { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 6px; }
+.kana-heat .kana-cell { aspect-ratio: 1 / 1; cursor: default; }
+.kana-heat .kana-cell:hover { transform: none; border-color: var(--line); }
+.kana-heat .kana-cell__kana { font-size: 19px; }
+
+.kana-missed { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.kana-missed__item { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.kana-missed__glyph { font-family: var(--jp-font); font-size: 26px; }
+.kana-missed__romaji { font-weight: 600; }
+.kana-missed__stat { margin-left: auto; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 560px) {
+  .kana-dash__totals { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Kana mastery legend (dashboard) */
+.kana-legend { margin: 4px 0 8px; }
+.kana-legend__note { color: var(--muted); font-size: 13px; }
+.kana-legend__swatches { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+.kana-legend__item { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.kana-legend__dot { width: 14px; height: 14px; border-radius: 4px; border: 1px solid var(--line); display: inline-block; }
+
+/* Kana home: row of small progress rings per script */
+.kana-rings { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* Kana Layer-1 brief: clean label/value rows */
+.kana-brief { display: flex; flex-direction: column; gap: 0; }
+.kana-brief__row {
+  display: grid; grid-template-columns: 92px 1fr; gap: 12px;
+  padding: 10px 0; border-top: 1px solid var(--line); align-items: start;
+}
+.kana-brief__row:first-child { border-top: none; }
+.kana-brief__label {
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.04em; padding-top: 2px;
+}
+.kana-brief__val { font-size: 14.5px; line-height: 1.55; }
+.kana-brief__glyphs { font-family: var(--jp-font); font-size: 22px; letter-spacing: 4px; margin-bottom: 4px; }
+.kana-brief__tips { margin: 4px 0 0; padding-left: 18px; }
+.kana-brief__tips li { margin: 2px 0; line-height: 1.5; }
+
+/* example word chip */
+.kana-ex { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.kana-ex__w { font-family: var(--jp-font); font-size: 22px; font-weight: 600; }
+.kana-ex__romaji { color: var(--accent); font-size: 14px; font-weight: 600; }
+.kana-ex__gloss { color: var(--muted); font-size: 14px; }
+
+/* "Did you know?" trivia — set apart with a soft accent panel */
+.kana-brief__row--trivia {
+  grid-template-columns: 1fr; gap: 4px; margin-top: 10px; padding: 12px 14px;
+  background: var(--accent-soft); border-radius: 12px; border-top: none;
+}
+.kana-brief__row--trivia .kana-brief__label { color: var(--accent); }
+.kana-brief__row--trivia .kana-brief__val { font-size: 14px; line-height: 1.6; }

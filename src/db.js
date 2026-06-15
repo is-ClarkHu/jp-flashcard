@@ -22,6 +22,7 @@ const STORE_DEFS = {
   saves: { keyPath: "id" }, // account snapshots
   seen: { keyPath: "list_id" }, // last-browsed per list
   course_state: { keyPath: "course" }, // current round per course
+  kana_progress: { keyPath: "id" }, // per-kana mastery (§4B): rolling accuracy
 };
 const REQUIRED_STORES = Object.keys(STORE_DEFS);
 
@@ -206,6 +207,37 @@ export async function getRound(listId) {
   return tx("rounds", "readonly", (os) => reqValue(os.get(listId)));
 }
 
+// --- kana progress (per-kana mastery, §4B) -------------------------------
+// One record per kana id: { id, attempts, correct, streak, last_result, updated }.
+// Mastery is a simple rolling accuracy; not the vocab round model.
+
+export async function getAllKanaProgress() {
+  return (await tx("kana_progress", "readonly", (os) => reqValue(os.getAll()))) || [];
+}
+
+// Record one attempt (correct true/false) against a kana, updating rolling stats.
+export async function recordKanaResult(kanaId, correct) {
+  const rec = (await tx("kana_progress", "readonly", (os) => reqValue(os.get(kanaId)))) || {
+    id: kanaId,
+    attempts: 0,
+    correct: 0,
+    streak: 0,
+    last_result: null,
+    updated: null,
+  };
+  rec.attempts += 1;
+  if (correct) {
+    rec.correct += 1;
+    rec.streak = (rec.streak || 0) + 1;
+  } else {
+    rec.streak = 0;
+  }
+  rec.last_result = correct ? "correct" : "wrong";
+  rec.updated = new Date().toISOString();
+  await tx("kana_progress", "readwrite", (os) => os.put(rec));
+  return rec;
+}
+
 // --- explanation cache (Layer 2 deep-dive results) -----------------------
 
 export async function getExplainCache(key) {
@@ -232,7 +264,7 @@ export async function deleteSave(id) {
 
 // --- migration (export / import all stores) ------------------------------
 
-const ALL_STORES = ["favorites", "study_log", "wrong_book", "rounds", "explain_cache", "seen", "course_state"];
+const ALL_STORES = ["favorites", "study_log", "wrong_book", "rounds", "explain_cache", "seen", "course_state", "kana_progress"];
 
 export async function exportStores() {
   const out = {};

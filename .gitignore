@@ -29,6 +29,8 @@ release/
 # (data/audio/, large & regenerable via convert.py --tts) is also excluded here.
 data/*
 !data/sample/
+# Kana (五十音) is a fixed, self-authored, non-copyrighted set — ship it.
+!data/kana/
 
 # --- Design doc (kept local, not published) ---
 docs/SPEC.md

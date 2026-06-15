@@ -21,7 +21,15 @@ for (const cur of manifest.curricula) {
   }
 }
 
-const json = JSON.stringify({ manifest, lists }).replace(/</g, "\\u003c");
+// Kana (五十音) is a fixed, self-authored static set; inline it too so the kana
+// module works in the single-file target with no fetch.
+const kana = {};
+for (const [key, file] of [["hira", "hiragana.json"], ["kata", "katakana.json"]]) {
+  const p = path.join(dataDir, "kana", file);
+  if (fs.existsSync(p)) kana[key] = JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+const json = JSON.stringify({ manifest, lists, kana }).replace(/</g, "\\u003c");
 const tag = `<script>window.__JPLIB__=${json};</script>`;
 
 let html = fs.readFileSync(htmlPath, "utf8");

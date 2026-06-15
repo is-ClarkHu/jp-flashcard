@@ -15,6 +15,7 @@ const KEYPATH = {
   explain_cache: "key",
   seen: "list_id",
   course_state: "course",
+  kana_progress: "id",
 };
 
 export function activeId() {

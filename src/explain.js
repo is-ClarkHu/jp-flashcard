@@ -266,6 +266,249 @@ async function fetchDeep(card, lang) {
   return text;
 }
 
+// --- kana-specific explanation (§4B.4) -----------------------------------
+// Different content from the vocab explain: glyph origin, how to write it, and
+// how to tell it apart from look-alikes — NOT word meaning / example sentences.
+
+function kanaGlyph(id) {
+  const i = id.indexOf(":");
+  return i === -1 ? id : id.slice(i + 1);
+}
+
+function buildKanaPrompt(kana, lang) {
+  const looks = (kana.lookalikes || []).map(kanaGlyph).join(" ");
+  return (
+    `You are a patient, encouraging Japanese tutor teaching the kana (五十音). ` +
+    `Answer entirely in ${LANG_NAME[lang]}, using clear Markdown with short sections.\n\n` +
+    `Kana: ${kana.kana} (${kana.script === "kata" ? "katakana" : "hiragana"})\n` +
+    `Romaji: ${kana.romaji}\nGlyph origin: derived from ${kana.origin || "(unknown)"}\n` +
+    (kana.position ? `Gojūon position: ${kana.position}\n` : "") +
+    (looks ? `Easily confused with: ${looks}\n` : "") +
+    `\nCover, with a brief heading for each:\n` +
+    `1. **Stroke order** — describe each stroke in order and the writing direction.\n` +
+    `2. **Origin** — how the shape came from the source kanji, as a memory aid.\n` +
+    `3. **Pronunciation** — the exact sound, mouth/tongue tip, and any sound learners get wrong.\n` +
+    `4. **Example words** — 3 common words that use this kana, each with reading and meaning.\n` +
+    (looks ? `5. **Telling it apart** — the precise visual difference from ${looks}.\n` : "") +
+    `6. **Common mistakes** — what beginners trip on, and a tip to remember it.\n` +
+    `Keep each section to 1–3 sentences; be concrete and practical.`
+  );
+}
+
+async function fetchKanaDeep(kana, lang) {
+  const s = getSettings();
+  const pid = s.explainProvider || "claude";
+  const key = (s.apiKeys && s.apiKeys[pid]) || "";
+  if (!key) throw new Error("NO_KEY");
+  const model = (s.models && s.models[pid]) || providerMeta(pid).defaultModel;
+  const text = await callProvider(pid, key, model, buildKanaPrompt(kana, lang));
+  if (!text) throw new Error("Empty response");
+  await putExplainCache(`${kana.id}:${lang}`, text);
+  return text;
+}
+
+// Kana brief is localized to the chosen explanation language. For kana the
+// glyph origin (字源) is the most authentic memory hook — every hiragana is the
+// cursive of a kanji, every katakana a fragment of one — so the brief leads with
+// that rather than English wordplay.
+const KANA_L10N = {
+  zh: {
+    originLabel: "字源",
+    originHira: (k, o) => `「${k}」是漢字「${o}」的草書（行書連筆）簡化而成——記住「${o}」的樣子就好記了。`,
+    originKata: (k, o) => `「${k}」取自漢字「${o}」的一部分（偏旁或一角）。`,
+    posLabel: "五十音位置",
+    pronLabel: "發音",
+    exLabel: "例詞",
+    triviaLabel: "小知識",
+    lookLabel: "易混淆",
+    look: (g) => `容易和 ${g} 搞混——注意筆畫的方向、起筆和收筆。點「Explain deeper」看具體怎麼區分。`,
+    shapeLabel: "形狀聯想",
+    join: "、",
+    none: "這個假名暫無離線筆記。",
+  },
+  en: {
+    originLabel: "Origin",
+    originHira: (k, o) => `**${k}** is the cursive (草書) simplification of the kanji **${o}** — picture that shape to recall it.`,
+    originKata: (k, o) => `**${k}** is taken from part of the kanji **${o}** (a corner or radical).`,
+    posLabel: "Position",
+    pronLabel: "Pronunciation",
+    exLabel: "Example",
+    triviaLabel: "Did you know?",
+    lookLabel: "Look-alikes",
+    look: (g) => `Often confused with ${g} — watch the stroke direction and where lines start and stop. Use “Explain deeper” for the exact difference.`,
+    shapeLabel: "Shape hint",
+    join: ", ",
+    none: "No offline notes for this kana.",
+  },
+  ja: {
+    originLabel: "字源",
+    originHira: (k, o) => `「${k}」は漢字「${o}」の草書体をくずして生まれました。元の形をイメージすると覚えやすいです。`,
+    originKata: (k, o) => `「${k}」は漢字「${o}」の一部分からできています。`,
+    posLabel: "五十音の位置",
+    pronLabel: "発音",
+    exLabel: "例",
+    triviaLabel: "豆知識",
+    lookLabel: "似ている字",
+    look: (g) => `${g} と混同しやすいです。線の向き・始点・終点に注意。「Explain deeper」で詳しく確認できます。`,
+    shapeLabel: "形のヒント",
+    join: "・",
+    none: "この仮名のオフラインメモはありません。",
+  },
+};
+
+// Pick the gloss for the chosen language (we author zh + en; ja reuses en).
+function exGloss(ex, lang) {
+  return lang === "zh" ? ex.zh : ex.en;
+}
+
+const ORIGIN_SHORT = {
+  zh: (o) => `源自「${o}」`,
+  en: (o) => `from 「${o}」`,
+  ja: (o) => `「${o}」より`,
+};
+export function kanaOriginShort(origin, lang) {
+  return (ORIGIN_SHORT[lang] || ORIGIN_SHORT.en)(origin);
+}
+
+function stripMd(s) {
+  return s.replace(/\*\*/g, "");
+}
+
+// Render the static (offline) Layer-1 brief as clean labeled rows (nicer than a
+// wall of markdown). Returns the number of rows rendered (0 = nothing to show).
+function renderKanaBrief(parent, kana, lang) {
+  const t = KANA_L10N[lang] || KANA_L10N.en;
+  parent.replaceChildren();
+  parent.classList.remove("muted");
+  const wrap = el("div", "kana-brief");
+  let n = 0;
+  const row = (label, value, variant) => {
+    const r = el("div", "kana-brief__row" + (variant ? ` kana-brief__row--${variant}` : ""));
+    r.appendChild(el("div", "kana-brief__label", label));
+    const v = el("div", "kana-brief__val");
+    if (typeof value === "string") v.textContent = value;
+    else v.appendChild(value);
+    r.appendChild(v);
+    wrap.appendChild(r);
+    n++;
+  };
+
+  if (kana.position) row(t.posLabel, kana.position);
+  if (kana.origin) {
+    const fn = kana.script === "kata" ? t.originKata : t.originHira;
+    row(t.originLabel, stripMd(fn(kana.kana, kana.origin)));
+  }
+  if (kana.pron && kana.pron[lang]) row(t.pronLabel, kana.pron[lang]);
+  if (kana.example && kana.example.w && kana.example.w !== "—") {
+    const ex = kana.example;
+    const v = el("div", "kana-ex");
+    v.append(
+      el("span", "kana-ex__w", ex.w),
+      el("span", "kana-ex__romaji", ex.romaji),
+      el("span", "kana-ex__gloss", exGloss(ex, lang)),
+    );
+    row(t.exLabel, v);
+  }
+  const looks = (kana.lookalikes || []).map(kanaGlyph);
+  if (looks.length) {
+    const v = el("div");
+    v.appendChild(el("div", "kana-brief__glyphs", looks.join("  ")));
+    const tips = (kana.tips && kana.tips[lang]) || [];
+    if (tips.length) {
+      const ul = el("ul", "kana-brief__tips");
+      tips.forEach((tip) => ul.appendChild(el("li", null, tip)));
+      v.appendChild(ul);
+    } else {
+      v.appendChild(el("div", null, t.look(looks.join(t.join))));
+    }
+    row(t.lookLabel, v);
+  }
+  if (lang === "en" && kana.mnemonic) row(t.shapeLabel, kana.mnemonic);
+  // The fun "Did you know?" note last, visually set apart.
+  if (kana.trivia && kana.trivia[lang]) row(t.triviaLabel, kana.trivia[lang], "trivia");
+
+  parent.appendChild(wrap);
+  return n;
+}
+
+export function createKanaExplainPanel(kana) {
+  const panel = el("div", "explain");
+  const pseudo = { front: kana.kana, reading: kana.romaji };
+
+  function render() {
+    const lang = getSettings().explainLang;
+    panel.replaceChildren();
+
+    const langs = el("div", "explain__langs");
+    LANGS.forEach(([key, label]) => {
+      const b = el("button", "chip" + (key === lang ? " chip--active" : ""), label);
+      b.addEventListener("click", () => {
+        setSetting("explainLang", key);
+        render();
+      });
+      langs.appendChild(b);
+    });
+    panel.appendChild(langs);
+
+    // Layer 1 — static brief (origin / mnemonic / look-alikes), offline.
+    const l1 = el("div", "explain__block");
+    l1.appendChild(el("div", "explain__label", "Brief (offline)"));
+    const l1text = el("div", "explain__text");
+    if (!renderKanaBrief(l1text, kana, lang)) {
+      l1text.classList.add("muted");
+      l1text.textContent = (KANA_L10N[lang] || KANA_L10N.en).none;
+    }
+    l1.appendChild(l1text);
+    panel.appendChild(l1);
+
+    // Layer 2 — deep dive (kana-specific prompt).
+    const l2 = el("div", "explain__block");
+    const head = el("div", "explain__l2head");
+    head.appendChild(el("div", "explain__label", `Deep dive · ${providerMeta(getSettings().explainProvider).label}`));
+    const btn = el("button", "btn btn--ghost explain__deepbtn", "Explain deeper");
+    head.appendChild(btn);
+    l2.appendChild(head);
+    const out = el("div", "explain__text");
+    l2.appendChild(out);
+    panel.appendChild(l2);
+
+    getExplainCache(`${kana.id}:${lang}`).then((rec) => {
+      if (rec && rec.text) {
+        renderExplainText(out, rec.text, pseudo, lang);
+        btn.textContent = "Regenerate";
+      }
+    });
+
+    btn.addEventListener("click", async () => {
+      const s = getSettings();
+      const pid = s.explainProvider || "claude";
+      if (!(s.apiKeys && s.apiKeys[pid])) {
+        out.replaceChildren();
+        out.append(document.createTextNode(`Set your ${providerMeta(pid).label} API key in `));
+        const a = el("a", null, "Settings");
+        a.href = "#/settings";
+        out.append(a, document.createTextNode(" to use deep explanations."));
+        return;
+      }
+      btn.disabled = true;
+      out.classList.remove("muted");
+      out.textContent = "Thinking…";
+      try {
+        renderExplainText(out, await fetchKanaDeep(kana, lang), pseudo, lang);
+        btn.textContent = "Regenerate";
+      } catch (e) {
+        out.classList.add("muted");
+        out.textContent = e.message === "NO_KEY" ? "Set your API key in Settings." : `Failed: ${e.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+
+  render();
+  return { element: panel };
+}
+
 // Build the explanation panel for one card.
 export function createExplainPanel(card) {
   const panel = el("div", "explain");

@@ -32,6 +32,7 @@ import {
 } from "./accounts.js";
 import { createExplainPanel, EXPLAIN_PROVIDERS, providerMeta } from "./explain.js";
 import { renderDashboard, renderCourse } from "./dashboard.js";
+import { renderKana } from "./kana.js";
 
 const app = document.getElementById("app");
 
@@ -130,6 +131,7 @@ async function renderHome() {
 
   const wrongCount = await getWrongCount().catch(() => 0);
   const top = el("div", "top-entries");
+  top.appendChild(topEntry("#/kana", "あ", "Kana", ""));
   top.appendChild(topEntry("#/favorites", "★", "Favorites", state.favorites.size));
   top.appendChild(topEntry("#/wrong", "✗", "Wrong Book", wrongCount));
   top.appendChild(topEntry("#/dashboard", "▤", "Dashboard", ""));
@@ -977,7 +979,8 @@ function route() {
 
   const hash = location.hash.replace(/^#/, "");
   let m;
-  if ((m = hash.match(/^\/list\/(.+)$/))) renderDeck(decodeURIComponent(m[1]));
+  if ((m = hash.match(/^\/kana(?:\/(.*))?$/))) state._cleanup = renderKana(app, m[1] || "");
+  else if ((m = hash.match(/^\/list\/(.+)$/))) renderDeck(decodeURIComponent(m[1]));
   else if ((m = hash.match(/^\/wrong\/([^/]+)\/(\d+)$/))) renderWrong(decodeURIComponent(m[1]), parseInt(m[2], 10));
   else if ((m = hash.match(/^\/wrong\/(.+)$/))) renderWrong(decodeURIComponent(m[1]));
   else if (hash === "/wrong" || hash === "/test-wrong") renderWrong();
