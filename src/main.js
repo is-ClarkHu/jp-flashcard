@@ -119,6 +119,50 @@ function iconBtn(name, title, onClick) {
   return b;
 }
 
+// Electron disables the native window.prompt(), so text entry (account names)
+// goes through this small modal instead. Resolves to the entered string, or
+// null if cancelled — same contract as window.prompt.
+function promptModal(title, defaultValue = "", okLabel = "OK") {
+  return new Promise((resolve) => {
+    const overlay = el("div", "modal");
+    const card = el("div", "modal__card");
+    card.appendChild(el("div", "modal__title", title));
+    const input = el("input", "modal__input");
+    input.type = "text";
+    input.value = defaultValue;
+    card.appendChild(input);
+    const row = el("div", "modal__btns");
+    const ok = el("button", "btn", okLabel);
+    const cancel = el("button", "btn btn--ghost", "Cancel");
+    let done = false;
+    const finish = (val) => {
+      if (done) return;
+      done = true;
+      document.removeEventListener("keydown", onKey);
+      overlay.remove();
+      resolve(val);
+    };
+    const onKey = (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        finish(input.value);
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        finish(null);
+      }
+    };
+    ok.addEventListener("click", () => finish(input.value));
+    cancel.addEventListener("click", () => finish(null));
+    document.addEventListener("keydown", onKey);
+    row.append(ok, cancel);
+    card.appendChild(row);
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+    input.focus();
+    input.select();
+  });
+}
+
 function topEntry(href, icon, label, count) {
   const a = el("a", "top-entry");
   a.href = href;
@@ -881,7 +925,7 @@ function accountsPane() {
   const btnRow = el("div", "panel__row");
   const saveAsBtn = el("button", "btn", "Save current as new account");
   saveAsBtn.addEventListener("click", async () => {
-    const name = window.prompt("Name the new account (copies your current progress):", "");
+    const name = await promptModal("Name the new account (copies your current progress):", "");
     if (name === null) return;
     try {
       await duplicateCurrentAs(name.trim() || "Copy");
@@ -893,7 +937,7 @@ function accountsPane() {
   const newBtn = el("button", "btn btn--ghost", "New empty account");
   newBtn.addEventListener("click", async () => {
     if (!confirm("Start a fresh empty account? Your current progress stays saved in its own account.")) return;
-    const name = window.prompt("New account name:", "New account");
+    const name = await promptModal("New account name:", "New account");
     if (name === null) return;
     try {
       await createAccount(name.trim() || "New account");
@@ -905,10 +949,19 @@ function accountsPane() {
   btnRow.append(saveAsBtn, newBtn);
   box.appendChild(btnRow);
 
-  // Local-file storage status: in the Electron app, all accounts auto-save to
+  // Local-file storage: in the Electron app, all accounts auto-save to
   // userData/save.json (with rotating backups). In a plain browser there is no
   // file — make that explicit so progress isn't silently trapped per-origin.
+  const fileSec = el("div", "panel__section");
+  fileSec.appendChild(el("div", "panel__subtitle", "Local save file"));
   if (isFileBacked()) {
+    fileSec.appendChild(
+      el(
+        "p",
+        "panel__note",
+        "All accounts auto-save to a local file with rotating backups, so your progress survives reinstalls and how the app is opened.",
+      ),
+    );
     const fileRow = el("div", "panel__row");
     const revealBtn = el("button", "btn btn--ghost", "Open save folder");
     revealBtn.addEventListener("click", () => window.jpStore.reveal());
@@ -925,9 +978,9 @@ function accountsPane() {
       }
     });
     fileRow.append(revealBtn, backupBtn);
-    box.appendChild(fileRow);
+    fileSec.appendChild(fileRow);
   } else {
-    box.appendChild(
+    fileSec.appendChild(
       el(
         "p",
         "panel__note panel__note--warn",
@@ -935,6 +988,7 @@ function accountsPane() {
       ),
     );
   }
+  box.appendChild(fileSec);
 
   const list = el("div", "slot-list");
   box.appendChild(list);
@@ -1031,7 +1085,7 @@ function accountsPane() {
       );
       actions.appendChild(
         iconBtn("rename", "Rename", async () => {
-          const n = window.prompt("Rename account:", a.name);
+          const n = await promptModal("Rename account:", a.name, "Rename");
           if (n === null) return;
           await renameAccount(a.id, n.trim() || a.name);
           refresh();
@@ -1063,11 +1117,11 @@ function renderSettings() {
 
   const cats = [
     ["appearance", "Appearance", appearancePane],
-    ["voice", "Voice", voicePane],
-    ["accounts", "Accounts", accountsPane],
     ["study", "Study", studyPane],
+    ["voice", "Voice", voicePane],
     ["explanations", "Explanations", explanationsPane],
-  ];
+    ["accounts", "Accounts", accountsPane],
+  ].sort((a, b) => a[1].localeCompare(b[1])); // nav listed alphabetically by title
 
   const wrap = el("div", "settings");
   const nav = el("div", "settings__nav");

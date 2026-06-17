@@ -1109,6 +1109,18 @@ body {
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  margin: 0 0 16px;
+}
+.panel__section {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.panel__subtitle {
+  font-family: var(--jp-font);
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 8px;
 }
 .panel__hint {
   color: var(--muted);
@@ -1302,6 +1314,21 @@ body {
 .modal__text {
   font-size: 14px;
   margin: 0 0 16px;
+}
+.modal__input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  padding: 9px 11px;
+  margin: 4px 0 16px;
+  border: 1px solid var(--border, #d8d2c8);
+  border-radius: 8px;
+  background: var(--card, #fff);
+  color: inherit;
+}
+.modal__input:focus {
+  outline: none;
+  border-color: var(--accent, #c0894a);
 }
 .modal__btns {
   display: flex;
