@@ -1,7 +1,7 @@
 # jp-flashcard
 
 A fully local, single-user **Japanese vocabulary flashcard app** — the core Quizlet
-experience (flip / self-test / shuffle / favorites) plus dual-speaker audio,
+experience (flip / self-test / shuffle / favorites) plus six-voice audio,
 multi-round study tracking, two-layer AI explanations, an analytics dashboard, and
 portable packaging (run it as a **website** or a **desktop app**, with one-click
 progress migration).
@@ -36,8 +36,11 @@ you can try every feature right away. To study real material, build your own lib
 ## Features
 
 - **Browse** by course → list, large 3D flip cards (Japanese ⇄ meaning).
-- **Dual-speaker audio** — two pluggable speaker buttons (browser `ja-JP` voice now;
-  VOICEVOX / Azure slots reserved), with speech-rate and auto-play-on-flip.
+- **Multi-voice audio** — a voice picker with six bundled VOICEVOX voices plus an
+  "Auto (system)" browser `ja-JP` fallback. Per-word mp3 is pre-generated offline by
+  `convert.py --tts`; in-app you get speech-rate, auto-play-on-flip, and a
+  fixed-or-random auto-play voice. Tapping a voice on a card makes it current for
+  that word.
 - **Self-test** — self-graded Known / Unknown, always shuffled, with a wrong book
   that grows on misses and clears as you get them right.
 - **Per-list scopes** — study/test **All**, **★ favorites**, or **✗ wrong** words
@@ -158,6 +161,23 @@ cp .env.example .env                            # then put your provider key in 
 - `--explain` generates `explain_zh/en/ja` (example sentence + usage) from scratch.
 - Both skip already-filled cards, so re-runs don't re-bill.
 
+### Generate audio (VOICEVOX)
+
+Pre-generate per-word pronunciation for all six bundled voices with the local
+[VOICEVOX](https://voicevox.hiroshiba.jp/) engine — no cloud, no API key:
+
+```bash
+# First launch the VOICEVOX app (serves http://127.0.0.1:50021) and install ffmpeg.
+./venv/bin/python convert.py --tts                       # synth all 6 voices, every card
+./venv/bin/python convert.py --tts --only N5 --limit 20  # scope a quick test run
+```
+
+Clips land in `data/<course>/audio/<id>/<voice>.mp3` and are linked into each card's
+`audio` map. The run is resumable — existing clips are kept (paths re-linked) unless
+you pass `--force`. The voice list lives in `src/speakers.js`, mirrored by the
+`TTS_SPEAKERS` table in `convert.py`; keep the two in sync. Override the engine URL
+with `VOICEVOX_HOST` if it isn't on the default port.
+
 > **Two separate keys.** The key above is **build-time** — it generates the static
 > library written into `data/` (your dev machine only; goes in `.env`, gitignored).
 > It is unrelated to the in-app **Settings** key used live by "Explain deeper", which
@@ -273,7 +293,8 @@ jp-flashcard/
 │   ├── main.js             # app init, hash routing, home / deck / favorites / settings / backup
 │   ├── deck.js             # library loading (with sample fallback), Deck cursor, shuffle
 │   ├── card.js             # single card render + 3D flip
-│   ├── tts.js              # pluggable audio providers (browser TTS now)
+│   ├── tts.js              # audio layer: per-voice VOICEVOX mp3 + browser TTS fallback
+│   ├── speakers.js         # the six bundled VOICEVOX voices (key, label, style id)
 │   ├── quiz.js             # self-test mode + wrong book + round/session logging
 │   ├── db.js               # IndexedDB wrapper (all dynamic stores + export/import)
 │   ├── accounts.js         # multiple profiles
@@ -304,6 +325,7 @@ jp-flashcard/
       "reading": "のみもの",
       "meaning_zh": "饮料", "meaning_en": "a drink", "meaning_ja": "飲み物",
       "explain_zh": "", "explain_en": "", "explain_ja": "",
+      "audio": { "aoyama": "N5/audio/N5-l01-002/aoyama.mp3" },
       "audio_anime": null, "audio_announcer": null, "audio_example": null,
       "duplicate_of": null,
       "extra": ""

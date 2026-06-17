@@ -6,7 +6,7 @@
 
 import { createCard } from "./card.js";
 import { getSettings, setSetting } from "./settings.js";
-import { PROVIDERS, getProvider, stopSpeech } from "./tts.js";
+import { SPEAKERS, playSpeaker, stopSpeech } from "./tts.js";
 import { markWrong, markKnown, toggleFavorite, addStudyLog, getWrongCount, getCourseRound } from "./db.js";
 import { courseOfList } from "./progress.js";
 
@@ -115,14 +115,22 @@ export function renderQuiz(app, { title, cards, listId, favorites, onExit }) {
   app.appendChild(stage);
 
   const speakers = el("div", "speakers");
-  PROVIDERS.forEach((p) => {
-    const b = el("button", "speaker-btn");
-    b.append(speakerIcon(), el("span", null, p.label));
-    b.addEventListener("click", () => {
-      if (queue[index]) getProvider(p.id).play(queue[index], settings);
-    });
-    speakers.appendChild(b);
+  const voiceSel = el("select", "voice-select");
+  [["auto", "Auto (system)"], ...SPEAKERS.map((s) => [s.key, s.label])].forEach(([key, label]) => {
+    const o = el("option", null, label);
+    o.value = key;
+    voiceSel.appendChild(o);
   });
+  voiceSel.value = settings.defaultSpeaker || "aoyama";
+  const playSel = () => {
+    if (queue[index]) playSpeaker(queue[index], voiceSel.value, settings);
+  };
+  const playBtn = el("button", "speaker-btn");
+  playBtn.append(speakerIcon(), el("span", null, "Play"));
+  playBtn.title = "Play this word with the selected voice";
+  playBtn.addEventListener("click", playSel);
+  voiceSel.addEventListener("change", playSel);
+  speakers.append(playBtn, voiceSel);
   app.appendChild(speakers);
 
   const actions = el("div", "quiz-actions");
@@ -157,6 +165,7 @@ export function renderQuiz(app, { title, cards, listId, favorites, onExit }) {
     clearTimer();
     revealed = false;
     timedOut = false;
+    voiceSel.value = settings.defaultSpeaker || "aoyama"; // reset voice per question
     card = createCard(queue[index], { defaultFace: "front", onFlip });
     cardWrap.replaceChildren(star, card.element);
     updateScore();

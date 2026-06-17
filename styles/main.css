@@ -482,7 +482,13 @@ body {
   font-weight: 700;
   line-height: 1.2;
 }
+/* Reading is absolutely positioned so the main word/meaning sits at the exact
+   vertical center of the card regardless of whether a reading is shown. */
 .card__reading {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13%;
   font-family: var(--jp-font);
   font-size: 22px;
   color: var(--accent);
@@ -501,10 +507,13 @@ body {
   color: var(--muted);
 }
 .card__reading-sub {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13%;
   font-family: var(--jp-font);
   font-size: 20px;
   color: var(--accent);
-  margin-top: 10px;
 }
 /* "Reading: off" toggle — keep layout (no jump), just hide the kana. */
 :root[data-hide-reading="true"] .card__reading,
@@ -543,6 +552,12 @@ body {
   border-color: var(--accent);
   color: var(--accent);
 }
+.speaker-btn--active {
+  border-color: var(--accent);
+  background: var(--accent-soft, var(--surface));
+  color: var(--accent);
+  font-weight: 600;
+}
 .speaker-btn .icon {
   display: inline-flex;
   color: var(--accent);
@@ -551,7 +566,8 @@ body {
   font-size: 13px;
   padding: 8px 12px;
 }
-.speaker-rate {
+.speaker-rate,
+.voice-select {
   font: inherit;
   font-size: 13px;
   padding: 7px 10px;
@@ -560,6 +576,16 @@ body {
   background: var(--surface);
   color: var(--text);
   cursor: pointer;
+}
+.voice-select {
+  font-size: 14px;
+  min-width: 130px;
+}
+/* Speed control is grayed out unless the system ("Auto") voice is selected —
+   VOICEVOX clips are pre-rendered at a fixed speed. */
+.speaker-rate:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 .voice-hint {
   text-align: center;

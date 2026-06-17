@@ -5,7 +5,7 @@
 // list/round structure.
 
 import { getSettings } from "./settings.js";
-import { getProvider, stopSpeech } from "./tts.js";
+import { playSpeaker, resolveSpeaker, stopSpeech } from "./tts.js";
 import { getAllKanaProgress, recordKanaResult } from "./db.js";
 import { createKanaExplainPanel, kanaOriginShort } from "./explain.js";
 
@@ -42,8 +42,8 @@ async function loadKana(script) {
 // Speak a kana through the shared TTS layer (browser voice in audio Phase 1).
 function speakKana(entry) {
   const s = getSettings();
-  const pseudo = { reading: entry.kana, front: entry.kana, audio_anime: entry.audio, audio_announcer: null };
-  getProvider(s.autoSpeaker || "announcer").play(pseudo, s);
+  const pseudo = { reading: entry.kana, front: entry.kana };
+  playSpeaker(pseudo, resolveSpeaker(s), s);
 }
 
 function shuffle(a) {

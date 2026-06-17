@@ -10,7 +10,8 @@ const DEFAULTS = {
   cardLang: "en", // which meaning language the card's meaning face shows: "zh" | "en"
   speechRate: 1.0, // 0.5 – 1.5
   autoPlay: false, // auto-speak on flip
-  autoSpeaker: "announcer", // which provider auto-plays
+  voiceMode: "fixed", // auto-play voice: "fixed" (use defaultSpeaker) | "random" (per card)
+  defaultSpeaker: "aoyama", // default VOICEVOX voice key (see speakers.js)
   uiLanguage: "en",
   explainLang: "en", // ZH / EN / JP toggle for explanations
   explainProvider: "claude", // which LLM powers "Explain deeper"

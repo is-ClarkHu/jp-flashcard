@@ -1,10 +1,14 @@
-// Pluggable audio layer. Each speaker button maps to a provider behind one
-// interface: provider.play(card, settings) -> Promise<boolean> (true = audible).
-//
-// Phase 1 (now): both providers fall back to the browser Web Speech API (ja-JP).
-// Phase 2 (later): "anime" plays a pre-generated VOICEVOX mp3 from card.audio_anime;
-// "announcer" keeps the system voice with a reserved Azure-neural slot
-// (card.audio_announcer). The UI never assumes a specific engine.
+// Pluggable audio layer. The app ships six VOICEVOX voices (see speakers.js).
+// A card may carry pre-generated mp3s in card.audio = { <speakerKey>: path }.
+// playSpeaker(card, key) plays that voice's mp3 if present, else falls back to
+// the browser Web Speech API (ja-JP). resolveSpeaker() decides which voice to
+// use for auto-play (fixed default or random-per-card), unless the user tapped
+// a specific voice on the card.
+
+import { SPEAKERS } from "./speakers.js";
+
+// Re-export so views can pull the voice list from the audio layer.
+export { SPEAKERS };
 
 const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
 
@@ -58,28 +62,22 @@ function spokenText(card) {
   return card.reading || card.front;
 }
 
-// Provider registry — config-driven, not hardcoded in the UI.
-export const PROVIDERS = [
-  {
-    id: "anime",
-    label: "Anime",
-    play(card, settings) {
-      if (card.audio_anime) return playMp3(card.audio_anime); // Phase 2
-      return speak(spokenText(card), settings);
-    },
-  },
-  {
-    id: "announcer",
-    label: "Announcer",
-    play(card, settings) {
-      if (card.audio_announcer) return playMp3(card.audio_announcer); // reserved (Azure)
-      return speak(spokenText(card), settings);
-    },
-  },
-];
+// Play a card with a specific voice. Uses the pre-generated mp3 if the card has
+// one for that voice; otherwise falls back to the browser's Japanese TTS.
+export function playSpeaker(card, speakerKey, settings = {}) {
+  const path = card && card.audio && card.audio[speakerKey];
+  if (path) return playMp3(path);
+  return speak(spokenText(card), settings);
+}
 
-export function getProvider(id) {
-  return PROVIDERS.find((p) => p.id === id) || PROVIDERS[0];
+// Which voice to use when the user hasn't tapped one on the card:
+// explicit override > random-per-card (voiceMode) > fixed default.
+export function resolveSpeaker(settings = {}, override) {
+  if (override) return override;
+  if (settings.voiceMode === "random") {
+    return SPEAKERS[Math.floor(Math.random() * SPEAKERS.length)].key;
+  }
+  return settings.defaultSpeaker || SPEAKERS[0].key;
 }
 
 export function stopSpeech() {

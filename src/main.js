@@ -14,7 +14,7 @@ import {
 } from "./deck.js";
 import { createCard } from "./card.js";
 import { getSettings, setSetting } from "./settings.js";
-import { PROVIDERS, getProvider, speechAvailable, japaneseVoiceAvailable, stopSpeech } from "./tts.js";
+import { SPEAKERS, playSpeaker, resolveSpeaker, speechAvailable, japaneseVoiceAvailable, stopSpeech } from "./tts.js";
 import { getAllFavoriteIds, toggleFavorite, getAllWrongIds, getWrongCount, getAllStudyLog, getAllCourseStates, getAllSeen, markSeen, getAllWrong, removeFromWrong } from "./db.js";
 import { statsByList, courseProgress, logRound } from "./progress.js";
 import { renderQuiz } from "./quiz.js";
@@ -320,12 +320,24 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
 
   // Speaker bar.
   const speakers = el("div", "speakers");
-  PROVIDERS.forEach((p) => {
-    const b = el("button", "speaker-btn");
-    b.append(speakerIcon(), el("span", null, p.label));
-    b.addEventListener("click", () => play(p.id));
-    speakers.appendChild(b);
+  // Voice picker: a play button + a dropdown of the 7 voices ("Auto" = browser
+  // system voice + the 6 VOICEVOX voices). Default shows the user's default voice.
+  const voiceSel = el("select", "voice-select");
+  [["auto", "Auto (system)"], ...SPEAKERS.map((s) => [s.key, s.label])].forEach(([key, label]) => {
+    const o = el("option", null, label);
+    o.value = key;
+    voiceSel.appendChild(o);
   });
+  voiceSel.value = state.settings.defaultSpeaker || "aoyama";
+  voiceSel.addEventListener("change", () => {
+    syncRate();
+    play(voiceSel.value);
+  });
+  const playBtn = el("button", "speaker-btn");
+  playBtn.append(speakerIcon(), el("span", null, "Play"));
+  playBtn.title = "Play this word with the selected voice";
+  playBtn.addEventListener("click", () => play(voiceSel.value));
+  speakers.append(playBtn, voiceSel);
   const auto = el("button", "btn btn--ghost speaker-auto");
   const autoLabel = () => `Auto-play: ${state.settings.autoPlay ? "on" : "off"}`;
   auto.textContent = autoLabel();
@@ -347,6 +359,16 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     state.settings = setSetting("speechRate", parseFloat(rate.value));
   });
   speakers.appendChild(rate);
+  // Speed only affects the browser Web Speech voice ("Auto"); VOICEVOX mp3s are
+  // pre-rendered at a fixed speed, so gray the control out for those.
+  const syncRate = () => {
+    const isSystem = voiceSel.value === "auto";
+    rate.disabled = !isSystem;
+    rate.title = isSystem
+      ? "Playback speed for the system voice"
+      : "Speed applies only to the Auto (system) voice — VOICEVOX voices play at a fixed speed.";
+  };
+  syncRate();
   app.appendChild(speakers);
 
   if (!speechAvailable() || !japaneseVoiceAvailable()) {
@@ -405,8 +427,8 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     return "Nothing here.";
   }
 
-  function play(providerId) {
-    if (state.deck.current) getProvider(providerId).play(state.deck.current, state.settings);
+  function play(speakerKey) {
+    if (state.deck.current) playSpeaker(state.deck.current, speakerKey, state.settings);
   }
   function updateStar() {
     const fav = state.deck.current && state.favorites.has(state.deck.current.id);
@@ -439,7 +461,14 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     explainToggle.classList.remove("btn--active");
     renderExplain();
     // Auto-play reads the word as soon as it's shown (not on flip).
-    if (state.settings.autoPlay) play(state.settings.autoSpeaker);
+    // Reset the voice picker to the default (or a fresh random) on every card, so
+    // an on-card voice change only sticks for the word it was chosen on.
+    voiceSel.value =
+      state.settings.voiceMode === "random"
+        ? resolveSpeaker(state.settings)
+        : state.settings.defaultSpeaker || "aoyama";
+    syncRate();
+    if (state.settings.autoPlay) play(voiceSel.value);
   }
   function move(delta) {
     if (!state.deck.size) return;
@@ -677,6 +706,34 @@ function appearancePane() {
       [["zh", "中文"], ["en", "English"]],
       () => state.settings.cardLang || "en",
       (key) => (state.settings = setSetting("cardLang", key)),
+    ),
+  );
+  return box;
+}
+
+function voicePane() {
+  const box = el("div", "pane");
+  box.appendChild(el("h3", "pane__title", "Auto-play voice"));
+  box.appendChild(
+    chipRow(
+      [["fixed", "Fixed default"], ["random", "Random each card"]],
+      () => state.settings.voiceMode || "fixed",
+      (key) => (state.settings = setSetting("voiceMode", key)),
+    ),
+  );
+  box.appendChild(el("h3", "pane__title", "Default voice"));
+  box.appendChild(
+    chipRow(
+      SPEAKERS.map((s) => [s.key, s.label]),
+      () => state.settings.defaultSpeaker || SPEAKERS[0].key,
+      (key) => (state.settings = setSetting("defaultSpeaker", key)),
+    ),
+  );
+  box.appendChild(
+    el(
+      "p",
+      "panel__note",
+      "Six VOICEVOX voices ship with the app. “Random” picks one per word for auto-play; “Fixed” always uses your default. On any card you can also tap a voice to hear it and make it current.",
     ),
   );
   return box;
@@ -974,6 +1031,7 @@ function renderSettings() {
 
   const cats = [
     ["appearance", "Appearance", appearancePane],
+    ["voice", "Voice", voicePane],
     ["accounts", "Accounts", accountsPane],
     ["study", "Study", studyPane],
     ["explanations", "Explanations", explanationsPane],

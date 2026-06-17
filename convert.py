@@ -49,8 +49,12 @@ import json
 import os
 import random
 import re
+import shutil
+import subprocess
 import sys
 import unicodedata
+import urllib.parse
+import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -129,6 +133,7 @@ class Card:
     audio_example: Optional[str] = None
     duplicate_of: Optional[str] = None
     extra: str = ""
+    audio: dict = field(default_factory=dict)  # { speakerKey: relpath }, filled by --tts
     # Assigned during list assembly:
     id: str = ""
     # Internal, not written to JSON:
@@ -152,6 +157,7 @@ class Card:
             "audio_example": self.audio_example,
             "duplicate_of": self.duplicate_of,
             "extra": self.extra,
+            "audio": self.audio,
         }
 
 
@@ -524,8 +530,10 @@ def detect_duplicates_conflicts(courses: List[Course]) -> Tuple[int, int]:
 # --- Merge previously generated enrichment / audio -----------------------
 
 _PRESERVE_FIELDS = [
+    "reading",  # filled offline by scripts/fill_readings.py; raw parse can't recover it
     "meaning_zh", "meaning_en", "meaning_ja",
     "explain_zh", "explain_en", "explain_ja",
+    "audio",  # { speakerKey: path } from --tts (dict); merge handles empty-dict below
     "audio_anime", "audio_announcer", "audio_example",
 ]
 
@@ -559,7 +567,7 @@ def merge_existing(courses: List[Course], out_dir: Path) -> int:
                 for fld in _PRESERVE_FIELDS:
                     cur = getattr(card, fld)
                     old = prev.get(fld)
-                    if (cur in ("", None)) and old not in ("", None):
+                    if (not cur) and old:  # cur empty (str "", None, or {}) and old has content
                         setattr(card, fld, old)
                         restored += 1
     if restored:
@@ -605,6 +613,93 @@ def write_output(courses: List[Course], out_dir: Path) -> None:
     )
     print(f"[write] manifest.json + {sum(len(c.lists) for c in courses)} list files "
           f"-> {out_dir}/")
+
+
+# --- Audio synthesis (VOICEVOX) -----------------------------------------
+
+VV_HOST = os.environ.get("VOICEVOX_HOST", "http://127.0.0.1:50021")
+
+# Six shipped voices — keep in sync with src/speakers.js (key, VOICEVOX style id).
+TTS_SPEAKERS = [
+    ("aoyama", 13), ("kyushu", 17), ("yurei", 103),
+    ("zunda", 3), ("no7", 30), ("metan", 6),
+]
+
+
+def _vv_post(path: str, data: Optional[bytes] = None) -> bytes:
+    headers = {"Content-Type": "application/json"} if data is not None else {}
+    req = urllib.request.Request(f"{VV_HOST}{path}", data=data, method="POST",
+                                 headers=headers)
+    return urllib.request.urlopen(req, timeout=60).read()
+
+
+def _synth_mp3(text: str, style_id: int, dest: Path) -> bool:
+    """VOICEVOX query+synthesis -> wav (in memory) -> mp3 via ffmpeg stdin."""
+    q = _vv_post(f"/audio_query?text={urllib.parse.quote(text)}&speaker={style_id}")
+    wav = _vv_post(f"/synthesis?speaker={style_id}", data=q)
+    proc = subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-f", "wav", "-i", "pipe:0",
+         "-codec:a", "libmp3lame", "-qscale:a", "5", str(dest)],
+        input=wav, capture_output=True,
+    )
+    return proc.returncode == 0 and dest.exists()
+
+
+def generate_audio(courses: List[Course], out_dir: Path, only: str = "",
+                   limit: int = 0, force: bool = False) -> None:
+    """Synthesize per-word mp3 for all 6 voices via the local VOICEVOX engine.
+
+    Resumable: clips already on disk are kept (paths re-linked) unless --force.
+    Each card gets card.audio = { key: "<course>/audio/<id>/<key>.mp3" }.
+    """
+    try:
+        ver = urllib.request.urlopen(f"{VV_HOST}/version", timeout=5).read().decode().strip()
+    except Exception as e:  # noqa: BLE001
+        sys.exit(f"VOICEVOX not reachable at {VV_HOST} ({e}) — launch the VOICEVOX app first.")
+    if not shutil.which("ffmpeg"):
+        sys.exit("ffmpeg not found — install it (e.g. brew install ffmpeg) to encode mp3.")
+    print(f"[tts] VOICEVOX {ver} · {len(TTS_SPEAKERS)} voices · {VV_HOST}")
+
+    items = []
+    for course in courses:
+        cslug = slug(course.name)
+        for lst in course.lists:
+            for card in lst.cards:
+                if _matches_only(card, only):
+                    items.append((cslug, card))
+    if limit:
+        items = items[:limit]
+    print(f"[tts] {len(items)} cards × {len(TTS_SPEAKERS)} voices "
+          f"(resume: existing clips kept{', force on' if force else ''})")
+
+    made = skipped = failed = 0
+    for n, (cslug, card) in enumerate(items, 1):
+        text = card.reading or card.front
+        if not text:
+            continue
+        if not isinstance(card.audio, dict):
+            card.audio = {}
+        adir = out_dir / cslug / "audio" / card.id
+        adir.mkdir(parents=True, exist_ok=True)
+        for key, sid in TTS_SPEAKERS:
+            dest = adir / f"{key}.mp3"
+            rel = f"{cslug}/audio/{card.id}/{key}.mp3"
+            if dest.exists() and dest.stat().st_size > 0 and not force:
+                card.audio[key] = rel
+                skipped += 1
+                continue
+            try:
+                if _synth_mp3(text, sid, dest):
+                    card.audio[key] = rel
+                    made += 1
+                else:
+                    failed += 1
+            except Exception as e:  # noqa: BLE001
+                failed += 1
+                print(f"  [error] {card.id}/{key}: {e}")
+        if n % 50 == 0 or n == len(items):
+            print(f"  {n}/{len(items)} cards (made {made}, skipped {skipped}, failed {failed})")
+    print(f"[tts] done — made {made}, skipped {skipped}, failed {failed}")
 
 
 # --- LLM enrichment ------------------------------------------------------
@@ -812,6 +907,8 @@ def main() -> None:
                     help="restrict enrichment to a course / list_id / id prefix (e.g. N5-list01)")
     ap.add_argument("--force", action="store_true",
                     help="regenerate even if a field is already filled (overwrites)")
+    ap.add_argument("--tts", action="store_true",
+                    help="synthesize per-word audio for all 6 voices via local VOICEVOX")
     args = ap.parse_args()
 
     load_dotenv(Path(".env"))
@@ -841,6 +938,10 @@ def main() -> None:
         enrich(courses, "explanations", langs, args.provider, args.model, args.api_key,
                batch_size=args.batch_size or 12, limit=args.limit, only=args.only,
                force=args.force)
+    if args.tts:
+        print("== Synthesizing audio (VOICEVOX) ==")
+        generate_audio(courses, args.out_dir, only=args.only, limit=args.limit,
+                       force=args.force)
 
     write_output(courses, args.out_dir)
 
