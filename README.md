@@ -350,10 +350,55 @@ study_log      { timestamp, date, hour, lists_studied, cards_seen, known, unknow
 wrong_book     { word_id, wrong_count, last_wrong_date }
 rounds         { list_id, times_studied, last_studied, history:[{round,date,known,unknown}] }
 explain_cache  { key:"{word_id}:{lang}", text, generated_at }
+seen           { list_id, last_seen }
+course_state   { course, round }
+kana_progress  { id, ... }            # 五十音 rolling accuracy
+saves          { id, name, stores, settings, counts }   # one per account
+meta           { key, value }         # internal (e.g. last file-sync marker)
 ```
 
 Settings (default face, speech rate, auto-play, theme, explanation language, API key,
 model) live in `localStorage`.
+
+### Where your progress is stored — and how to not lose it
+
+> **TL;DR — for daily study, use the packaged Electron app.** It saves everything
+> to one local file, so it never gets lost. The dev server in a browser is for
+> development only.
+
+Browser storage (IndexedDB **and** localStorage) is isolated **per origin** —
+`scheme://host:port` — and also per browser. The same app opened different ways
+therefore reads **different, independent stores**:
+
+| How you open it | Origin | Storage |
+| --- | --- | --- |
+| Packaged Electron app (recommended) | `app://app` | Electron userData |
+| Electron loading the dev server | `http://localhost:5173` | Electron userData |
+| `npm run dev` in Chrome/Safari | `http://localhost:5173` | that browser's profile |
+| The standalone single file (double-click) | `file://` | that browser's profile |
+
+These do **not** share data and do **not** erase each other. Open the app a
+different way (a different port because `5173` was taken — Vite silently jumps to
+`5174` — a different browser, packaged vs dev) and you'll see a *fresh empty
+store*. Your old data is still there under the original origin; you're just
+looking at a different box. Clearing a browser's site data, however, **deletes**
+that origin's store for good.
+
+**The fix:** the Electron app persists the whole database to a single
+origin-independent file and treats it as the source of truth:
+
+- **`<userData>/save.json`** — full mirror (all accounts + active progress +
+  settings) written atomically after every change. On macOS, `<userData>` is
+  `~/Library/Application Support/JP Flashcards/`.
+- **`<userData>/backups/`** — the last ~20 timestamped copies.
+- On launch the app restores from `save.json`, so even a wiped/!changed origin
+  comes back. Settings → **Accounts** has **Open save folder** / **Back up now**.
+- **API keys are never written to the file** (they stay in `localStorage`); after
+  a site-data clear, re-enter them in Settings.
+
+Running in a plain browser (dev/debug) shows a banner in Settings → Accounts:
+there's no file there, so storage is per-origin only. To move data between a
+browser and the app, use per-account **Export / Import**.
 
 ---
 
@@ -384,7 +429,12 @@ Choices not fully specified up front, recorded here.
 8. **Stack:** Vite + vanilla JS (no framework). Dynamic data in IndexedDB, settings in
    localStorage. Dashboard charts are hand-rolled SVG (no chart library) to stay fully
    offline and dependency-light.
-9. **The API key is never written into an exported progress file.**
+9. **The API key is never written into an exported progress file** — nor into the
+   Electron `save.json`. Keys stay in `localStorage` on the machine that entered them.
+10. **Durable storage is a file, not the browser.** The Electron app mirrors the whole
+    database to `<userData>/save.json` (atomic write + rotating backups) and restores
+    from it on launch, so user data survives the per-origin IndexedDB split and
+    cleared site data. A plain browser has no file and runs IndexedDB-only (debug).
 
 ---
 

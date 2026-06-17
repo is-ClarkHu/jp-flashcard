@@ -33,6 +33,7 @@ import {
 import { createExplainPanel, EXPLAIN_PROVIDERS, providerMeta } from "./explain.js";
 import { renderDashboard, renderCourse } from "./dashboard.js";
 import { renderKana } from "./kana.js";
+import { bootReconcile, flushNow, isFileBacked } from "./filestore.js";
 
 const app = document.getElementById("app");
 
@@ -904,6 +905,37 @@ function accountsPane() {
   btnRow.append(saveAsBtn, newBtn);
   box.appendChild(btnRow);
 
+  // Local-file storage status: in the Electron app, all accounts auto-save to
+  // userData/save.json (with rotating backups). In a plain browser there is no
+  // file — make that explicit so progress isn't silently trapped per-origin.
+  if (isFileBacked()) {
+    const fileRow = el("div", "panel__row");
+    const revealBtn = el("button", "btn btn--ghost", "Open save folder");
+    revealBtn.addEventListener("click", () => window.jpStore.reveal());
+    const backupBtn = el("button", "btn btn--ghost", "Back up now");
+    backupBtn.addEventListener("click", async () => {
+      backupBtn.disabled = true;
+      try {
+        await flushNow();
+        alert("Saved to the local file (a timestamped backup was added too).");
+      } catch (e) {
+        alert(`Backup failed: ${e.message}`);
+      } finally {
+        backupBtn.disabled = false;
+      }
+    });
+    fileRow.append(revealBtn, backupBtn);
+    box.appendChild(fileRow);
+  } else {
+    box.appendChild(
+      el(
+        "p",
+        "panel__note panel__note--warn",
+        "Debug mode (browser): progress is stored only in this browser/origin and is NOT saved to the local file. Different ports or browsers each get their own empty store. For durable storage use the packaged app; to move data between them, export here and import there.",
+      ),
+    );
+  }
+
   const list = el("div", "slot-list");
   box.appendChild(list);
 
@@ -1136,6 +1168,13 @@ async function init() {
     return;
   }
   try {
+    // Electron only: make the local save file the source of truth before any
+    // account logic reads accounts/activeAccountId. No-op in a plain browser.
+    await bootReconcile();
+  } catch (e) {
+    console.error("file-store reconcile failed:", e);
+  }
+  try {
     await ensureActive();
   } catch {
     /* accounts unavailable; continue with live data */
@@ -1147,5 +1186,14 @@ async function init() {
   }
   route();
 }
+
+// Flush any pending file save when the window is hidden or closed, so the last
+// debounced changes aren't lost on quit (no-op in a plain browser).
+window.addEventListener("pagehide", () => {
+  flushNow();
+});
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") flushNow();
+});
 
 init();

@@ -1097,6 +1097,13 @@ body {
   line-height: 1.6;
   margin: 0 0 20px;
 }
+.panel__note--warn {
+  color: #8a5a00;
+  background: #fff4e0;
+  border: 1px solid #f0d9a8;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
 .panel__row {
   display: flex;
   align-items: center;

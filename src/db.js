@@ -13,6 +13,21 @@ const DB_NAME = "jp-flashcard";
 
 let dbPromise = null;
 
+// Write hook: filestore.js registers a callback here so any change to durable
+// data triggers a debounced mirror to the local save file. `meta` (the sync
+// marker) and `explain_cache` (regenerable, never persisted to the file) don't
+// trigger it — and `suppressWriteHook` is raised while filestore writes its own
+// snapshot, so persisting never re-triggers itself into a loop.
+let onWrite = null;
+let hookSuppressed = false;
+const NO_TRIGGER = new Set(["meta", "explain_cache"]);
+export function setWriteHook(fn) {
+  onWrite = fn;
+}
+export function suppressWriteHook(v) {
+  hookSuppressed = !!v;
+}
+
 const STORE_DEFS = {
   favorites: { keyPath: "word_id" },
   study_log: { keyPath: "timestamp" },
@@ -23,6 +38,7 @@ const STORE_DEFS = {
   seen: { keyPath: "list_id" }, // last-browsed per list
   course_state: { keyPath: "course" }, // current round per course
   kana_progress: { keyPath: "id" }, // per-kana mastery (§4B): rolling accuracy
+  meta: { keyPath: "key" }, // misc app state (e.g. last file-sync marker)
 };
 const REQUIRED_STORES = Object.keys(STORE_DEFS);
 
@@ -79,7 +95,16 @@ function tx(store, mode, fn) {
         const t = db.transaction(store, mode);
         const os = t.objectStore(store);
         const result = fn(os);
-        t.oncomplete = () => resolve(result && result._value !== undefined ? result._value : undefined);
+        t.oncomplete = () => {
+          if (mode === "readwrite" && onWrite && !hookSuppressed && !NO_TRIGGER.has(store)) {
+            try {
+              onWrite(store);
+            } catch {
+              /* a sync-scheduling error must not abort the data write */
+            }
+          }
+          resolve(result && result._value !== undefined ? result._value : undefined);
+        };
         t.onerror = () => reject(t.error);
         t.onabort = () => reject(t.error);
       }),
@@ -261,14 +286,32 @@ export async function listSaves() {
 export async function deleteSave(id) {
   await tx("saves", "readwrite", (os) => os.delete(id));
 }
+// Replace the whole accounts list (used when restoring from the local file).
+export async function replaceSaves(records) {
+  await tx("saves", "readwrite", (os) => {
+    os.clear();
+    for (const r of records || []) os.put(r);
+  });
+}
+
+// --- file-sync marker (last savedAt we successfully wrote to save.json) --
+
+export async function getSyncMarker() {
+  const r = await tx("meta", "readonly", (os) => reqValue(os.get("fileSyncedAt")));
+  return r ? r.value : "";
+}
+export async function setSyncMarker(savedAt) {
+  await tx("meta", "readwrite", (os) => os.put({ key: "fileSyncedAt", value: savedAt }));
+}
 
 // --- migration (export / import all stores) ------------------------------
 
 const ALL_STORES = ["favorites", "study_log", "wrong_book", "rounds", "explain_cache", "seen", "course_state", "kana_progress"];
 
-export async function exportStores() {
+export async function exportStores(exclude = []) {
   const out = {};
   for (const s of ALL_STORES) {
+    if (exclude.includes(s)) continue;
     out[s] = (await tx(s, "readonly", (os) => reqValue(os.getAll()))) || [];
   }
   return out;

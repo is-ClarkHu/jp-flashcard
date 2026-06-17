@@ -66,7 +66,7 @@ export async function ensureActive() {
 }
 
 // Persist the live working set back into the active account's record.
-async function persistActive() {
+export async function persistActive() {
   const id = activeId();
   if (!id) return;
   const rec = (await listSaves()).find((a) => a.id === id);
