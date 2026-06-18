@@ -45,6 +45,7 @@ const state = {
   settings: getSettings(),
   _move: null,
   _flip: null,
+  _fav: null,
   _cleanup: null,
 };
 
@@ -286,6 +287,9 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   app.classList.add("app--wide");
   let activeScope = scopes && scopes.length ? scopes[0].key : null;
   let explainOpen = false;
+  // True while showing the "end of list" card that sits after the last word; the
+  // next step from here wraps back to the first card.
+  let atEnd = false;
 
   const bar = el("div", "deck-bar");
   const left = el("div", "deck-bar__side");
@@ -444,7 +448,7 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   }
   app.appendChild(foot);
 
-  app.appendChild(el("p", "hint", "Click the card to flip · ← → to navigate · Space to flip · ★ to favorite"));
+  app.appendChild(el("p", "hint", "Click the card to flip · ← → to navigate · Space to flip · F (or ↑) to favorite"));
 
   // Explanation (Layer 1 static + Layer 2 deep dive) — kept at the bottom so
   // expanding it doesn't push the controls down.
@@ -491,13 +495,26 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     refreshChips();
   }
   function showCard() {
+    atEnd = false;
     stopSpeech();
-    state.card = createCard(state.deck.current, { defaultFace: state.settings.defaultFace });
+    // With "front" the Japanese face is the un-rotated side (visible when not
+    // flipped); with "back" it's the rotated side (visible when flipped). Auto-play
+    // re-reads the word every time that Japanese face comes back into view.
+    const jpVisibleWhenFlipped = state.settings.defaultFace === "back";
+    state.card = createCard(state.deck.current, {
+      defaultFace: state.settings.defaultFace,
+      onFlip: (flipped) => {
+        if (!state.settings.autoPlay) return;
+        if (flipped === jpVisibleWhenFlipped) play(voiceSel.value);
+        else stopSpeech();
+      },
+    });
     cardWrap.replaceChildren(star, state.card.element);
     star.style.display = "";
     counter.textContent = `${state.deck.index + 1} / ${state.deck.size}`;
     prevArrow.disabled = state.deck.index === 0;
-    nextArrow.disabled = state.deck.index === state.deck.size - 1;
+    // The last card's "next" no longer dead-ends: it steps onto the end card.
+    nextArrow.disabled = false;
     if (wrongBadge) wrongBadge.textContent = `wrong ×${wrongCounts.get(state.deck.current.id) || 0}`;
     updateStar();
     // Collapse the explanation when a new card is shown.
@@ -515,8 +532,41 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     syncRate();
     if (state.settings.autoPlay) play(voiceSel.value);
   }
+  // A standalone "end of list" card after the last word. Stepping forward from
+  // here wraps to the first card; stepping back returns to the last word.
+  function showEndCard() {
+    stopSpeech();
+    state.card = null;
+    const end = el("div", "card-end");
+    end.append(
+      el("div", "card-end__title", "🎉 End of list"),
+      el("div", "card-end__hint", "You've reached the last card. Press › (or →) to start over from the first."),
+    );
+    cardWrap.replaceChildren(end);
+    star.style.display = "none";
+    counter.textContent = `${state.deck.size} / ${state.deck.size}`;
+    prevArrow.disabled = false;
+    nextArrow.disabled = false;
+    if (wrongBadge) wrongBadge.textContent = "";
+    explainOpen = false;
+    explainToggle.textContent = "Explain ▾";
+    explainToggle.classList.remove("btn--active");
+    renderExplain();
+  }
   function move(delta) {
     if (!state.deck.size) return;
+    if (atEnd) {
+      // On the end card: forward wraps to the first card, back returns to the last.
+      atEnd = false;
+      state.deck.index = delta > 0 ? 0 : state.deck.size - 1;
+      showCard();
+      return;
+    }
+    if (delta > 0 && state.deck.index === state.deck.size - 1) {
+      atEnd = true;
+      showEndCard();
+      return;
+    }
     if (delta < 0) state.deck.prev();
     else state.deck.next();
     showCard();
@@ -562,6 +612,8 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   if (scopes && scopes.length) chipEls[activeScope].classList.add("chip--active");
   state._move = move;
   state._flip = () => state.card && state.card.flip();
+  // Favorite shortcut — only on a real card (not the end-of-list card).
+  state._fav = () => state.card && toggleFav();
   load();
 }
 
@@ -745,6 +797,13 @@ function appearancePane() {
       },
     ),
   );
+  box.appendChild(
+    el(
+      "p",
+      "panel__note",
+      "Affects only the front face you see first. The back face always shows the reading, so flipping over still reveals the pronunciation.",
+    ),
+  );
   box.appendChild(el("h3", "pane__title", "Card language (meaning shown)"));
   box.appendChild(
     chipRow(
@@ -754,6 +813,45 @@ function appearancePane() {
     ),
   );
   return box;
+}
+
+// Lazily gather a small pool of real cards so tapping a voice in Settings can
+// audition it: three random words spoken in that voice. Uses the shipped
+// per-voice mp3s when present, else the browser's Japanese TTS (see playSpeaker).
+let _previewPool = null;
+let _previewToken = 0;
+async function previewPool() {
+  if (_previewPool) return _previewPool;
+  const files = [];
+  for (const c of state.manifest?.curricula || [])
+    for (const g of c.groups) for (const l of g.lists) if (l.file) files.push(l.file);
+  // A couple of lists give enough variety without loading the whole library.
+  const pick = files.sort(() => Math.random() - 0.5).slice(0, 2);
+  const cards = [];
+  await Promise.all(
+    pick.map(async (f) => {
+      try {
+        const data = await loadListFile(f);
+        for (const card of data.cards || []) cards.push(card);
+      } catch {
+        /* a list file may be missing; skip it */
+      }
+    }),
+  );
+  _previewPool = cards;
+  return cards;
+}
+
+async function previewVoice(speakerKey) {
+  const token = ++_previewToken; // a newer tap cancels this one
+  stopSpeech();
+  const pool = await previewPool();
+  if (token !== _previewToken || !pool.length) return;
+  const picks = pool.slice().sort(() => Math.random() - 0.5).slice(0, 3);
+  for (const card of picks) {
+    if (token !== _previewToken) return;
+    await playSpeaker(card, speakerKey, state.settings);
+  }
 }
 
 function voicePane() {
@@ -767,18 +865,22 @@ function voicePane() {
     ),
   );
   box.appendChild(el("h3", "pane__title", "Default voice"));
+  // Tapping a voice both sets it as the default and auditions it.
   box.appendChild(
     chipRow(
       SPEAKERS.map((s) => [s.key, s.label]),
       () => state.settings.defaultSpeaker || SPEAKERS[0].key,
-      (key) => (state.settings = setSetting("defaultSpeaker", key)),
+      (key) => {
+        state.settings = setSetting("defaultSpeaker", key);
+        previewVoice(key);
+      },
     ),
   );
   box.appendChild(
     el(
       "p",
       "panel__note",
-      "Six VOICEVOX voices ship with the app. “Random” picks one per word for auto-play; “Fixed” always uses your default. On any card you can also tap a voice to hear it and make it current.",
+      "Six VOICEVOX voices ship with the app. Tap a voice above to set it as your default and hear it audition three random words. “Random” picks one per word for auto-play; “Fixed” always uses your default.",
     ),
   );
   return box;
@@ -1157,6 +1259,7 @@ function route() {
   }
   state._move = null;
   state._flip = null;
+  state._fav = null;
   app.classList.remove("app--wide", "app--full");
 
   const hash = location.hash.replace(/^#/, "");
@@ -1188,6 +1291,9 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
   } else if (e.key === " " || e.key === "Enter") {
     if (state._flip) state._flip();
+    e.preventDefault();
+  } else if (e.key === "f" || e.key === "F" || e.key === "ArrowUp") {
+    if (state._fav) state._fav();
     e.preventDefault();
   }
 });

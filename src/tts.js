@@ -48,12 +48,18 @@ function speak(text, { speechRate = 1.0 } = {}) {
   });
 }
 
+let currentAudio = null;
 function playMp3(path) {
   return new Promise((resolve) => {
     const audio = new Audio(`./${path}`);
-    audio.onended = () => resolve(true);
-    audio.onerror = () => resolve(false);
-    audio.play().catch(() => resolve(false));
+    currentAudio = audio;
+    const done = (ok) => {
+      if (currentAudio === audio) currentAudio = null;
+      resolve(ok);
+    };
+    audio.onended = () => done(true);
+    audio.onerror = () => done(false);
+    audio.play().catch(() => done(false));
   });
 }
 
@@ -82,4 +88,8 @@ export function resolveSpeaker(settings = {}, override) {
 
 export function stopSpeech() {
   if (synth) synth.cancel();
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
 }

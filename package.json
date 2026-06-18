@@ -14,7 +14,8 @@
     "preview": "vite preview",
     "electron:dev": "node scripts/electron-dev.mjs",
     "electron": "npm run build && electron .",
-    "build:electron": "npm run build && electron-builder"
+    "build:electron": "npm run build && electron-builder",
+    "app:mac": "node scripts/install-mac.mjs"
   },
   "devDependencies": {
     "electron": "^31.0.0",
