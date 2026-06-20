@@ -23,6 +23,7 @@ const DEFAULTS = {
   activeAccountId: "", // which account's data is currently live
   timerEnabled: false, // self-test per-card countdown
   timerSeconds: 10, // seconds before auto-flip + mark wrong
+  dailyGoal: 20, // cards/day target shown on home (0 = hide the goal banner)
   roundThreshold: 0.9, // each list's last-test accuracy must reach this to advance a course round
 };
 

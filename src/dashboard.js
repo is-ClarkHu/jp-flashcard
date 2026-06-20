@@ -3,7 +3,7 @@
 // Panels: totals, check-in heatmap + streak, daily volume, level progress rings,
 // accuracy-over-rounds, wrong-answer distribution, time-of-day ("when you learn best").
 
-import { getAllStudyLog, getAllWrong, getAllFavoriteIds, deleteStudyLog, markKnown, getCourseRound, setCourseRound } from "./db.js";
+import { getAllStudyLog, getAllWrong, getAllFavoriteIds, deleteStudyLog, markKnown, getCourseRound, setCourseRound, getAllBrowse, getAllSeen } from "./db.js";
 import { orderedCourses, findList, cardListId, loadCardsByIds } from "./deck.js";
 import { statsByList, courseProgress, logListId, logAcc } from "./progress.js";
 import { getSettings } from "./settings.js";
@@ -101,6 +101,7 @@ function totals(stats) {
     ["Mastered", stats.mastered],
     ["Total tests", stats.totalTests],
     ["Cards seen", stats.cardsSeen],
+    ["Cards browsed", stats.cardsBrowsed],
     ["Favorites", stats.favorites],
     ["Wrong book", stats.wrongCount],
     ["Day streak", stats.streak],
@@ -440,10 +441,12 @@ export async function renderDashboard(app, manifest) {
   app.appendChild(el("h1", "dash-title", "Dashboard"));
   app.appendChild(el("p", "loading", "Loading…"));
 
-  const [logs, wrong, favIds] = await Promise.all([
+  const [logs, wrong, favIds, browse, seen] = await Promise.all([
     getAllStudyLog().catch(() => []),
     getAllWrong().catch(() => []),
     getAllFavoriteIds().catch(() => []),
+    getAllBrowse().catch(() => []),
+    getAllSeen().catch(() => []),
   ]);
   const statMap = statsByList(logs);
   const threshold = getSettings().roundThreshold || 0.9;
@@ -452,15 +455,19 @@ export async function renderDashboard(app, manifest) {
   app.appendChild(back);
   app.appendChild(el("h1", "dash-title", "Dashboard"));
 
-  if (!logs.length) {
-    app.appendChild(el("p", "hint", "No study data yet — run a self-test to start tracking your progress."));
+  // Browsing alone is enough to populate the dashboard now; only a truly empty
+  // account (no tests, no browsing, no lists opened) shows the empty hint.
+  if (!logs.length && !browse.length && !seen.length) {
+    app.appendChild(el("p", "hint", "No activity yet — browse a list or run a self-test to start tracking your progress."));
     return;
   }
 
-  // aggregates
+  // aggregates — daily volume + per-hour volume blend tests and browsing so the
+  // heatmap, streak, daily-volume and time-of-day charts reflect both.
   const dateCounts = {};
   const byHour = Array.from({ length: 24 }, () => ({ cards: 0, known: 0, unknown: 0 }));
   let cardsSeen = 0;
+  let cardsBrowsed = 0;
   logs.forEach((l) => {
     dateCounts[l.date] = (dateCounts[l.date] || 0) + (l.cards_seen || 0);
     cardsSeen += l.cards_seen || 0;
@@ -468,6 +475,11 @@ export async function renderDashboard(app, manifest) {
     byHour[hr].cards += l.cards_seen || 0;
     byHour[hr].known += l.known || 0;
     byHour[hr].unknown += l.unknown || 0;
+  });
+  browse.forEach((b) => {
+    dateCounts[b.date] = (dateCounts[b.date] || 0) + (b.count || 0);
+    cardsBrowsed += b.count || 0;
+    (b.hours || []).forEach((n, hr) => (byHour[hr].cards += n || 0));
   });
 
   // streak (consecutive days up to today/yesterday with study)
@@ -491,6 +503,7 @@ export async function renderDashboard(app, manifest) {
     mastered,
     totalTests,
     cardsSeen,
+    cardsBrowsed,
     favorites: favIds.length,
     wrongCount,
     streak,
@@ -504,7 +517,7 @@ export async function renderDashboard(app, manifest) {
   grid.appendChild(panel(`Check-in · ${streak}-day streak`, heatmap(dateCounts)));
   grid.appendChild(panel("Daily volume (last 14 days)", dailyVolume(dateCounts)));
 
-  // level progress rings
+  // level progress rings (tested lists per course)
   const courses = orderedCourses(manifest);
   const studiedSet = new Set(statMap.keys());
   const rings = el("div", "rings");
@@ -512,7 +525,17 @@ export async function renderDashboard(app, manifest) {
     const studied = c.lists.filter((l) => studiedSet.has(l.list_id)).length;
     rings.appendChild(progressRing(studied, c.lists.length, c.name));
   });
-  grid.appendChild(panel("Level progress", rings));
+  grid.appendChild(panel("Level progress (tested)", rings));
+
+  // library coverage rings (lists *opened* per course — counts browsing, not
+  // just testing, so it fills in as you explore).
+  const seenSet = new Set(seen.map((s) => s.list_id));
+  const coverRings = el("div", "rings");
+  courses.forEach((c) => {
+    const opened = c.lists.filter((l) => seenSet.has(l.list_id)).length;
+    coverRings.appendChild(progressRing(opened, c.lists.length, c.name));
+  });
+  grid.appendChild(panel("Library coverage (opened)", coverRings));
 
   // accuracy over sessions (last 30)
   const recentSessions = logs
@@ -567,7 +590,7 @@ export async function renderDashboard(app, manifest) {
   let bestAcc = -1;
   let bestVol = 0;
   byHour.forEach((b, i) => {
-    if (b.cards >= 5) {
+    if (b.known + b.unknown >= 5) {
       const a = acc(b.known, b.unknown);
       if (a > bestAcc || (a === bestAcc && b.cards > bestVol)) {
         bestAcc = a;

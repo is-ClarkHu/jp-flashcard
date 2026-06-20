@@ -15,7 +15,7 @@ import {
 import { createCard } from "./card.js";
 import { getSettings, setSetting } from "./settings.js";
 import { SPEAKERS, playSpeaker, resolveSpeaker, speechAvailable, japaneseVoiceAvailable, stopSpeech } from "./tts.js";
-import { getAllFavoriteIds, toggleFavorite, getAllWrongIds, getWrongCount, getAllStudyLog, getAllCourseStates, getAllSeen, markSeen, getAllWrong, removeFromWrong } from "./db.js";
+import { getAllFavoriteIds, toggleFavorite, getAllWrongIds, getWrongCount, getAllStudyLog, getAllCourseStates, getAllSeen, markSeen, getAllWrong, removeFromWrong, logBrowse, getAllBrowse } from "./db.js";
 import { statsByList, courseProgress, logRound } from "./progress.js";
 import { renderQuiz } from "./quiz.js";
 import {
@@ -46,6 +46,7 @@ const state = {
   _move: null,
   _flip: null,
   _fav: null,
+  _jumpCardId: null, // set by search → renderDeck lands on this card
   _cleanup: null,
 };
 
@@ -71,6 +72,53 @@ function clear() {
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme === "dark" ? "dark" : "light";
+}
+
+function ymdLocal(d) {
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+// Consecutive days (up to today, or yesterday if nothing yet today) present in
+// the activity-day set. Used by the home daily-goal banner.
+function streakFrom(daySet) {
+  let n = 0;
+  const day = new Date();
+  day.setHours(0, 0, 0, 0);
+  if (!daySet.has(ymdLocal(day))) day.setDate(day.getDate() - 1);
+  while (daySet.has(ymdLocal(day))) {
+    n++;
+    day.setDate(day.getDate() - 1);
+  }
+  return n;
+}
+function goalRing(done, goal) {
+  const frac = goal > 0 ? Math.min(1, done / goal) : 0;
+  const r = 24;
+  const c = 2 * Math.PI * r;
+  const cx = 30;
+  const cy = 30;
+  const wrap = el("div", "goal-ring");
+  wrap.innerHTML =
+    `<svg viewBox="0 0 60 60" width="60" height="60">` +
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--line)" stroke-width="6"/>` +
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(c * frac).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 ${cx} ${cy})"/>` +
+    `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text)">${Math.round(frac * 100)}%</text>` +
+    `</svg>`;
+  return wrap;
+}
+function goalBanner(done, goal, streak) {
+  const banner = el("div", "goal-banner");
+  banner.appendChild(goalRing(done, goal));
+  const txt = el("div", "goal-banner__txt");
+  txt.appendChild(el("div", "goal-banner__main", `${done} / ${goal} cards today`));
+  let sub;
+  if (done >= goal) sub = streak > 0 ? `Goal reached! 🔥 ${streak}-day streak` : "Goal reached! 🎉";
+  else if (streak > 0 && done === 0) sub = `🔥 ${streak}-day streak — study today to keep it`;
+  else if (streak > 0) sub = `🔥 ${streak}-day streak`;
+  else sub = "Start a streak today!";
+  txt.appendChild(el("div", "goal-banner__sub", sub));
+  banner.appendChild(txt);
+  return banner;
 }
 
 // Toggle furigana visibility app-wide (cards + self-test) via a root attribute;
@@ -182,13 +230,23 @@ async function renderHome() {
   app.appendChild(header);
 
   const wrongCount = await getWrongCount().catch(() => 0);
+  // Search bar + quick-entry chips share a shrink-to-fit column, so the search
+  // bar stretches to exactly the width of the 5-button row below it.
+  const homeTop = el("div", "home-top");
+  const searchBar = el("a", "home-search");
+  searchBar.href = "#/search";
+  searchBar.appendChild(el("span", "home-search__icon", "🔍"));
+  searchBar.appendChild(el("span", "home-search__ph", "Search words by kanji, kana, or meaning…"));
+  homeTop.appendChild(searchBar);
+
   const top = el("div", "top-entries");
   top.appendChild(topEntry("#/kana", "あ", "Kana", ""));
   top.appendChild(topEntry("#/favorites", "★", "Favorites", state.favorites.size));
   top.appendChild(topEntry("#/wrong", "✗", "Wrong Book", wrongCount));
   top.appendChild(topEntry("#/dashboard", "▤", "Dashboard", ""));
   top.appendChild(topEntry("#/settings", "⚙", "Settings", ""));
-  app.appendChild(top);
+  homeTop.appendChild(top);
+  app.appendChild(homeTop);
 
   const logs = await getAllStudyLog().catch(() => []);
   const statMap = statsByList(logs);
@@ -198,6 +256,19 @@ async function renderHome() {
   const seenMap = new Map(seen.map((s) => [s.list_id, s.last_seen]));
   const todayStr = new Date().toISOString().slice(0, 10);
   const threshold = state.settings.roundThreshold || 0.9;
+
+  // Daily-goal banner: today's cards (browsing + tests) vs the goal, plus streak.
+  const goal = state.settings.dailyGoal || 0;
+  if (goal > 0) {
+    const browse = await getAllBrowse().catch(() => []);
+    const todayLocal = ymdLocal(new Date());
+    const browseToday = (browse.find((b) => b.date === todayLocal) || {}).count || 0;
+    const testToday = logs.filter((l) => l.date === todayLocal).reduce((n, l) => n + (l.cards_seen || 0), 0);
+    const activeDays = new Set();
+    browse.forEach((b) => b.count && activeDays.add(b.date));
+    logs.forEach((l) => l.date && activeDays.add(l.date));
+    app.appendChild(goalBanner(browseToday + testToday, goal, streakFrom(activeDays)));
+  }
 
   const courses = orderedCourses(state.manifest);
   const list = el("div", "course-list");
@@ -279,10 +350,98 @@ async function renderHome() {
   app.appendChild(list);
 }
 
+// --- global word search --------------------------------------------------
+// Build (once, then cache) a flat index of every card across the library so a
+// search can match kanji / kana / meaning and jump straight to that card.
+let _searchIndex = null;
+async function buildSearchIndex() {
+  if (_searchIndex) return _searchIndex;
+  const files = [];
+  for (const c of state.manifest.curricula)
+    for (const g of c.groups)
+      for (const l of g.lists)
+        if (l.file) files.push({ file: l.file, listId: l.list_id, course: c.curriculum, listName: l.list_name });
+  const idx = [];
+  await Promise.all(
+    files.map(async (f) => {
+      try {
+        const data = await loadListFile(f.file);
+        for (const card of data.cards || []) {
+          const hay = [card.front, card.reading, card.meaning_en, card.meaning_zh, card.meaning_ja]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+          idx.push({ card, listId: f.listId, course: f.course, listName: f.listName, hay });
+        }
+      } catch {
+        /* a list file may be missing; skip it */
+      }
+    }),
+  );
+  _searchIndex = idx;
+  return idx;
+}
+
+async function renderSearch() {
+  clear();
+  const back = el("a", "btn btn--ghost", "← Home");
+  back.href = "#/";
+  app.appendChild(back);
+  app.appendChild(el("h1", "dash-title", "Search"));
+  const input = el("input", "text-input search-input");
+  input.type = "search";
+  input.placeholder = "Search by kanji, kana, or meaning…";
+  app.appendChild(input);
+  const status = el("p", "hint", "Loading library…");
+  app.appendChild(status);
+  const results = el("div", "search-results");
+  app.appendChild(results);
+
+  const index = await buildSearchIndex();
+  const idle = () => `${index.length} words indexed — type to search.`;
+  status.textContent = idle();
+
+  const CAP = 100;
+  function run() {
+    const q = input.value.trim().toLowerCase();
+    results.replaceChildren();
+    if (!q) {
+      status.textContent = idle();
+      return;
+    }
+    const hits = [];
+    for (const item of index) {
+      if (item.hay.includes(q)) {
+        hits.push(item);
+        if (hits.length >= CAP) break;
+      }
+    }
+    status.textContent = hits.length ? `${hits.length}${hits.length >= CAP ? "+" : ""} match(es)` : "No matches.";
+    hits.forEach((item) => {
+      const c = item.card;
+      const row = el("a", "search-row");
+      row.href = `#/list/${encodeURIComponent(item.listId)}`;
+      const main = el("div", "search-row__main");
+      const jp = el("span", "search-row__jp", c.front);
+      main.appendChild(jp);
+      if (c.reading && c.reading !== c.front) main.appendChild(el("span", "search-row__reading", c.reading));
+      main.appendChild(el("span", "search-row__mean", c.meaning_en || c.meaning_zh || c.meaning_ja || ""));
+      row.appendChild(main);
+      row.appendChild(el("span", "search-row__loc", `${item.course} · ${item.listName}`));
+      row.addEventListener("click", () => {
+        state._jumpCardId = c.id; // renderDeck will land on this card
+      });
+      results.appendChild(row);
+    });
+  }
+  input.addEventListener("input", run);
+  setTimeout(() => input.focus(), 0);
+}
+
 // --- deck view (browse) --------------------------------------------------
 // opts: { title, scopes?:[{key,label}], getCards(scope)->cards, onSelfTest?(scope) }
 
-function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClear }) {
+function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClear, initialCardId }) {
   clear();
   app.classList.add("app--wide");
   let activeScope = scopes && scopes.length ? scopes[0].key : null;
@@ -290,6 +449,9 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   // True while showing the "end of list" card that sits after the last word; the
   // next step from here wraps back to the first card.
   let atEnd = false;
+  // Card ids already counted toward browse volume this view — so revisiting a
+  // card (flipping, wrapping, arrow-spamming) logs it at most once per session.
+  const browsedThisSession = new Set();
 
   const bar = el("div", "deck-bar");
   const left = el("div", "deck-bar__side");
@@ -497,6 +659,13 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   function showCard() {
     atEnd = false;
     stopSpeech();
+    // Count this card toward browse volume (once per session) so the dashboard
+    // reflects plain browsing, not only self-tests.
+    const cur = state.deck.current;
+    if (cur && !browsedThisSession.has(cur.id)) {
+      browsedThisSession.add(cur.id);
+      logBrowse().catch(() => {}); // best-effort; never block or break rendering
+    }
     // With "front" the Japanese face is the un-rotated side (visible when not
     // flipped); with "back" it's the rotated side (visible when flipped). Auto-play
     // re-reads the word every time that Japanese face comes back into view.
@@ -610,6 +779,13 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
       return;
     }
     if (wasShuffled) state.deck.toggleShuffle(); // re-shuffle the fresh pass
+    if (initialCardId) {
+      // Land on the searched-for card the first time only; later loads (scope
+      // switch, new pass) start at the top.
+      const i = state.deck.cards.findIndex((c) => c.id === initialCardId);
+      if (i >= 0) state.deck.index = i;
+      initialCardId = null;
+    }
     showCard();
   }
   function setScope(key) {
@@ -628,6 +804,8 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
 
 async function renderDeck(listId) {
   clear();
+  const jumpId = state._jumpCardId; // set by search; honored once
+  state._jumpCardId = null;
   const meta = findList(state.manifest, listId);
   if (!meta) return void app.appendChild(el("p", "error", `List not found: ${listId}`));
   app.appendChild(el("p", "loading", "Loading…"));
@@ -664,7 +842,7 @@ async function renderDeck(listId) {
       },
     });
 
-  renderDeckUI({ title, scopes, getCards, onSelfTest });
+  renderDeckUI({ title, scopes, getCards, onSelfTest, initialCardId: jumpId });
 }
 
 async function renderFavorites() {
@@ -963,6 +1141,30 @@ function explanationsPane() {
 
 function studyPane() {
   const box = el("div", "pane");
+  box.appendChild(el("h3", "pane__title", "Daily goal"));
+  box.appendChild(
+    el(
+      "p",
+      "panel__note",
+      "Cards per day (browsing + tests) shown as a progress ring on the home screen, with your study streak. Set to 0 to hide the banner.",
+    ),
+  );
+  box.appendChild(el("label", "panel__field-label", "Cards per day"));
+  const goal = el("input", "text-input");
+  goal.type = "number";
+  goal.min = "0";
+  goal.max = "1000";
+  goal.value = String(state.settings.dailyGoal ?? 20);
+  goal.addEventListener("change", () => {
+    let v = parseInt(goal.value, 10);
+    if (!Number.isFinite(v) || v < 0) v = 0;
+    if (v > 1000) v = 1000;
+    goal.value = String(v);
+    state.settings = setSetting("dailyGoal", v);
+  });
+  box.appendChild(goal);
+
+  box.appendChild(el("hr", "panel__sep"));
   box.appendChild(el("h3", "pane__title", "Self-test timer"));
   box.appendChild(
     el(
@@ -1280,6 +1482,7 @@ function route() {
   else if ((m = hash.match(/^\/wrong\/([^/]+)\/(\d+)$/))) renderWrong(decodeURIComponent(m[1]), parseInt(m[2], 10));
   else if ((m = hash.match(/^\/wrong\/(.+)$/))) renderWrong(decodeURIComponent(m[1]));
   else if (hash === "/wrong" || hash === "/test-wrong") renderWrong();
+  else if (hash === "/search") renderSearch();
   else if (hash === "/favorites") renderFavorites();
   else if ((m = hash.match(/^\/course\/(.+)$/))) {
     app.classList.add("app--full");

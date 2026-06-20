@@ -36,6 +36,7 @@ const STORE_DEFS = {
   explain_cache: { keyPath: "key" },
   saves: { keyPath: "id" }, // account snapshots
   seen: { keyPath: "list_id" }, // last-browsed per list
+  browse_log: { keyPath: "date" }, // per-day card-view volume (browsing, not tests)
   course_state: { keyPath: "course" }, // current round per course
   kana_progress: { keyPath: "id" }, // per-kana mastery (§4B): rolling accuracy
   meta: { keyPath: "key" }, // misc app state (e.g. last file-sync marker)
@@ -221,6 +222,31 @@ export async function getAllSeen() {
   return (await tx("seen", "readonly", (os) => reqValue(os.getAll()))) || [];
 }
 
+// --- browse log (per-day card-view volume, so the dashboard reflects plain
+// browsing, not just self-tests). One record per local day:
+//   { date:"YYYY-MM-DD", count, hours:[24] }
+function localDay() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+export async function logBrowse(hour = new Date().getHours()) {
+  const date = localDay();
+  await tx("browse_log", "readwrite", (os) => {
+    const get = os.get(date);
+    get.onsuccess = () => {
+      const rec = get.result || { date, count: 0, hours: Array(24).fill(0) };
+      if (!Array.isArray(rec.hours)) rec.hours = Array(24).fill(0);
+      rec.count += 1;
+      rec.hours[hour] = (rec.hours[hour] || 0) + 1;
+      os.put(rec);
+    };
+  });
+}
+export async function getAllBrowse() {
+  return (await tx("browse_log", "readonly", (os) => reqValue(os.getAll()))) || [];
+}
+
 // --- rounds (multi-round study tracking) ---------------------------------
 
 export async function getAllRounds() {
@@ -306,7 +332,7 @@ export async function setSyncMarker(savedAt) {
 
 // --- migration (export / import all stores) ------------------------------
 
-const ALL_STORES = ["favorites", "study_log", "wrong_book", "rounds", "explain_cache", "seen", "course_state", "kana_progress"];
+const ALL_STORES = ["favorites", "study_log", "wrong_book", "rounds", "explain_cache", "seen", "browse_log", "course_state", "kana_progress"];
 
 export async function exportStores(exclude = []) {
   const out = {};
