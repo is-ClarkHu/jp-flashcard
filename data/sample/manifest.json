@@ -8,14 +8,14 @@
           "lists": [
             {
               "list_id": "greet-list01",
-              "list_name": "Hellos",
-              "count": 8,
+              "list_name": "Hellos & Goodbyes",
+              "count": 12,
               "file": "sample/greet.json"
             },
             {
               "list_id": "polite-list01",
-              "list_name": "Polite phrases",
-              "count": 8,
+              "list_name": "Polite Phrases",
+              "count": 12,
               "file": "sample/polite.json"
             }
           ]
@@ -30,14 +30,14 @@
           "lists": [
             {
               "list_id": "num-list01",
-              "list_name": "Numbers 1–10",
-              "count": 10,
+              "list_name": "Numbers",
+              "count": 12,
               "file": "sample/num.json"
             },
             {
               "list_id": "cal-list01",
               "list_name": "Days & Time",
-              "count": 8,
+              "count": 12,
               "file": "sample/cal.json"
             }
           ]
@@ -53,13 +53,13 @@
             {
               "list_id": "food-list01",
               "list_name": "Food",
-              "count": 8,
+              "count": 12,
               "file": "sample/food.json"
             },
             {
               "list_id": "drink-list01",
               "list_name": "Drinks",
-              "count": 8,
+              "count": 12,
               "file": "sample/drink.json"
             }
           ]
@@ -75,14 +75,114 @@
             {
               "list_id": "place-list01",
               "list_name": "Places",
-              "count": 8,
+              "count": 12,
               "file": "sample/place.json"
             },
             {
               "list_id": "trans-list01",
               "list_name": "Transport",
-              "count": 8,
+              "count": 12,
               "file": "sample/trans.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "People & Family",
+      "groups": [
+        {
+          "group": "People & Family",
+          "lists": [
+            {
+              "list_id": "family-list01",
+              "list_name": "Family",
+              "count": 12,
+              "file": "sample/family.json"
+            },
+            {
+              "list_id": "people-list01",
+              "list_name": "People & Pronouns",
+              "count": 12,
+              "file": "sample/people.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Home & Daily Life",
+      "groups": [
+        {
+          "group": "Home & Daily Life",
+          "lists": [
+            {
+              "list_id": "home-list01",
+              "list_name": "Home & Objects",
+              "count": 12,
+              "file": "sample/home.json"
+            },
+            {
+              "list_id": "daily-list01",
+              "list_name": "Daily Verbs",
+              "count": 12,
+              "file": "sample/daily.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Nature & World",
+      "groups": [
+        {
+          "group": "Nature & World",
+          "lists": [
+            {
+              "list_id": "animal-list01",
+              "list_name": "Animals",
+              "count": 12,
+              "file": "sample/animal.json"
+            },
+            {
+              "list_id": "nature-list01",
+              "list_name": "Nature & Weather",
+              "count": 12,
+              "file": "sample/nature.json"
+            },
+            {
+              "list_id": "color-list01",
+              "list_name": "Colors",
+              "count": 10,
+              "file": "sample/color.json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "curriculum": "Describing Things",
+      "groups": [
+        {
+          "group": "Describing Things",
+          "lists": [
+            {
+              "list_id": "adj-list01",
+              "list_name": "Adjectives",
+              "count": 12,
+              "file": "sample/adj.json"
+            },
+            {
+              "list_id": "verb-list01",
+              "list_name": "Common Verbs",
+              "count": 12,
+              "file": "sample/verb.json"
+            },
+            {
+              "list_id": "body-list01",
+              "list_name": "The Body",
+              "count": 12,
+              "file": "sample/body.json"
             }
           ]
         }
