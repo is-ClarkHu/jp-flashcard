@@ -556,10 +556,17 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
   function move(delta) {
     if (!state.deck.size) return;
     if (atEnd) {
-      // On the end card: forward wraps to the first card, back returns to the last.
       atEnd = false;
-      state.deck.index = delta > 0 ? 0 : state.deck.size - 1;
-      showCard();
+      if (delta > 0) {
+        // Forward starts a fresh pass: rebuild from current membership so cards
+        // unfavorited (or cleared) during this round drop out now. They stay
+        // visible mid-round (just with the star un-lit) and leave only on wrap.
+        load(true);
+      } else {
+        // Back returns to the last card of the same round.
+        state.deck.index = state.deck.size - 1;
+        showCard();
+      }
       return;
     }
     if (delta > 0 && state.deck.index === state.deck.size - 1) {
@@ -589,8 +596,9 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
     if (state.deck.index >= state.deck.cards.length) state.deck.index = state.deck.cards.length - 1;
     showCard();
   }
-  function load() {
+  function load(preserveShuffle = false) {
     refreshChips();
+    const wasShuffled = preserveShuffle && state.deck && state.deck.shuffled;
     const cards = getCards(activeScope);
     state.deck = new Deck(cards);
     if (!cards.length) {
@@ -601,6 +609,7 @@ function renderDeckUI({ title, scopes, getCards, onSelfTest, wrongCounts, onClea
       nextArrow.disabled = true;
       return;
     }
+    if (wasShuffled) state.deck.toggleShuffle(); // re-shuffle the fresh pass
     showCard();
   }
   function setScope(key) {
@@ -670,7 +679,9 @@ async function renderFavorites() {
   }
   renderDeckUI({
     title: "★ Favorites",
-    getCards: () => cards,
+    // Filter by the live favorite set (not the open-time snapshot) so cards
+    // unfavorited during a pass drop out when the deck is rebuilt on wrap.
+    getCards: () => cards.filter((c) => state.favorites.has(c.id)),
     onSelfTest: () =>
       startQuiz({
         title: "★ Favorites",
