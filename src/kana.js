@@ -39,10 +39,12 @@ async function loadKana(script) {
   return (_cache[script] = await res.json());
 }
 
-// Speak a kana through the shared TTS layer (browser voice in audio Phase 1).
+// Speak a kana through the shared TTS layer. Pre-generated VOICEVOX mp3s (via
+// scripts/kana-tts.py) live on entry.audio; playSpeaker uses them when present
+// and falls back to the browser voice otherwise.
 function speakKana(entry) {
   const s = getSettings();
-  const pseudo = { reading: entry.kana, front: entry.kana };
+  const pseudo = { reading: entry.kana, front: entry.kana, audio: entry.audio || undefined };
   playSpeaker(pseudo, resolveSpeaker(s), s);
 }
 

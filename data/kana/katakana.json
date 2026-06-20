@@ -1,3647 +1,4375 @@
 {
-  "script": "kata",
-  "name": "Katakana",
-  "vowels": [
-    "a",
-    "i",
-    "u",
-    "e",
-    "o"
-  ],
-  "categories": [
-    "seion",
-    "dakuon",
-    "handakuon",
-    "yoon"
-  ],
-  "kana": [
-    {
-      "id": "kata:ア",
-      "kana": "ア",
-      "romaji": "a",
-      "accepts": [
-        "a"
-      ],
-      "type": "seion",
-      "row": 0,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "阿",
-      "mnemonic": "An 'A'-frame with a flag.",
-      "position": "あ行・あ段",
-      "pron": null,
-      "example": {
-        "w": "アイス",
-        "r": "アイス",
-        "romaji": "aisu",
-        "zh": "冰/冰淇淋",
-        "en": "ice / ice cream"
-      },
-      "trivia": {
-        "zh": "片假名常用長音符「ー」拉長母音,如 アート(art)。",
-        "en": "Katakana lengthens vowels with the bar 「ー」, e.g. アート (art).",
-        "ja": "カタカナは長音符「ー」で母音を伸ばします(例:アート)。"
-      },
-      "lookalikes": [
-        "kata:マ"
-      ],
-      "tips": {
-        "zh": [
-          "ア 的撇与主体分开;マ 是连成一笔的折(像对勾)。"
-        ],
-        "en": [
-          "ア has a separate hooked stroke; マ is one connected check-mark."
-        ],
-        "ja": [
-          "アは離れた鉤、マは一筆のチェック。"
-        ]
-      }
-    },
-    {
-      "id": "kata:イ",
-      "kana": "イ",
-      "romaji": "i",
-      "accepts": [
-        "i"
-      ],
-      "type": "seion",
-      "row": 0,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "伊",
-      "mnemonic": "Two strokes leaning — an 'ee'gle's beak.",
-      "position": "あ行・い段",
-      "pron": null,
-      "example": {
-        "w": "イタリア",
-        "r": "イタリア",
-        "romaji": "itaria",
-        "zh": "義大利",
-        "en": "Italy"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ウ",
-      "kana": "ウ",
-      "romaji": "u",
-      "accepts": [
-        "u"
-      ],
-      "type": "seion",
-      "row": 0,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "宇",
-      "mnemonic": "A roof with a hook — 'oo'.",
-      "position": "あ行・う段",
-      "pron": null,
-      "example": {
-        "w": "ウール",
-        "r": "ウール",
-        "romaji": "ūru",
-        "zh": "羊毛",
-        "en": "wool"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ワ"
-      ],
-      "tips": {
-        "zh": [
-          "ウ 顶上有一点(宝盖头);ワ 没有点。"
-        ],
-        "en": [
-          "ウ has a dot on top; ワ does not."
-        ],
-        "ja": [
-          "ウは上に点、ワは点なし。"
-        ]
-      }
-    },
-    {
-      "id": "kata:エ",
-      "kana": "エ",
-      "romaji": "e",
-      "accepts": [
-        "e"
-      ],
-      "type": "seion",
-      "row": 0,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "江",
-      "mnemonic": "An 'E' / 工 shape (engineering).",
-      "position": "あ行・え段",
-      "pron": null,
-      "example": {
-        "w": "エアコン",
-        "r": "エアコン",
-        "romaji": "eakon",
-        "zh": "空調",
-        "en": "air conditioner"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:オ",
-      "kana": "オ",
-      "romaji": "o",
-      "accepts": [
-        "o"
-      ],
-      "type": "seion",
-      "row": 0,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "於",
-      "mnemonic": "An 'O' with a kick — like 'oh!'",
-      "position": "あ行・お段",
-      "pron": null,
-      "example": {
-        "w": "オレンジ",
-        "r": "オレンジ",
-        "romaji": "orenji",
-        "zh": "橙子",
-        "en": "orange"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:カ",
-      "kana": "カ",
-      "romaji": "ka",
-      "accepts": [
-        "ka"
-      ],
-      "type": "seion",
-      "row": 1,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "加",
-      "mnemonic": "Same idea as か — a 'car' corner.",
-      "position": "か行・あ段",
-      "pron": null,
-      "example": {
-        "w": "カメラ",
-        "r": "カメラ",
-        "romaji": "kamera",
-        "zh": "相機",
-        "en": "camera"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ケ"
-      ],
-      "tips": {
-        "zh": [
-          "カ 是「力」字形;ケ 多一斜撇、更斜。"
-        ],
-        "en": [
-          "カ looks like 力; ケ has an extra slash and leans more."
-        ],
-        "ja": [
-          "カは「力」、ケは斜め棒付き。"
-        ]
-      }
-    },
-    {
-      "id": "kata:キ",
-      "kana": "キ",
-      "romaji": "ki",
-      "accepts": [
-        "ki"
-      ],
-      "type": "seion",
-      "row": 1,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "幾",
-      "mnemonic": "A 'key' with two prongs.",
-      "position": "か行・い段",
-      "pron": null,
-      "example": {
-        "w": "キロ",
-        "r": "キロ",
-        "romaji": "kiro",
-        "zh": "公斤/公里",
-        "en": "kilo"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ク",
-      "kana": "ク",
-      "romaji": "ku",
-      "accepts": [
-        "ku"
-      ],
-      "type": "seion",
-      "row": 1,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "久",
-      "mnemonic": "An open mouth corner — 'ku'.",
-      "position": "か行・う段",
-      "pron": null,
-      "example": {
-        "w": "クラス",
-        "r": "クラス",
-        "romaji": "kurasu",
-        "zh": "班級",
-        "en": "class"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ワ",
-        "kata:ケ"
-      ],
-      "tips": {
-        "zh": [
-          "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。"
-        ],
-        "en": [
-          "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash."
-        ],
-        "ja": [
-          "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ケ",
-      "kana": "ケ",
-      "romaji": "ke",
-      "accepts": [
-        "ke"
-      ],
-      "type": "seion",
-      "row": 1,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "介",
-      "mnemonic": "A 'k' with a slash.",
-      "position": "か行・え段",
-      "pron": null,
-      "example": {
-        "w": "ケーキ",
-        "r": "ケーキ",
-        "romaji": "kēki",
-        "zh": "蛋糕",
-        "en": "cake"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ク",
-        "kata:ワ",
-        "kata:カ"
-      ],
-      "tips": {
-        "zh": [
-          "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。",
-          "カ 是「力」字形;ケ 多一斜撇、更斜。"
-        ],
-        "en": [
-          "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash.",
-          "カ looks like 力; ケ has an extra slash and leans more."
-        ],
-        "ja": [
-          "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。",
-          "カは「力」、ケは斜め棒付き。"
-        ]
-      }
-    },
-    {
-      "id": "kata:コ",
-      "kana": "コ",
-      "romaji": "ko",
-      "accepts": [
-        "ko"
-      ],
-      "type": "seion",
-      "row": 1,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "己",
-      "mnemonic": "An open box — two 'co'-rners.",
-      "position": "か行・お段",
-      "pron": null,
-      "example": {
-        "w": "コーヒー",
-        "r": "コーヒー",
-        "romaji": "kōhī",
-        "zh": "咖啡",
-        "en": "coffee"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ユ"
-      ],
-      "tips": {
-        "zh": [
-          "コ 开口朝右;ユ 开口朝上、底横长。"
-        ],
-        "en": [
-          "コ opens to the right; ユ opens upward with a long base."
-        ],
-        "ja": [
-          "コは右が開く、ユは上が開く。"
-        ]
-      }
-    },
-    {
-      "id": "kata:サ",
-      "kana": "サ",
-      "romaji": "sa",
-      "accepts": [
-        "sa"
-      ],
-      "type": "seion",
-      "row": 2,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "散",
-      "mnemonic": "Like さ straightened — three strokes.",
-      "position": "さ行・あ段",
-      "pron": null,
-      "example": {
-        "w": "サラダ",
-        "r": "サラダ",
-        "romaji": "sarada",
-        "zh": "沙拉",
-        "en": "salad"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:シ",
-      "kana": "シ",
-      "romaji": "shi",
-      "accepts": [
-        "shi",
-        "si"
-      ],
-      "type": "seion",
-      "row": 2,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "之",
-      "mnemonic": "Two dots + an up-stroke — strokes go bottom-up (vs ツ).",
-      "position": "さ行・い段",
-      "pron": {
-        "zh": "讀作 shi。注意與 ツ 的筆順區別。",
-        "en": "Pronounced “shi”. Mind the stroke order vs ツ.",
-        "ja": "「シ」は shi。"
-      },
-      "example": {
-        "w": "シャツ",
-        "r": "シャツ",
-        "romaji": "shatsu",
-        "zh": "襯衫",
-        "en": "shirt"
-      },
-      "trivia": {
-        "zh": "「シ」「ツ」是片假名最容易混的一對,關鍵看筆順方向。",
-        "en": "「シ」 and 「ツ」 are the most-confused katakana pair — the giveaway is stroke direction.",
-        "ja": "「シ」と「ツ」は最も紛らわしい対。見分けは筆順の向きです。"
-      },
-      "lookalikes": [
-        "kata:ツ"
-      ],
-      "tips": {
-        "zh": [
-          "シ 两点竖排、第三笔由下往上挑;ツ 两点横排、第三笔由上往下撇。"
-        ],
-        "en": [
-          "シ's dots stack vertically and the stroke sweeps up; ツ's dots sit side-by-side and the stroke goes down."
-        ],
-        "ja": [
-          "シは点が縦・下から上へ、ツは点が横・上から下へ。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ス",
-      "kana": "ス",
-      "romaji": "su",
-      "accepts": [
-        "su"
-      ],
-      "type": "seion",
-      "row": 2,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "須",
-      "mnemonic": "A figure sitting — 'soo'.",
-      "position": "さ行・う段",
-      "pron": null,
-      "example": {
-        "w": "スプーン",
-        "r": "スプーン",
-        "romaji": "supūn",
-        "zh": "勺子",
-        "en": "spoon"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ヌ",
-        "kata:フ"
-      ],
-      "tips": {
-        "zh": [
-          "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
-        ],
-        "en": [
-          "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
-        ],
-        "ja": [
-          "フは一画、スは下に一画、ヌは交差を足す。"
-        ]
-      }
-    },
-    {
-      "id": "kata:セ",
-      "kana": "セ",
-      "romaji": "se",
-      "accepts": [
-        "se"
-      ],
-      "type": "seion",
-      "row": 2,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "世",
-      "mnemonic": "A 'C' with a bar — 'se'.",
-      "position": "さ行・え段",
-      "pron": null,
-      "example": {
-        "w": "セーター",
-        "r": "セーター",
-        "romaji": "sētā",
-        "zh": "毛衣",
-        "en": "sweater"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ヤ"
-      ],
-      "tips": {
-        "zh": [
-          "セ 横长、竖在右带钩往左;ヤ 是一撇加一点。"
-        ],
-        "en": [
-          "セ has a long horizontal with a hooked vertical; ヤ is a stroke plus a dot."
-        ],
-        "ja": [
-          "セは横長＋鉤、ヤは点付き。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ソ",
-      "kana": "ソ",
-      "romaji": "so",
-      "accepts": [
-        "so"
-      ],
-      "type": "seion",
-      "row": 2,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "曽",
-      "mnemonic": "One dot + a down-stroke — top-down (vs ン).",
-      "position": "さ行・お段",
-      "pron": null,
-      "example": {
-        "w": "ソファ",
-        "r": "ソファ",
-        "romaji": "sofa",
-        "zh": "沙發",
-        "en": "sofa"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ン",
-        "kata:ノ"
-      ],
-      "tips": {
-        "zh": [
-          "ソ 第二笔由上往下;ン 第二笔由下往上挑。",
-          "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
-        ],
-        "en": [
-          "ソ's stroke goes top-down; ン's sweeps bottom-up.",
-          "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
-        ],
-        "ja": [
-          "ソは上から下、ンは下から上へ。",
-          "ノは一画、ソ・ンは点の向きで区別。"
-        ]
-      }
-    },
-    {
-      "id": "kata:タ",
-      "kana": "タ",
-      "romaji": "ta",
-      "accepts": [
-        "ta"
-      ],
-      "type": "seion",
-      "row": 3,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "多",
-      "mnemonic": "Like ク with a stroke — 'ta'.",
-      "position": "た行・あ段",
-      "pron": null,
-      "example": {
-        "w": "タクシー",
-        "r": "タクシー",
-        "romaji": "takushī",
-        "zh": "計程車",
-        "en": "taxi"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:チ",
-      "kana": "チ",
-      "romaji": "chi",
-      "accepts": [
-        "chi",
-        "ti"
-      ],
-      "type": "seion",
-      "row": 3,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "千",
-      "mnemonic": "A 'ch'air seen sideways.",
-      "position": "た行・い段",
-      "pron": null,
-      "example": {
-        "w": "チーズ",
-        "r": "チーズ",
-        "romaji": "chīzu",
-        "zh": "起司",
-        "en": "cheese"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:テ"
-      ],
-      "tips": {
-        "zh": [
-          "チ 像「千」、末笔竖钩穿下;テ 竖在正中、不带大钩。"
-        ],
-        "en": [
-          "チ ends in a long vertical hook (like 千); テ has a centered vertical with no big hook."
-        ],
-        "ja": [
-          "チは縦のかぎ、テは真ん中に縦棒。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ツ",
-      "kana": "ツ",
-      "romaji": "tsu",
-      "accepts": [
-        "tsu",
-        "tu"
-      ],
-      "type": "seion",
-      "row": 3,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "川",
-      "mnemonic": "Three strokes, two dots side-by-side; written top-down.",
-      "position": "た行・う段",
-      "pron": {
-        "zh": "讀作 tsu。注意與 シ 的筆順區別。",
-        "en": "Pronounced “tsu”. Mind the stroke order vs シ.",
-        "ja": "「ツ」は tsu。"
-      },
-      "example": {
-        "w": "ツナ",
-        "r": "ツナ",
-        "romaji": "tsuna",
-        "zh": "金槍魚",
-        "en": "tuna"
-      },
-      "trivia": {
-        "zh": "「ツ」「シ」是片假名最容易混的一對,關鍵看筆順方向。",
-        "en": "「ツ」 and 「シ」 are the most-confused katakana pair — the giveaway is stroke direction.",
-        "ja": "「ツ」と「シ」は最も紛らわしい対。見分けは筆順の向きです。"
-      },
-      "lookalikes": [
-        "kata:シ"
-      ],
-      "tips": {
-        "zh": [
-          "シ 两点竖排、第三笔由下往上挑;ツ 两点横排、第三笔由上往下撇。"
-        ],
-        "en": [
-          "シ's dots stack vertically and the stroke sweeps up; ツ's dots sit side-by-side and the stroke goes down."
-        ],
-        "ja": [
-          "シは点が縦・下から上へ、ツは点が横・上から下へ。"
-        ]
-      }
-    },
-    {
-      "id": "kata:テ",
-      "kana": "テ",
-      "romaji": "te",
-      "accepts": [
-        "te"
-      ],
-      "type": "seion",
-      "row": 3,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "天",
-      "mnemonic": "A 'T' with extra bars.",
-      "position": "た行・え段",
-      "pron": null,
-      "example": {
-        "w": "テレビ",
-        "r": "テレビ",
-        "romaji": "terebi",
-        "zh": "電視",
-        "en": "TV"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:チ"
-      ],
-      "tips": {
-        "zh": [
-          "チ 像「千」、末笔竖钩穿下;テ 竖在正中、不带大钩。"
-        ],
-        "en": [
-          "チ ends in a long vertical hook (like 千); テ has a centered vertical with no big hook."
-        ],
-        "ja": [
-          "チは縦のかぎ、テは真ん中に縦棒。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ト",
-      "kana": "ト",
-      "romaji": "to",
-      "accepts": [
-        "to"
-      ],
-      "type": "seion",
-      "row": 3,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "止",
-      "mnemonic": "A 'T' minus an arm — toe.",
-      "position": "た行・お段",
-      "pron": null,
-      "example": {
-        "w": "トマト",
-        "r": "トマト",
-        "romaji": "tomato",
-        "zh": "番茄",
-        "en": "tomato"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ナ",
-      "kana": "ナ",
-      "romaji": "na",
-      "accepts": [
-        "na"
-      ],
-      "type": "seion",
-      "row": 4,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "奈",
-      "mnemonic": "A 't' cross — 'na'.",
-      "position": "な行・あ段",
-      "pron": null,
-      "example": {
-        "w": "ナイフ",
-        "r": "ナイフ",
-        "romaji": "naifu",
-        "zh": "刀",
-        "en": "knife"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:メ"
-      ],
-      "tips": {
-        "zh": [
-          "ナ 是十字(横+竖撇);メ 是交叉两撇(像 X)。"
-        ],
-        "en": [
-          "ナ is a cross; メ is two crossing strokes (like X)."
-        ],
-        "ja": [
-          "ナは十字、メは交差。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ニ",
-      "kana": "ニ",
-      "romaji": "ni",
-      "accepts": [
-        "ni"
-      ],
-      "type": "seion",
-      "row": 4,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "二",
-      "mnemonic": "Two bars = 'ni' (2).",
-      "position": "な行・い段",
-      "pron": null,
-      "example": {
-        "w": "ニュース",
-        "r": "ニュース",
-        "romaji": "nyūsu",
-        "zh": "新聞",
-        "en": "news"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヌ",
-      "kana": "ヌ",
-      "romaji": "nu",
-      "accepts": [
-        "nu"
-      ],
-      "type": "seion",
-      "row": 4,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "奴",
-      "mnemonic": "Like ス with a slash — noodles.",
-      "position": "な行・う段",
-      "pron": null,
-      "example": {
-        "w": "ヌードル",
-        "r": "ヌードル",
-        "romaji": "nūdoru",
-        "zh": "麵條",
-        "en": "noodle"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ス",
-        "kata:フ"
-      ],
-      "tips": {
-        "zh": [
-          "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
-        ],
-        "en": [
-          "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
-        ],
-        "ja": [
-          "フは一画、スは下に一画、ヌは交差を足す。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ネ",
-      "kana": "ネ",
-      "romaji": "ne",
-      "accepts": [
-        "ne"
-      ],
-      "type": "seion",
-      "row": 4,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "祢",
-      "mnemonic": "A 't' plus marks — cat 'ne'.",
-      "position": "な行・え段",
-      "pron": null,
-      "example": {
-        "w": "ネクタイ",
-        "r": "ネクタイ",
-        "romaji": "nekutai",
-        "zh": "領帶",
-        "en": "necktie"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ノ",
-      "kana": "ノ",
-      "romaji": "no",
-      "accepts": [
-        "no"
-      ],
-      "type": "seion",
-      "row": 4,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "乃",
-      "mnemonic": "A single down-stroke — 'no'.",
-      "position": "な行・お段",
-      "pron": null,
-      "example": {
-        "w": "ノート",
-        "r": "ノート",
-        "romaji": "nōto",
-        "zh": "筆記本",
-        "en": "notebook"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ソ",
-        "kata:ン"
-      ],
-      "tips": {
-        "zh": [
-          "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
-        ],
-        "en": [
-          "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
-        ],
-        "ja": [
-          "ノは一画、ソ・ンは点の向きで区別。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ハ",
-      "kana": "ハ",
-      "romaji": "ha",
-      "accepts": [
-        "ha"
-      ],
-      "type": "seion",
-      "row": 5,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "八",
-      "mnemonic": "Two strokes apart — 八 (eight), 'ha'.",
-      "position": "は行・あ段",
-      "pron": null,
-      "example": {
-        "w": "ハム",
-        "r": "ハム",
-        "romaji": "hamu",
-        "zh": "火腿",
-        "en": "ham"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヒ",
-      "kana": "ヒ",
-      "romaji": "hi",
-      "accepts": [
-        "hi"
-      ],
-      "type": "seion",
-      "row": 5,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "比",
-      "mnemonic": "An 'E'-ish hook — 'hee'.",
-      "position": "は行・い段",
-      "pron": null,
-      "example": {
-        "w": "ヒント",
-        "r": "ヒント",
-        "romaji": "hinto",
-        "zh": "提示",
-        "en": "hint"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:フ",
-      "kana": "フ",
-      "romaji": "fu",
-      "accepts": [
-        "fu",
-        "hu"
-      ],
-      "type": "seion",
-      "row": 5,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "不",
-      "mnemonic": "A single hook — Fuji.",
-      "position": "は行・う段",
-      "pron": {
-        "zh": "讀作 fu(同 ふ),雙唇輕送氣。",
-        "en": "Pronounced “fu” (like ふ), a soft bilabial breath.",
-        "ja": "「フ」は fu。"
-      },
-      "example": {
-        "w": "フォーク",
-        "r": "フォーク",
-        "romaji": "fōku",
-        "zh": "叉子",
-        "en": "fork"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ス",
-        "kata:ヌ"
-      ],
-      "tips": {
-        "zh": [
-          "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
-        ],
-        "en": [
-          "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
-        ],
-        "ja": [
-          "フは一画、スは下に一画、ヌは交差を足す。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ヘ",
-      "kana": "ヘ",
-      "romaji": "he",
-      "accepts": [
-        "he"
-      ],
-      "type": "seion",
-      "row": 5,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "部",
-      "mnemonic": "Same as へ — a hill.",
-      "position": "は行・え段",
-      "pron": null,
-      "example": {
-        "w": "ヘア",
-        "r": "ヘア",
-        "romaji": "hea",
-        "zh": "頭髮",
-        "en": "hair"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ホ",
-      "kana": "ホ",
-      "romaji": "ho",
-      "accepts": [
-        "ho"
-      ],
-      "type": "seion",
-      "row": 5,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "保",
-      "mnemonic": "A 'tree' 木-like shape — 'ho'.",
-      "position": "は行・お段",
-      "pron": null,
-      "example": {
-        "w": "ホテル",
-        "r": "ホテル",
-        "romaji": "hoteru",
-        "zh": "酒店",
-        "en": "hotel"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:マ",
-      "kana": "マ",
-      "romaji": "ma",
-      "accepts": [
-        "ma"
-      ],
-      "type": "seion",
-      "row": 6,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "末",
-      "mnemonic": "A check-mark loop — 'ma'.",
-      "position": "ま行・あ段",
-      "pron": null,
-      "example": {
-        "w": "マスク",
-        "r": "マスク",
-        "romaji": "masuku",
-        "zh": "口罩",
-        "en": "mask"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ア"
-      ],
-      "tips": {
-        "zh": [
-          "ア 的撇与主体分开;マ 是连成一笔的折(像对勾)。"
-        ],
-        "en": [
-          "ア has a separate hooked stroke; マ is one connected check-mark."
-        ],
-        "ja": [
-          "アは離れた鉤、マは一筆のチェック。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ミ",
-      "kana": "ミ",
-      "romaji": "mi",
-      "accepts": [
-        "mi"
-      ],
-      "type": "seion",
-      "row": 6,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "三",
-      "mnemonic": "Three strokes = 三-like — 'mi' (3).",
-      "position": "ま行・い段",
-      "pron": null,
-      "example": {
-        "w": "ミルク",
-        "r": "ミルク",
-        "romaji": "miruku",
-        "zh": "牛奶",
-        "en": "milk"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ム",
-      "kana": "ム",
-      "romaji": "mu",
-      "accepts": [
-        "mu"
-      ],
-      "type": "seion",
-      "row": 6,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "牟",
-      "mnemonic": "A small mouth corner — 'muu'.",
-      "position": "ま行・う段",
-      "pron": null,
-      "example": {
-        "w": "ゲーム",
-        "r": "ゲーム",
-        "romaji": "gēmu",
-        "zh": "遊戲",
-        "en": "game"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:メ",
-      "kana": "メ",
-      "romaji": "me",
-      "accepts": [
-        "me"
-      ],
-      "type": "seion",
-      "row": 6,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "女",
-      "mnemonic": "An 'X' — crossed eyes (me).",
-      "position": "ま行・え段",
-      "pron": null,
-      "example": {
-        "w": "メモ",
-        "r": "メモ",
-        "romaji": "memo",
-        "zh": "便條",
-        "en": "memo"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ナ"
-      ],
-      "tips": {
-        "zh": [
-          "ナ 是十字(横+竖撇);メ 是交叉两撇(像 X)。"
-        ],
-        "en": [
-          "ナ is a cross; メ is two crossing strokes (like X)."
-        ],
-        "ja": [
-          "ナは十字、メは交差。"
-        ]
-      }
-    },
-    {
-      "id": "kata:モ",
-      "kana": "モ",
-      "romaji": "mo",
-      "accepts": [
-        "mo"
-      ],
-      "type": "seion",
-      "row": 6,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "毛",
-      "mnemonic": "Like も straightened.",
-      "position": "ま行・お段",
-      "pron": null,
-      "example": {
-        "w": "モデル",
-        "r": "モデル",
-        "romaji": "moderu",
-        "zh": "模特",
-        "en": "model"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヤ",
-      "kana": "ヤ",
-      "romaji": "ya",
-      "accepts": [
-        "ya"
-      ],
-      "type": "seion",
-      "row": 7,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "也",
-      "mnemonic": "A 'Y'-ish yacht.",
-      "position": "や行・あ段",
-      "pron": null,
-      "example": {
-        "w": "タイヤ",
-        "r": "タイヤ",
-        "romaji": "taiya",
-        "zh": "輪胎(ヤ 在詞中)",
-        "en": "tire (ヤ inside)"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:セ"
-      ],
-      "tips": {
-        "zh": [
-          "セ 横长、竖在右带钩往左;ヤ 是一撇加一点。"
-        ],
-        "en": [
-          "セ has a long horizontal with a hooked vertical; ヤ is a stroke plus a dot."
-        ],
-        "ja": [
-          "セは横長＋鉤、ヤは点付き。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ユ",
-      "kana": "ユ",
-      "romaji": "yu",
-      "accepts": [
-        "yu"
-      ],
-      "type": "seion",
-      "row": 7,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "由",
-      "mnemonic": "A 'U' tray — 'you'.",
-      "position": "や行・う段",
-      "pron": null,
-      "example": {
-        "w": "ユーロ",
-        "r": "ユーロ",
-        "romaji": "yūro",
-        "zh": "歐元",
-        "en": "euro"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:コ"
-      ],
-      "tips": {
-        "zh": [
-          "コ 开口朝右;ユ 开口朝上、底横长。"
-        ],
-        "en": [
-          "コ opens to the right; ユ opens upward with a long base."
-        ],
-        "ja": [
-          "コは右が開く、ユは上が開く。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ヨ",
-      "kana": "ヨ",
-      "romaji": "yo",
-      "accepts": [
-        "yo"
-      ],
-      "type": "seion",
-      "row": 7,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "與",
-      "mnemonic": "Three bars like a comb — 'yo'.",
-      "position": "や行・お段",
-      "pron": null,
-      "example": {
-        "w": "ヨット",
-        "r": "ヨット",
-        "romaji": "yotto",
-        "zh": "遊艇",
-        "en": "yacht"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ラ",
-      "kana": "ラ",
-      "romaji": "ra",
-      "accepts": [
-        "ra"
-      ],
-      "type": "seion",
-      "row": 8,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "良",
-      "mnemonic": "A flag on a pole — 'la'.",
-      "position": "ら行・あ段",
-      "pron": null,
-      "example": {
-        "w": "ラジオ",
-        "r": "ラジオ",
-        "romaji": "rajio",
-        "zh": "收音機",
-        "en": "radio"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:リ",
-      "kana": "リ",
-      "romaji": "ri",
-      "accepts": [
-        "ri"
-      ],
-      "type": "seion",
-      "row": 8,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "利",
-      "mnemonic": "Two strokes like り — 'ri'.",
-      "position": "ら行・い段",
-      "pron": null,
-      "example": {
-        "w": "リボン",
-        "r": "リボン",
-        "romaji": "ribon",
-        "zh": "絲帶",
-        "en": "ribbon"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ル",
-      "kana": "ル",
-      "romaji": "ru",
-      "accepts": [
-        "ru"
-      ],
-      "type": "seion",
-      "row": 8,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "流",
-      "mnemonic": "A loop kick — 'route'.",
-      "position": "ら行・う段",
-      "pron": null,
-      "example": {
-        "w": "ルール",
-        "r": "ルール",
-        "romaji": "rūru",
-        "zh": "規則",
-        "en": "rule"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:レ"
-      ],
-      "tips": {
-        "zh": [
-          "ル 是两笔(右笔上翘);レ 只有一笔的钩。"
-        ],
-        "en": [
-          "ル has two strokes; レ is a single hook."
-        ],
-        "ja": [
-          "ルは二画、レは一画。"
-        ]
-      }
-    },
-    {
-      "id": "kata:レ",
-      "kana": "レ",
-      "romaji": "re",
-      "accepts": [
-        "re"
-      ],
-      "type": "seion",
-      "row": 8,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "礼",
-      "mnemonic": "A single check-mark — 're'.",
-      "position": "ら行・え段",
-      "pron": null,
-      "example": {
-        "w": "レモン",
-        "r": "レモン",
-        "romaji": "remon",
-        "zh": "檸檬",
-        "en": "lemon"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ル"
-      ],
-      "tips": {
-        "zh": [
-          "ル 是两笔(右笔上翘);レ 只有一笔的钩。"
-        ],
-        "en": [
-          "ル has two strokes; レ is a single hook."
-        ],
-        "ja": [
-          "ルは二画、レは一画。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ロ",
-      "kana": "ロ",
-      "romaji": "ro",
-      "accepts": [
-        "ro"
-      ],
-      "type": "seion",
-      "row": 8,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "呂",
-      "mnemonic": "A square box — 'ro'.",
-      "position": "ら行・お段",
-      "pron": null,
-      "example": {
-        "w": "ロボット",
-        "r": "ロボット",
-        "romaji": "robotto",
-        "zh": "機器人",
-        "en": "robot"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ワ",
-      "kana": "ワ",
-      "romaji": "wa",
-      "accepts": [
-        "wa"
-      ],
-      "type": "seion",
-      "row": 9,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "和",
-      "mnemonic": "An open-top box — 'wa' (vs ク/ケ).",
-      "position": "わ行・あ段",
-      "pron": null,
-      "example": {
-        "w": "ワイン",
-        "r": "ワイン",
-        "romaji": "wain",
-        "zh": "葡萄酒",
-        "en": "wine"
-      },
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [
-        "kata:ク",
-        "kata:ケ",
-        "kata:ウ"
-      ],
-      "tips": {
-        "zh": [
-          "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。",
-          "ウ 顶上有一点(宝盖头);ワ 没有点。"
-        ],
-        "en": [
-          "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash.",
-          "ウ has a dot on top; ワ does not."
-        ],
-        "ja": [
-          "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。",
-          "ウは上に点、ワは点なし。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ヲ",
-      "kana": "ヲ",
-      "romaji": "wo",
-      "accepts": [
-        "wo",
-        "o"
-      ],
-      "type": "seion",
-      "row": 9,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "乎",
-      "mnemonic": "A bar with a hook — rare 'wo'.",
-      "position": "わ行・お段",
-      "pron": {
-        "zh": "讀作 o;現代外來語幾乎不用。",
-        "en": "Pronounced “o”; almost never used in modern loanwords.",
-        "ja": "「ヲ」は o。現代ではほぼ不使用。"
-      },
-      "example": {
-        "w": "—",
-        "r": "",
-        "romaji": "o",
-        "zh": "現代外來語不使用",
-        "en": "unused in modern loanwords"
-      },
-      "trivia": {
-        "zh": "「ヲ」在現代外來語中幾乎用不到。",
-        "en": "「ヲ」 is almost never used in modern loanwords.",
-        "ja": "「ヲ」は現代の外来語ではほぼ使いません。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ン",
-      "kana": "ン",
-      "romaji": "n",
-      "accepts": [
-        "n",
-        "nn",
-        "n'"
-      ],
-      "type": "seion",
-      "row": 10,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "尔",
-      "mnemonic": "One dot + an up-stroke — bottom-up (vs ソ).",
-      "position": "ん",
-      "pron": {
-        "zh": "唯一的單獨輔音;絕不出現在詞首(如 パン)。",
-        "en": "The only standalone consonant; never starts a word (e.g. パン).",
-        "ja": "「ン」は語頭に立たない。"
-      },
-      "example": {
-        "w": "パン",
-        "r": "パン",
-        "romaji": "pan",
-        "zh": "麵包(ン 在詞尾)",
-        "en": "bread (ン at the end)"
-      },
-      "trivia": {
-        "zh": "「ン」和 ん 一樣,絕不出現在詞首(如 パン)。",
-        "en": "Like ん, 「ン」 never starts a word (e.g. パン).",
-        "ja": "「ン」も「ん」と同様、語頭に立ちません(例:パン)。"
-      },
-      "lookalikes": [
-        "kata:ソ",
-        "kata:ノ"
-      ],
-      "tips": {
-        "zh": [
-          "ソ 第二笔由上往下;ン 第二笔由下往上挑。",
-          "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
-        ],
-        "en": [
-          "ソ's stroke goes top-down; ン's sweeps bottom-up.",
-          "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
-        ],
-        "ja": [
-          "ソは上から下、ンは下から上へ。",
-          "ノは一画、ソ・ンは点の向きで区別。"
-        ]
-      }
-    },
-    {
-      "id": "kata:ガ",
-      "kana": "ガ",
-      "romaji": "ga",
-      "accepts": [
-        "ga"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ギ",
-      "kana": "ギ",
-      "romaji": "gi",
-      "accepts": [
-        "gi"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:グ",
-      "kana": "グ",
-      "romaji": "gu",
-      "accepts": [
-        "gu"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ゲ",
-      "kana": "ゲ",
-      "romaji": "ge",
-      "accepts": [
-        "ge"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ゴ",
-      "kana": "ゴ",
-      "romaji": "go",
-      "accepts": [
-        "go"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ザ",
-      "kana": "ザ",
-      "romaji": "za",
-      "accepts": [
-        "za"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ジ",
-      "kana": "ジ",
-      "romaji": "ji",
-      "accepts": [
-        "ji"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ズ",
-      "kana": "ズ",
-      "romaji": "zu",
-      "accepts": [
-        "zu"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ゼ",
-      "kana": "ゼ",
-      "romaji": "ze",
-      "accepts": [
-        "ze"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ゾ",
-      "kana": "ゾ",
-      "romaji": "zo",
-      "accepts": [
-        "zo"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ダ",
-      "kana": "ダ",
-      "romaji": "da",
-      "accepts": [
-        "da"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヂ",
-      "kana": "ヂ",
-      "romaji": "ji",
-      "accepts": [
-        "ji",
-        "di",
-        "zi"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヅ",
-      "kana": "ヅ",
-      "romaji": "zu",
-      "accepts": [
-        "zu",
-        "du"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:デ",
-      "kana": "デ",
-      "romaji": "de",
-      "accepts": [
-        "de"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ド",
-      "kana": "ド",
-      "romaji": "do",
-      "accepts": [
-        "do"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:バ",
-      "kana": "バ",
-      "romaji": "ba",
-      "accepts": [
-        "ba"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ビ",
-      "kana": "ビ",
-      "romaji": "bi",
-      "accepts": [
-        "bi"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ブ",
-      "kana": "ブ",
-      "romaji": "bu",
-      "accepts": [
-        "bu"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ベ",
-      "kana": "ベ",
-      "romaji": "be",
-      "accepts": [
-        "be"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ボ",
-      "kana": "ボ",
-      "romaji": "bo",
-      "accepts": [
-        "bo"
-      ],
-      "type": "dakuon",
-      "row": null,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:パ",
-      "kana": "パ",
-      "romaji": "pa",
-      "accepts": [
-        "pa"
-      ],
-      "type": "handakuon",
-      "row": null,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ピ",
-      "kana": "ピ",
-      "romaji": "pi",
-      "accepts": [
-        "pi"
-      ],
-      "type": "handakuon",
-      "row": null,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:プ",
-      "kana": "プ",
-      "romaji": "pu",
-      "accepts": [
-        "pu"
-      ],
-      "type": "handakuon",
-      "row": null,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ペ",
-      "kana": "ペ",
-      "romaji": "pe",
-      "accepts": [
-        "pe"
-      ],
-      "type": "handakuon",
-      "row": null,
-      "col": 3,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ポ",
-      "kana": "ポ",
-      "romaji": "po",
-      "accepts": [
-        "po"
-      ],
-      "type": "handakuon",
-      "row": null,
-      "col": 4,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:キャ",
-      "kana": "キャ",
-      "romaji": "kya",
-      "accepts": [
-        "kya"
-      ],
-      "type": "yoon",
-      "row": 0,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:キュ",
-      "kana": "キュ",
-      "romaji": "kyu",
-      "accepts": [
-        "kyu"
-      ],
-      "type": "yoon",
-      "row": 0,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:キョ",
-      "kana": "キョ",
-      "romaji": "kyo",
-      "accepts": [
-        "kyo"
-      ],
-      "type": "yoon",
-      "row": 0,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:シャ",
-      "kana": "シャ",
-      "romaji": "sha",
-      "accepts": [
-        "sha",
-        "sya"
-      ],
-      "type": "yoon",
-      "row": 1,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:シュ",
-      "kana": "シュ",
-      "romaji": "shu",
-      "accepts": [
-        "shu",
-        "syu"
-      ],
-      "type": "yoon",
-      "row": 1,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ショ",
-      "kana": "ショ",
-      "romaji": "sho",
-      "accepts": [
-        "sho",
-        "syo"
-      ],
-      "type": "yoon",
-      "row": 1,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:チャ",
-      "kana": "チャ",
-      "romaji": "cha",
-      "accepts": [
-        "cha",
-        "tya"
-      ],
-      "type": "yoon",
-      "row": 2,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:チュ",
-      "kana": "チュ",
-      "romaji": "chu",
-      "accepts": [
-        "chu",
-        "tyu"
-      ],
-      "type": "yoon",
-      "row": 2,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:チョ",
-      "kana": "チョ",
-      "romaji": "cho",
-      "accepts": [
-        "cho",
-        "tyo"
-      ],
-      "type": "yoon",
-      "row": 2,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ニャ",
-      "kana": "ニャ",
-      "romaji": "nya",
-      "accepts": [
-        "nya"
-      ],
-      "type": "yoon",
-      "row": 3,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ニュ",
-      "kana": "ニュ",
-      "romaji": "nyu",
-      "accepts": [
-        "nyu"
-      ],
-      "type": "yoon",
-      "row": 3,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ニョ",
-      "kana": "ニョ",
-      "romaji": "nyo",
-      "accepts": [
-        "nyo"
-      ],
-      "type": "yoon",
-      "row": 3,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヒャ",
-      "kana": "ヒャ",
-      "romaji": "hya",
-      "accepts": [
-        "hya"
-      ],
-      "type": "yoon",
-      "row": 4,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヒュ",
-      "kana": "ヒュ",
-      "romaji": "hyu",
-      "accepts": [
-        "hyu"
-      ],
-      "type": "yoon",
-      "row": 4,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ヒョ",
-      "kana": "ヒョ",
-      "romaji": "hyo",
-      "accepts": [
-        "hyo"
-      ],
-      "type": "yoon",
-      "row": 4,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ミャ",
-      "kana": "ミャ",
-      "romaji": "mya",
-      "accepts": [
-        "mya"
-      ],
-      "type": "yoon",
-      "row": 5,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ミュ",
-      "kana": "ミュ",
-      "romaji": "myu",
-      "accepts": [
-        "myu"
-      ],
-      "type": "yoon",
-      "row": 5,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ミョ",
-      "kana": "ミョ",
-      "romaji": "myo",
-      "accepts": [
-        "myo"
-      ],
-      "type": "yoon",
-      "row": 5,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:リャ",
-      "kana": "リャ",
-      "romaji": "rya",
-      "accepts": [
-        "rya"
-      ],
-      "type": "yoon",
-      "row": 6,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:リュ",
-      "kana": "リュ",
-      "romaji": "ryu",
-      "accepts": [
-        "ryu"
-      ],
-      "type": "yoon",
-      "row": 6,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:リョ",
-      "kana": "リョ",
-      "romaji": "ryo",
-      "accepts": [
-        "ryo"
-      ],
-      "type": "yoon",
-      "row": 6,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ギャ",
-      "kana": "ギャ",
-      "romaji": "gya",
-      "accepts": [
-        "gya"
-      ],
-      "type": "yoon",
-      "row": 7,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ギュ",
-      "kana": "ギュ",
-      "romaji": "gyu",
-      "accepts": [
-        "gyu"
-      ],
-      "type": "yoon",
-      "row": 7,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ギョ",
-      "kana": "ギョ",
-      "romaji": "gyo",
-      "accepts": [
-        "gyo"
-      ],
-      "type": "yoon",
-      "row": 7,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ジャ",
-      "kana": "ジャ",
-      "romaji": "ja",
-      "accepts": [
-        "ja",
-        "jya",
-        "zya"
-      ],
-      "type": "yoon",
-      "row": 8,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ジュ",
-      "kana": "ジュ",
-      "romaji": "ju",
-      "accepts": [
-        "ju",
-        "jyu",
-        "zyu"
-      ],
-      "type": "yoon",
-      "row": 8,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ジョ",
-      "kana": "ジョ",
-      "romaji": "jo",
-      "accepts": [
-        "jo",
-        "jyo",
-        "zyo"
-      ],
-      "type": "yoon",
-      "row": 8,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ビャ",
-      "kana": "ビャ",
-      "romaji": "bya",
-      "accepts": [
-        "bya"
-      ],
-      "type": "yoon",
-      "row": 9,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ビュ",
-      "kana": "ビュ",
-      "romaji": "byu",
-      "accepts": [
-        "byu"
-      ],
-      "type": "yoon",
-      "row": 9,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ビョ",
-      "kana": "ビョ",
-      "romaji": "byo",
-      "accepts": [
-        "byo"
-      ],
-      "type": "yoon",
-      "row": 9,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ピャ",
-      "kana": "ピャ",
-      "romaji": "pya",
-      "accepts": [
-        "pya"
-      ],
-      "type": "yoon",
-      "row": 10,
-      "col": 0,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ピュ",
-      "kana": "ピュ",
-      "romaji": "pyu",
-      "accepts": [
-        "pyu"
-      ],
-      "type": "yoon",
-      "row": 10,
-      "col": 1,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    },
-    {
-      "id": "kata:ピョ",
-      "kana": "ピョ",
-      "romaji": "pyo",
-      "accepts": [
-        "pyo"
-      ],
-      "type": "yoon",
-      "row": 10,
-      "col": 2,
-      "script": "kata",
-      "audio": null,
-      "origin": "",
-      "mnemonic": "",
-      "position": "",
-      "pron": null,
-      "example": null,
-      "trivia": {
-        "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
-        "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
-        "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
-      },
-      "lookalikes": [],
-      "tips": {
-        "zh": [],
-        "en": [],
-        "ja": []
-      }
-    }
-  ],
-  "special": [
-    {
-      "type": "sokuon",
-      "title": "Sokuon 促音 (small っ/ッ)",
-      "kana": "ッ",
-      "note": "A small つ/ツ marks a doubled (geminate) consonant — a short pause before the next sound. Romaji doubles the following consonant: きって = kitte, ベッド = beddo. It is never pronounced 'tsu' on its own."
-    },
-    {
-      "type": "chouon",
-      "title": "Long vowels 長音",
-      "kana": "ー",
-      "note": "Katakana lengthens any vowel with a single bar ー (e.g. コーヒー kōhī, ラーメン rāmen). The bar follows the direction of writing."
-    }
-  ],
-  "confusion": [
-    [
-      "kata:シ",
-      "kata:ツ"
+ "script": "kata",
+ "name": "Katakana",
+ "vowels": [
+  "a",
+  "i",
+  "u",
+  "e",
+  "o"
+ ],
+ "categories": [
+  "seion",
+  "dakuon",
+  "handakuon",
+  "yoon"
+ ],
+ "kana": [
+  {
+   "id": "kata:ア",
+   "kana": "ア",
+   "romaji": "a",
+   "accepts": [
+    "a"
+   ],
+   "type": "seion",
+   "row": 0,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30a2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30a2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30a2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30a2/zunda.mp3",
+    "no7": "kana/audio/kata-u30a2/no7.mp3",
+    "metan": "kana/audio/kata-u30a2/metan.mp3"
+   },
+   "origin": "阿",
+   "mnemonic": "An 'A'-frame with a flag.",
+   "position": "あ行・あ段",
+   "pron": null,
+   "example": {
+    "w": "アイス",
+    "r": "アイス",
+    "romaji": "aisu",
+    "zh": "冰/冰淇淋",
+    "en": "ice / ice cream"
+   },
+   "trivia": {
+    "zh": "片假名常用長音符「ー」拉長母音,如 アート(art)。",
+    "en": "Katakana lengthens vowels with the bar 「ー」, e.g. アート (art).",
+    "ja": "カタカナは長音符「ー」で母音を伸ばします(例:アート)。"
+   },
+   "lookalikes": [
+    "kata:マ"
+   ],
+   "tips": {
+    "zh": [
+     "ア 的撇与主体分开;マ 是连成一笔的折(像对勾)。"
     ],
-    [
-      "kata:ソ",
-      "kata:ン"
+    "en": [
+     "ア has a separate hooked stroke; マ is one connected check-mark."
     ],
-    [
-      "kata:ノ",
-      "kata:ソ",
-      "kata:ン"
-    ],
-    [
-      "kata:ク",
-      "kata:ワ",
-      "kata:ケ"
-    ],
-    [
-      "kata:ア",
-      "kata:マ"
-    ],
-    [
-      "kata:ナ",
-      "kata:メ"
-    ],
-    [
-      "kata:チ",
-      "kata:テ"
-    ],
-    [
-      "kata:ス",
-      "kata:ヌ",
-      "kata:フ"
-    ],
-    [
-      "kata:コ",
-      "kata:ユ"
-    ],
-    [
-      "kata:ウ",
-      "kata:ワ"
-    ],
-    [
-      "kata:ル",
-      "kata:レ"
-    ],
-    [
-      "kata:カ",
-      "kata:ケ"
-    ],
-    [
-      "kata:セ",
-      "kata:ヤ"
+    "ja": [
+     "アは離れた鉤、マは一筆のチェック。"
     ]
+   }
+  },
+  {
+   "id": "kata:イ",
+   "kana": "イ",
+   "romaji": "i",
+   "accepts": [
+    "i"
+   ],
+   "type": "seion",
+   "row": 0,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30a4/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30a4/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30a4/yurei.mp3",
+    "zunda": "kana/audio/kata-u30a4/zunda.mp3",
+    "no7": "kana/audio/kata-u30a4/no7.mp3",
+    "metan": "kana/audio/kata-u30a4/metan.mp3"
+   },
+   "origin": "伊",
+   "mnemonic": "Two strokes leaning — an 'ee'gle's beak.",
+   "position": "あ行・い段",
+   "pron": null,
+   "example": {
+    "w": "イタリア",
+    "r": "イタリア",
+    "romaji": "itaria",
+    "zh": "義大利",
+    "en": "Italy"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ウ",
+   "kana": "ウ",
+   "romaji": "u",
+   "accepts": [
+    "u"
+   ],
+   "type": "seion",
+   "row": 0,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30a6/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30a6/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30a6/yurei.mp3",
+    "zunda": "kana/audio/kata-u30a6/zunda.mp3",
+    "no7": "kana/audio/kata-u30a6/no7.mp3",
+    "metan": "kana/audio/kata-u30a6/metan.mp3"
+   },
+   "origin": "宇",
+   "mnemonic": "A roof with a hook — 'oo'.",
+   "position": "あ行・う段",
+   "pron": null,
+   "example": {
+    "w": "ウール",
+    "r": "ウール",
+    "romaji": "ūru",
+    "zh": "羊毛",
+    "en": "wool"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ワ"
+   ],
+   "tips": {
+    "zh": [
+     "ウ 顶上有一点(宝盖头);ワ 没有点。"
+    ],
+    "en": [
+     "ウ has a dot on top; ワ does not."
+    ],
+    "ja": [
+     "ウは上に点、ワは点なし。"
+    ]
+   }
+  },
+  {
+   "id": "kata:エ",
+   "kana": "エ",
+   "romaji": "e",
+   "accepts": [
+    "e"
+   ],
+   "type": "seion",
+   "row": 0,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30a8/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30a8/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30a8/yurei.mp3",
+    "zunda": "kana/audio/kata-u30a8/zunda.mp3",
+    "no7": "kana/audio/kata-u30a8/no7.mp3",
+    "metan": "kana/audio/kata-u30a8/metan.mp3"
+   },
+   "origin": "江",
+   "mnemonic": "An 'E' / 工 shape (engineering).",
+   "position": "あ行・え段",
+   "pron": null,
+   "example": {
+    "w": "エアコン",
+    "r": "エアコン",
+    "romaji": "eakon",
+    "zh": "空調",
+    "en": "air conditioner"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:オ",
+   "kana": "オ",
+   "romaji": "o",
+   "accepts": [
+    "o"
+   ],
+   "type": "seion",
+   "row": 0,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30aa/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30aa/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30aa/yurei.mp3",
+    "zunda": "kana/audio/kata-u30aa/zunda.mp3",
+    "no7": "kana/audio/kata-u30aa/no7.mp3",
+    "metan": "kana/audio/kata-u30aa/metan.mp3"
+   },
+   "origin": "於",
+   "mnemonic": "An 'O' with a kick — like 'oh!'",
+   "position": "あ行・お段",
+   "pron": null,
+   "example": {
+    "w": "オレンジ",
+    "r": "オレンジ",
+    "romaji": "orenji",
+    "zh": "橙子",
+    "en": "orange"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:カ",
+   "kana": "カ",
+   "romaji": "ka",
+   "accepts": [
+    "ka"
+   ],
+   "type": "seion",
+   "row": 1,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ab/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ab/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ab/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ab/zunda.mp3",
+    "no7": "kana/audio/kata-u30ab/no7.mp3",
+    "metan": "kana/audio/kata-u30ab/metan.mp3"
+   },
+   "origin": "加",
+   "mnemonic": "Same idea as か — a 'car' corner.",
+   "position": "か行・あ段",
+   "pron": null,
+   "example": {
+    "w": "カメラ",
+    "r": "カメラ",
+    "romaji": "kamera",
+    "zh": "相機",
+    "en": "camera"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ケ"
+   ],
+   "tips": {
+    "zh": [
+     "カ 是「力」字形;ケ 多一斜撇、更斜。"
+    ],
+    "en": [
+     "カ looks like 力; ケ has an extra slash and leans more."
+    ],
+    "ja": [
+     "カは「力」、ケは斜め棒付き。"
+    ]
+   }
+  },
+  {
+   "id": "kata:キ",
+   "kana": "キ",
+   "romaji": "ki",
+   "accepts": [
+    "ki"
+   ],
+   "type": "seion",
+   "row": 1,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ad/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ad/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ad/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ad/zunda.mp3",
+    "no7": "kana/audio/kata-u30ad/no7.mp3",
+    "metan": "kana/audio/kata-u30ad/metan.mp3"
+   },
+   "origin": "幾",
+   "mnemonic": "A 'key' with two prongs.",
+   "position": "か行・い段",
+   "pron": null,
+   "example": {
+    "w": "キロ",
+    "r": "キロ",
+    "romaji": "kiro",
+    "zh": "公斤/公里",
+    "en": "kilo"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ク",
+   "kana": "ク",
+   "romaji": "ku",
+   "accepts": [
+    "ku"
+   ],
+   "type": "seion",
+   "row": 1,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30af/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30af/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30af/yurei.mp3",
+    "zunda": "kana/audio/kata-u30af/zunda.mp3",
+    "no7": "kana/audio/kata-u30af/no7.mp3",
+    "metan": "kana/audio/kata-u30af/metan.mp3"
+   },
+   "origin": "久",
+   "mnemonic": "An open mouth corner — 'ku'.",
+   "position": "か行・う段",
+   "pron": null,
+   "example": {
+    "w": "クラス",
+    "r": "クラス",
+    "romaji": "kurasu",
+    "zh": "班級",
+    "en": "class"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ワ",
+    "kata:ケ"
+   ],
+   "tips": {
+    "zh": [
+     "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。"
+    ],
+    "en": [
+     "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash."
+    ],
+    "ja": [
+     "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ケ",
+   "kana": "ケ",
+   "romaji": "ke",
+   "accepts": [
+    "ke"
+   ],
+   "type": "seion",
+   "row": 1,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b1/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b1/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b1/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b1/zunda.mp3",
+    "no7": "kana/audio/kata-u30b1/no7.mp3",
+    "metan": "kana/audio/kata-u30b1/metan.mp3"
+   },
+   "origin": "介",
+   "mnemonic": "A 'k' with a slash.",
+   "position": "か行・え段",
+   "pron": null,
+   "example": {
+    "w": "ケーキ",
+    "r": "ケーキ",
+    "romaji": "kēki",
+    "zh": "蛋糕",
+    "en": "cake"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ク",
+    "kata:ワ",
+    "kata:カ"
+   ],
+   "tips": {
+    "zh": [
+     "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。",
+     "カ 是「力」字形;ケ 多一斜撇、更斜。"
+    ],
+    "en": [
+     "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash.",
+     "カ looks like 力; ケ has an extra slash and leans more."
+    ],
+    "ja": [
+     "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。",
+     "カは「力」、ケは斜め棒付き。"
+    ]
+   }
+  },
+  {
+   "id": "kata:コ",
+   "kana": "コ",
+   "romaji": "ko",
+   "accepts": [
+    "ko"
+   ],
+   "type": "seion",
+   "row": 1,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b3/zunda.mp3",
+    "no7": "kana/audio/kata-u30b3/no7.mp3",
+    "metan": "kana/audio/kata-u30b3/metan.mp3"
+   },
+   "origin": "己",
+   "mnemonic": "An open box — two 'co'-rners.",
+   "position": "か行・お段",
+   "pron": null,
+   "example": {
+    "w": "コーヒー",
+    "r": "コーヒー",
+    "romaji": "kōhī",
+    "zh": "咖啡",
+    "en": "coffee"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ユ"
+   ],
+   "tips": {
+    "zh": [
+     "コ 开口朝右;ユ 开口朝上、底横长。"
+    ],
+    "en": [
+     "コ opens to the right; ユ opens upward with a long base."
+    ],
+    "ja": [
+     "コは右が開く、ユは上が開く。"
+    ]
+   }
+  },
+  {
+   "id": "kata:サ",
+   "kana": "サ",
+   "romaji": "sa",
+   "accepts": [
+    "sa"
+   ],
+   "type": "seion",
+   "row": 2,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b5/zunda.mp3",
+    "no7": "kana/audio/kata-u30b5/no7.mp3",
+    "metan": "kana/audio/kata-u30b5/metan.mp3"
+   },
+   "origin": "散",
+   "mnemonic": "Like さ straightened — three strokes.",
+   "position": "さ行・あ段",
+   "pron": null,
+   "example": {
+    "w": "サラダ",
+    "r": "サラダ",
+    "romaji": "sarada",
+    "zh": "沙拉",
+    "en": "salad"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:シ",
+   "kana": "シ",
+   "romaji": "shi",
+   "accepts": [
+    "shi",
+    "si"
+   ],
+   "type": "seion",
+   "row": 2,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b7/zunda.mp3",
+    "no7": "kana/audio/kata-u30b7/no7.mp3",
+    "metan": "kana/audio/kata-u30b7/metan.mp3"
+   },
+   "origin": "之",
+   "mnemonic": "Two dots + an up-stroke — strokes go bottom-up (vs ツ).",
+   "position": "さ行・い段",
+   "pron": {
+    "zh": "讀作 shi。注意與 ツ 的筆順區別。",
+    "en": "Pronounced “shi”. Mind the stroke order vs ツ.",
+    "ja": "「シ」は shi。"
+   },
+   "example": {
+    "w": "シャツ",
+    "r": "シャツ",
+    "romaji": "shatsu",
+    "zh": "襯衫",
+    "en": "shirt"
+   },
+   "trivia": {
+    "zh": "「シ」「ツ」是片假名最容易混的一對,關鍵看筆順方向。",
+    "en": "「シ」 and 「ツ」 are the most-confused katakana pair — the giveaway is stroke direction.",
+    "ja": "「シ」と「ツ」は最も紛らわしい対。見分けは筆順の向きです。"
+   },
+   "lookalikes": [
+    "kata:ツ"
+   ],
+   "tips": {
+    "zh": [
+     "シ 两点竖排、第三笔由下往上挑;ツ 两点横排、第三笔由上往下撇。"
+    ],
+    "en": [
+     "シ's dots stack vertically and the stroke sweeps up; ツ's dots sit side-by-side and the stroke goes down."
+    ],
+    "ja": [
+     "シは点が縦・下から上へ、ツは点が横・上から下へ。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ス",
+   "kana": "ス",
+   "romaji": "su",
+   "accepts": [
+    "su"
+   ],
+   "type": "seion",
+   "row": 2,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b9/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b9/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b9/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b9/zunda.mp3",
+    "no7": "kana/audio/kata-u30b9/no7.mp3",
+    "metan": "kana/audio/kata-u30b9/metan.mp3"
+   },
+   "origin": "須",
+   "mnemonic": "A figure sitting — 'soo'.",
+   "position": "さ行・う段",
+   "pron": null,
+   "example": {
+    "w": "スプーン",
+    "r": "スプーン",
+    "romaji": "supūn",
+    "zh": "勺子",
+    "en": "spoon"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ヌ",
+    "kata:フ"
+   ],
+   "tips": {
+    "zh": [
+     "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
+    ],
+    "en": [
+     "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
+    ],
+    "ja": [
+     "フは一画、スは下に一画、ヌは交差を足す。"
+    ]
+   }
+  },
+  {
+   "id": "kata:セ",
+   "kana": "セ",
+   "romaji": "se",
+   "accepts": [
+    "se"
+   ],
+   "type": "seion",
+   "row": 2,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30bb/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30bb/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30bb/yurei.mp3",
+    "zunda": "kana/audio/kata-u30bb/zunda.mp3",
+    "no7": "kana/audio/kata-u30bb/no7.mp3",
+    "metan": "kana/audio/kata-u30bb/metan.mp3"
+   },
+   "origin": "世",
+   "mnemonic": "A 'C' with a bar — 'se'.",
+   "position": "さ行・え段",
+   "pron": null,
+   "example": {
+    "w": "セーター",
+    "r": "セーター",
+    "romaji": "sētā",
+    "zh": "毛衣",
+    "en": "sweater"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ヤ"
+   ],
+   "tips": {
+    "zh": [
+     "セ 横长、竖在右带钩往左;ヤ 是一撇加一点。"
+    ],
+    "en": [
+     "セ has a long horizontal with a hooked vertical; ヤ is a stroke plus a dot."
+    ],
+    "ja": [
+     "セは横長＋鉤、ヤは点付き。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ソ",
+   "kana": "ソ",
+   "romaji": "so",
+   "accepts": [
+    "so"
+   ],
+   "type": "seion",
+   "row": 2,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30bd/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30bd/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30bd/yurei.mp3",
+    "zunda": "kana/audio/kata-u30bd/zunda.mp3",
+    "no7": "kana/audio/kata-u30bd/no7.mp3",
+    "metan": "kana/audio/kata-u30bd/metan.mp3"
+   },
+   "origin": "曽",
+   "mnemonic": "One dot + a down-stroke — top-down (vs ン).",
+   "position": "さ行・お段",
+   "pron": null,
+   "example": {
+    "w": "ソファ",
+    "r": "ソファ",
+    "romaji": "sofa",
+    "zh": "沙發",
+    "en": "sofa"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ン",
+    "kata:ノ"
+   ],
+   "tips": {
+    "zh": [
+     "ソ 第二笔由上往下;ン 第二笔由下往上挑。",
+     "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
+    ],
+    "en": [
+     "ソ's stroke goes top-down; ン's sweeps bottom-up.",
+     "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
+    ],
+    "ja": [
+     "ソは上から下、ンは下から上へ。",
+     "ノは一画、ソ・ンは点の向きで区別。"
+    ]
+   }
+  },
+  {
+   "id": "kata:タ",
+   "kana": "タ",
+   "romaji": "ta",
+   "accepts": [
+    "ta"
+   ],
+   "type": "seion",
+   "row": 3,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30bf/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30bf/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30bf/yurei.mp3",
+    "zunda": "kana/audio/kata-u30bf/zunda.mp3",
+    "no7": "kana/audio/kata-u30bf/no7.mp3",
+    "metan": "kana/audio/kata-u30bf/metan.mp3"
+   },
+   "origin": "多",
+   "mnemonic": "Like ク with a stroke — 'ta'.",
+   "position": "た行・あ段",
+   "pron": null,
+   "example": {
+    "w": "タクシー",
+    "r": "タクシー",
+    "romaji": "takushī",
+    "zh": "計程車",
+    "en": "taxi"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:チ",
+   "kana": "チ",
+   "romaji": "chi",
+   "accepts": [
+    "chi",
+    "ti"
+   ],
+   "type": "seion",
+   "row": 3,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c1/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c1/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c1/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c1/zunda.mp3",
+    "no7": "kana/audio/kata-u30c1/no7.mp3",
+    "metan": "kana/audio/kata-u30c1/metan.mp3"
+   },
+   "origin": "千",
+   "mnemonic": "A 'ch'air seen sideways.",
+   "position": "た行・い段",
+   "pron": null,
+   "example": {
+    "w": "チーズ",
+    "r": "チーズ",
+    "romaji": "chīzu",
+    "zh": "起司",
+    "en": "cheese"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:テ"
+   ],
+   "tips": {
+    "zh": [
+     "チ 像「千」、末笔竖钩穿下;テ 竖在正中、不带大钩。"
+    ],
+    "en": [
+     "チ ends in a long vertical hook (like 千); テ has a centered vertical with no big hook."
+    ],
+    "ja": [
+     "チは縦のかぎ、テは真ん中に縦棒。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ツ",
+   "kana": "ツ",
+   "romaji": "tsu",
+   "accepts": [
+    "tsu",
+    "tu"
+   ],
+   "type": "seion",
+   "row": 3,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c4/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c4/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c4/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c4/zunda.mp3",
+    "no7": "kana/audio/kata-u30c4/no7.mp3",
+    "metan": "kana/audio/kata-u30c4/metan.mp3"
+   },
+   "origin": "川",
+   "mnemonic": "Three strokes, two dots side-by-side; written top-down.",
+   "position": "た行・う段",
+   "pron": {
+    "zh": "讀作 tsu。注意與 シ 的筆順區別。",
+    "en": "Pronounced “tsu”. Mind the stroke order vs シ.",
+    "ja": "「ツ」は tsu。"
+   },
+   "example": {
+    "w": "ツナ",
+    "r": "ツナ",
+    "romaji": "tsuna",
+    "zh": "金槍魚",
+    "en": "tuna"
+   },
+   "trivia": {
+    "zh": "「ツ」「シ」是片假名最容易混的一對,關鍵看筆順方向。",
+    "en": "「ツ」 and 「シ」 are the most-confused katakana pair — the giveaway is stroke direction.",
+    "ja": "「ツ」と「シ」は最も紛らわしい対。見分けは筆順の向きです。"
+   },
+   "lookalikes": [
+    "kata:シ"
+   ],
+   "tips": {
+    "zh": [
+     "シ 两点竖排、第三笔由下往上挑;ツ 两点横排、第三笔由上往下撇。"
+    ],
+    "en": [
+     "シ's dots stack vertically and the stroke sweeps up; ツ's dots sit side-by-side and the stroke goes down."
+    ],
+    "ja": [
+     "シは点が縦・下から上へ、ツは点が横・上から下へ。"
+    ]
+   }
+  },
+  {
+   "id": "kata:テ",
+   "kana": "テ",
+   "romaji": "te",
+   "accepts": [
+    "te"
+   ],
+   "type": "seion",
+   "row": 3,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c6/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c6/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c6/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c6/zunda.mp3",
+    "no7": "kana/audio/kata-u30c6/no7.mp3",
+    "metan": "kana/audio/kata-u30c6/metan.mp3"
+   },
+   "origin": "天",
+   "mnemonic": "A 'T' with extra bars.",
+   "position": "た行・え段",
+   "pron": null,
+   "example": {
+    "w": "テレビ",
+    "r": "テレビ",
+    "romaji": "terebi",
+    "zh": "電視",
+    "en": "TV"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:チ"
+   ],
+   "tips": {
+    "zh": [
+     "チ 像「千」、末笔竖钩穿下;テ 竖在正中、不带大钩。"
+    ],
+    "en": [
+     "チ ends in a long vertical hook (like 千); テ has a centered vertical with no big hook."
+    ],
+    "ja": [
+     "チは縦のかぎ、テは真ん中に縦棒。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ト",
+   "kana": "ト",
+   "romaji": "to",
+   "accepts": [
+    "to"
+   ],
+   "type": "seion",
+   "row": 3,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c8/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c8/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c8/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c8/zunda.mp3",
+    "no7": "kana/audio/kata-u30c8/no7.mp3",
+    "metan": "kana/audio/kata-u30c8/metan.mp3"
+   },
+   "origin": "止",
+   "mnemonic": "A 'T' minus an arm — toe.",
+   "position": "た行・お段",
+   "pron": null,
+   "example": {
+    "w": "トマト",
+    "r": "トマト",
+    "romaji": "tomato",
+    "zh": "番茄",
+    "en": "tomato"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ナ",
+   "kana": "ナ",
+   "romaji": "na",
+   "accepts": [
+    "na"
+   ],
+   "type": "seion",
+   "row": 4,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ca/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ca/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ca/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ca/zunda.mp3",
+    "no7": "kana/audio/kata-u30ca/no7.mp3",
+    "metan": "kana/audio/kata-u30ca/metan.mp3"
+   },
+   "origin": "奈",
+   "mnemonic": "A 't' cross — 'na'.",
+   "position": "な行・あ段",
+   "pron": null,
+   "example": {
+    "w": "ナイフ",
+    "r": "ナイフ",
+    "romaji": "naifu",
+    "zh": "刀",
+    "en": "knife"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:メ"
+   ],
+   "tips": {
+    "zh": [
+     "ナ 是十字(横+竖撇);メ 是交叉两撇(像 X)。"
+    ],
+    "en": [
+     "ナ is a cross; メ is two crossing strokes (like X)."
+    ],
+    "ja": [
+     "ナは十字、メは交差。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ニ",
+   "kana": "ニ",
+   "romaji": "ni",
+   "accepts": [
+    "ni"
+   ],
+   "type": "seion",
+   "row": 4,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cb/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cb/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cb/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cb/zunda.mp3",
+    "no7": "kana/audio/kata-u30cb/no7.mp3",
+    "metan": "kana/audio/kata-u30cb/metan.mp3"
+   },
+   "origin": "二",
+   "mnemonic": "Two bars = 'ni' (2).",
+   "position": "な行・い段",
+   "pron": null,
+   "example": {
+    "w": "ニュース",
+    "r": "ニュース",
+    "romaji": "nyūsu",
+    "zh": "新聞",
+    "en": "news"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヌ",
+   "kana": "ヌ",
+   "romaji": "nu",
+   "accepts": [
+    "nu"
+   ],
+   "type": "seion",
+   "row": 4,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cc/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cc/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cc/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cc/zunda.mp3",
+    "no7": "kana/audio/kata-u30cc/no7.mp3",
+    "metan": "kana/audio/kata-u30cc/metan.mp3"
+   },
+   "origin": "奴",
+   "mnemonic": "Like ス with a slash — noodles.",
+   "position": "な行・う段",
+   "pron": null,
+   "example": {
+    "w": "ヌードル",
+    "r": "ヌードル",
+    "romaji": "nūdoru",
+    "zh": "麵條",
+    "en": "noodle"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ス",
+    "kata:フ"
+   ],
+   "tips": {
+    "zh": [
+     "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
+    ],
+    "en": [
+     "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
+    ],
+    "ja": [
+     "フは一画、スは下に一画、ヌは交差を足す。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ネ",
+   "kana": "ネ",
+   "romaji": "ne",
+   "accepts": [
+    "ne"
+   ],
+   "type": "seion",
+   "row": 4,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cd/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cd/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cd/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cd/zunda.mp3",
+    "no7": "kana/audio/kata-u30cd/no7.mp3",
+    "metan": "kana/audio/kata-u30cd/metan.mp3"
+   },
+   "origin": "祢",
+   "mnemonic": "A 't' plus marks — cat 'ne'.",
+   "position": "な行・え段",
+   "pron": null,
+   "example": {
+    "w": "ネクタイ",
+    "r": "ネクタイ",
+    "romaji": "nekutai",
+    "zh": "領帶",
+    "en": "necktie"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ノ",
+   "kana": "ノ",
+   "romaji": "no",
+   "accepts": [
+    "no"
+   ],
+   "type": "seion",
+   "row": 4,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ce/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ce/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ce/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ce/zunda.mp3",
+    "no7": "kana/audio/kata-u30ce/no7.mp3",
+    "metan": "kana/audio/kata-u30ce/metan.mp3"
+   },
+   "origin": "乃",
+   "mnemonic": "A single down-stroke — 'no'.",
+   "position": "な行・お段",
+   "pron": null,
+   "example": {
+    "w": "ノート",
+    "r": "ノート",
+    "romaji": "nōto",
+    "zh": "筆記本",
+    "en": "notebook"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ソ",
+    "kata:ン"
+   ],
+   "tips": {
+    "zh": [
+     "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
+    ],
+    "en": [
+     "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
+    ],
+    "ja": [
+     "ノは一画、ソ・ンは点の向きで区別。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ハ",
+   "kana": "ハ",
+   "romaji": "ha",
+   "accepts": [
+    "ha"
+   ],
+   "type": "seion",
+   "row": 5,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cf/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cf/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cf/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cf/zunda.mp3",
+    "no7": "kana/audio/kata-u30cf/no7.mp3",
+    "metan": "kana/audio/kata-u30cf/metan.mp3"
+   },
+   "origin": "八",
+   "mnemonic": "Two strokes apart — 八 (eight), 'ha'.",
+   "position": "は行・あ段",
+   "pron": null,
+   "example": {
+    "w": "ハム",
+    "r": "ハム",
+    "romaji": "hamu",
+    "zh": "火腿",
+    "en": "ham"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヒ",
+   "kana": "ヒ",
+   "romaji": "hi",
+   "accepts": [
+    "hi"
+   ],
+   "type": "seion",
+   "row": 5,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d2/zunda.mp3",
+    "no7": "kana/audio/kata-u30d2/no7.mp3",
+    "metan": "kana/audio/kata-u30d2/metan.mp3"
+   },
+   "origin": "比",
+   "mnemonic": "An 'E'-ish hook — 'hee'.",
+   "position": "は行・い段",
+   "pron": null,
+   "example": {
+    "w": "ヒント",
+    "r": "ヒント",
+    "romaji": "hinto",
+    "zh": "提示",
+    "en": "hint"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:フ",
+   "kana": "フ",
+   "romaji": "fu",
+   "accepts": [
+    "fu",
+    "hu"
+   ],
+   "type": "seion",
+   "row": 5,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d5/zunda.mp3",
+    "no7": "kana/audio/kata-u30d5/no7.mp3",
+    "metan": "kana/audio/kata-u30d5/metan.mp3"
+   },
+   "origin": "不",
+   "mnemonic": "A single hook — Fuji.",
+   "position": "は行・う段",
+   "pron": {
+    "zh": "讀作 fu(同 ふ),雙唇輕送氣。",
+    "en": "Pronounced “fu” (like ふ), a soft bilabial breath.",
+    "ja": "「フ」は fu。"
+   },
+   "example": {
+    "w": "フォーク",
+    "r": "フォーク",
+    "romaji": "fōku",
+    "zh": "叉子",
+    "en": "fork"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ス",
+    "kata:ヌ"
+   ],
+   "tips": {
+    "zh": [
+     "フ 只有一折;ス 在フ下加一撇;ヌ 在フ下加交叉一捺。"
+    ],
+    "en": [
+     "フ is one bend; ス adds a stroke below; ヌ adds a crossing stroke."
+    ],
+    "ja": [
+     "フは一画、スは下に一画、ヌは交差を足す。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ヘ",
+   "kana": "ヘ",
+   "romaji": "he",
+   "accepts": [
+    "he"
+   ],
+   "type": "seion",
+   "row": 5,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d8/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d8/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d8/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d8/zunda.mp3",
+    "no7": "kana/audio/kata-u30d8/no7.mp3",
+    "metan": "kana/audio/kata-u30d8/metan.mp3"
+   },
+   "origin": "部",
+   "mnemonic": "Same as へ — a hill.",
+   "position": "は行・え段",
+   "pron": null,
+   "example": {
+    "w": "ヘア",
+    "r": "ヘア",
+    "romaji": "hea",
+    "zh": "頭髮",
+    "en": "hair"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ホ",
+   "kana": "ホ",
+   "romaji": "ho",
+   "accepts": [
+    "ho"
+   ],
+   "type": "seion",
+   "row": 5,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30db/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30db/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30db/yurei.mp3",
+    "zunda": "kana/audio/kata-u30db/zunda.mp3",
+    "no7": "kana/audio/kata-u30db/no7.mp3",
+    "metan": "kana/audio/kata-u30db/metan.mp3"
+   },
+   "origin": "保",
+   "mnemonic": "A 'tree' 木-like shape — 'ho'.",
+   "position": "は行・お段",
+   "pron": null,
+   "example": {
+    "w": "ホテル",
+    "r": "ホテル",
+    "romaji": "hoteru",
+    "zh": "酒店",
+    "en": "hotel"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:マ",
+   "kana": "マ",
+   "romaji": "ma",
+   "accepts": [
+    "ma"
+   ],
+   "type": "seion",
+   "row": 6,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30de/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30de/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30de/yurei.mp3",
+    "zunda": "kana/audio/kata-u30de/zunda.mp3",
+    "no7": "kana/audio/kata-u30de/no7.mp3",
+    "metan": "kana/audio/kata-u30de/metan.mp3"
+   },
+   "origin": "末",
+   "mnemonic": "A check-mark loop — 'ma'.",
+   "position": "ま行・あ段",
+   "pron": null,
+   "example": {
+    "w": "マスク",
+    "r": "マスク",
+    "romaji": "masuku",
+    "zh": "口罩",
+    "en": "mask"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ア"
+   ],
+   "tips": {
+    "zh": [
+     "ア 的撇与主体分开;マ 是连成一笔的折(像对勾)。"
+    ],
+    "en": [
+     "ア has a separate hooked stroke; マ is one connected check-mark."
+    ],
+    "ja": [
+     "アは離れた鉤、マは一筆のチェック。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ミ",
+   "kana": "ミ",
+   "romaji": "mi",
+   "accepts": [
+    "mi"
+   ],
+   "type": "seion",
+   "row": 6,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30df/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30df/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30df/yurei.mp3",
+    "zunda": "kana/audio/kata-u30df/zunda.mp3",
+    "no7": "kana/audio/kata-u30df/no7.mp3",
+    "metan": "kana/audio/kata-u30df/metan.mp3"
+   },
+   "origin": "三",
+   "mnemonic": "Three strokes = 三-like — 'mi' (3).",
+   "position": "ま行・い段",
+   "pron": null,
+   "example": {
+    "w": "ミルク",
+    "r": "ミルク",
+    "romaji": "miruku",
+    "zh": "牛奶",
+    "en": "milk"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ム",
+   "kana": "ム",
+   "romaji": "mu",
+   "accepts": [
+    "mu"
+   ],
+   "type": "seion",
+   "row": 6,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e0/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e0/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e0/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e0/zunda.mp3",
+    "no7": "kana/audio/kata-u30e0/no7.mp3",
+    "metan": "kana/audio/kata-u30e0/metan.mp3"
+   },
+   "origin": "牟",
+   "mnemonic": "A small mouth corner — 'muu'.",
+   "position": "ま行・う段",
+   "pron": null,
+   "example": {
+    "w": "ゲーム",
+    "r": "ゲーム",
+    "romaji": "gēmu",
+    "zh": "遊戲",
+    "en": "game"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:メ",
+   "kana": "メ",
+   "romaji": "me",
+   "accepts": [
+    "me"
+   ],
+   "type": "seion",
+   "row": 6,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e1/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e1/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e1/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e1/zunda.mp3",
+    "no7": "kana/audio/kata-u30e1/no7.mp3",
+    "metan": "kana/audio/kata-u30e1/metan.mp3"
+   },
+   "origin": "女",
+   "mnemonic": "An 'X' — crossed eyes (me).",
+   "position": "ま行・え段",
+   "pron": null,
+   "example": {
+    "w": "メモ",
+    "r": "メモ",
+    "romaji": "memo",
+    "zh": "便條",
+    "en": "memo"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ナ"
+   ],
+   "tips": {
+    "zh": [
+     "ナ 是十字(横+竖撇);メ 是交叉两撇(像 X)。"
+    ],
+    "en": [
+     "ナ is a cross; メ is two crossing strokes (like X)."
+    ],
+    "ja": [
+     "ナは十字、メは交差。"
+    ]
+   }
+  },
+  {
+   "id": "kata:モ",
+   "kana": "モ",
+   "romaji": "mo",
+   "accepts": [
+    "mo"
+   ],
+   "type": "seion",
+   "row": 6,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e2/zunda.mp3",
+    "no7": "kana/audio/kata-u30e2/no7.mp3",
+    "metan": "kana/audio/kata-u30e2/metan.mp3"
+   },
+   "origin": "毛",
+   "mnemonic": "Like も straightened.",
+   "position": "ま行・お段",
+   "pron": null,
+   "example": {
+    "w": "モデル",
+    "r": "モデル",
+    "romaji": "moderu",
+    "zh": "模特",
+    "en": "model"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヤ",
+   "kana": "ヤ",
+   "romaji": "ya",
+   "accepts": [
+    "ya"
+   ],
+   "type": "seion",
+   "row": 7,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e4/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e4/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e4/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e4/zunda.mp3",
+    "no7": "kana/audio/kata-u30e4/no7.mp3",
+    "metan": "kana/audio/kata-u30e4/metan.mp3"
+   },
+   "origin": "也",
+   "mnemonic": "A 'Y'-ish yacht.",
+   "position": "や行・あ段",
+   "pron": null,
+   "example": {
+    "w": "タイヤ",
+    "r": "タイヤ",
+    "romaji": "taiya",
+    "zh": "輪胎(ヤ 在詞中)",
+    "en": "tire (ヤ inside)"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:セ"
+   ],
+   "tips": {
+    "zh": [
+     "セ 横长、竖在右带钩往左;ヤ 是一撇加一点。"
+    ],
+    "en": [
+     "セ has a long horizontal with a hooked vertical; ヤ is a stroke plus a dot."
+    ],
+    "ja": [
+     "セは横長＋鉤、ヤは点付き。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ユ",
+   "kana": "ユ",
+   "romaji": "yu",
+   "accepts": [
+    "yu"
+   ],
+   "type": "seion",
+   "row": 7,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e6/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e6/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e6/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e6/zunda.mp3",
+    "no7": "kana/audio/kata-u30e6/no7.mp3",
+    "metan": "kana/audio/kata-u30e6/metan.mp3"
+   },
+   "origin": "由",
+   "mnemonic": "A 'U' tray — 'you'.",
+   "position": "や行・う段",
+   "pron": null,
+   "example": {
+    "w": "ユーロ",
+    "r": "ユーロ",
+    "romaji": "yūro",
+    "zh": "歐元",
+    "en": "euro"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:コ"
+   ],
+   "tips": {
+    "zh": [
+     "コ 开口朝右;ユ 开口朝上、底横长。"
+    ],
+    "en": [
+     "コ opens to the right; ユ opens upward with a long base."
+    ],
+    "ja": [
+     "コは右が開く、ユは上が開く。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ヨ",
+   "kana": "ヨ",
+   "romaji": "yo",
+   "accepts": [
+    "yo"
+   ],
+   "type": "seion",
+   "row": 7,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e8/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e8/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e8/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e8/zunda.mp3",
+    "no7": "kana/audio/kata-u30e8/no7.mp3",
+    "metan": "kana/audio/kata-u30e8/metan.mp3"
+   },
+   "origin": "與",
+   "mnemonic": "Three bars like a comb — 'yo'.",
+   "position": "や行・お段",
+   "pron": null,
+   "example": {
+    "w": "ヨット",
+    "r": "ヨット",
+    "romaji": "yotto",
+    "zh": "遊艇",
+    "en": "yacht"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ラ",
+   "kana": "ラ",
+   "romaji": "ra",
+   "accepts": [
+    "ra"
+   ],
+   "type": "seion",
+   "row": 8,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30e9/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30e9/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30e9/yurei.mp3",
+    "zunda": "kana/audio/kata-u30e9/zunda.mp3",
+    "no7": "kana/audio/kata-u30e9/no7.mp3",
+    "metan": "kana/audio/kata-u30e9/metan.mp3"
+   },
+   "origin": "良",
+   "mnemonic": "A flag on a pole — 'la'.",
+   "position": "ら行・あ段",
+   "pron": null,
+   "example": {
+    "w": "ラジオ",
+    "r": "ラジオ",
+    "romaji": "rajio",
+    "zh": "收音機",
+    "en": "radio"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:リ",
+   "kana": "リ",
+   "romaji": "ri",
+   "accepts": [
+    "ri"
+   ],
+   "type": "seion",
+   "row": 8,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ea/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ea/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ea/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ea/zunda.mp3",
+    "no7": "kana/audio/kata-u30ea/no7.mp3",
+    "metan": "kana/audio/kata-u30ea/metan.mp3"
+   },
+   "origin": "利",
+   "mnemonic": "Two strokes like り — 'ri'.",
+   "position": "ら行・い段",
+   "pron": null,
+   "example": {
+    "w": "リボン",
+    "r": "リボン",
+    "romaji": "ribon",
+    "zh": "絲帶",
+    "en": "ribbon"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ル",
+   "kana": "ル",
+   "romaji": "ru",
+   "accepts": [
+    "ru"
+   ],
+   "type": "seion",
+   "row": 8,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30eb/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30eb/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30eb/yurei.mp3",
+    "zunda": "kana/audio/kata-u30eb/zunda.mp3",
+    "no7": "kana/audio/kata-u30eb/no7.mp3",
+    "metan": "kana/audio/kata-u30eb/metan.mp3"
+   },
+   "origin": "流",
+   "mnemonic": "A loop kick — 'route'.",
+   "position": "ら行・う段",
+   "pron": null,
+   "example": {
+    "w": "ルール",
+    "r": "ルール",
+    "romaji": "rūru",
+    "zh": "規則",
+    "en": "rule"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:レ"
+   ],
+   "tips": {
+    "zh": [
+     "ル 是两笔(右笔上翘);レ 只有一笔的钩。"
+    ],
+    "en": [
+     "ル has two strokes; レ is a single hook."
+    ],
+    "ja": [
+     "ルは二画、レは一画。"
+    ]
+   }
+  },
+  {
+   "id": "kata:レ",
+   "kana": "レ",
+   "romaji": "re",
+   "accepts": [
+    "re"
+   ],
+   "type": "seion",
+   "row": 8,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ec/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ec/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ec/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ec/zunda.mp3",
+    "no7": "kana/audio/kata-u30ec/no7.mp3",
+    "metan": "kana/audio/kata-u30ec/metan.mp3"
+   },
+   "origin": "礼",
+   "mnemonic": "A single check-mark — 're'.",
+   "position": "ら行・え段",
+   "pron": null,
+   "example": {
+    "w": "レモン",
+    "r": "レモン",
+    "romaji": "remon",
+    "zh": "檸檬",
+    "en": "lemon"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ル"
+   ],
+   "tips": {
+    "zh": [
+     "ル 是两笔(右笔上翘);レ 只有一笔的钩。"
+    ],
+    "en": [
+     "ル has two strokes; レ is a single hook."
+    ],
+    "ja": [
+     "ルは二画、レは一画。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ロ",
+   "kana": "ロ",
+   "romaji": "ro",
+   "accepts": [
+    "ro"
+   ],
+   "type": "seion",
+   "row": 8,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ed/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ed/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ed/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ed/zunda.mp3",
+    "no7": "kana/audio/kata-u30ed/no7.mp3",
+    "metan": "kana/audio/kata-u30ed/metan.mp3"
+   },
+   "origin": "呂",
+   "mnemonic": "A square box — 'ro'.",
+   "position": "ら行・お段",
+   "pron": null,
+   "example": {
+    "w": "ロボット",
+    "r": "ロボット",
+    "romaji": "robotto",
+    "zh": "機器人",
+    "en": "robot"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ワ",
+   "kana": "ワ",
+   "romaji": "wa",
+   "accepts": [
+    "wa"
+   ],
+   "type": "seion",
+   "row": 9,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ef/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ef/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ef/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ef/zunda.mp3",
+    "no7": "kana/audio/kata-u30ef/no7.mp3",
+    "metan": "kana/audio/kata-u30ef/metan.mp3"
+   },
+   "origin": "和",
+   "mnemonic": "An open-top box — 'wa' (vs ク/ケ).",
+   "position": "わ行・あ段",
+   "pron": null,
+   "example": {
+    "w": "ワイン",
+    "r": "ワイン",
+    "romaji": "wain",
+    "zh": "葡萄酒",
+    "en": "wine"
+   },
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [
+    "kata:ク",
+    "kata:ケ",
+    "kata:ウ"
+   ],
+   "tips": {
+    "zh": [
+     "ク 带钩(像 9);ワ 开口大、无钩、底圆;ケ 多一斜撇穿出。",
+     "ウ 顶上有一点(宝盖头);ワ 没有点。"
+    ],
+    "en": [
+     "ク has a hooked corner; ワ is open with no hook; ケ has an extra slash.",
+     "ウ has a dot on top; ワ does not."
+    ],
+    "ja": [
+     "クはかぎ付き、ワは開いて鉤なし、ケは斜め棒あり。",
+     "ウは上に点、ワは点なし。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ヲ",
+   "kana": "ヲ",
+   "romaji": "wo",
+   "accepts": [
+    "wo",
+    "o"
+   ],
+   "type": "seion",
+   "row": 9,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30f2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30f2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30f2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30f2/zunda.mp3",
+    "no7": "kana/audio/kata-u30f2/no7.mp3",
+    "metan": "kana/audio/kata-u30f2/metan.mp3"
+   },
+   "origin": "乎",
+   "mnemonic": "A bar with a hook — rare 'wo'.",
+   "position": "わ行・お段",
+   "pron": {
+    "zh": "讀作 o;現代外來語幾乎不用。",
+    "en": "Pronounced “o”; almost never used in modern loanwords.",
+    "ja": "「ヲ」は o。現代ではほぼ不使用。"
+   },
+   "example": {
+    "w": "—",
+    "r": "",
+    "romaji": "o",
+    "zh": "現代外來語不使用",
+    "en": "unused in modern loanwords"
+   },
+   "trivia": {
+    "zh": "「ヲ」在現代外來語中幾乎用不到。",
+    "en": "「ヲ」 is almost never used in modern loanwords.",
+    "ja": "「ヲ」は現代の外来語ではほぼ使いません。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ン",
+   "kana": "ン",
+   "romaji": "n",
+   "accepts": [
+    "n",
+    "nn",
+    "n'"
+   ],
+   "type": "seion",
+   "row": 10,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30f3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30f3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30f3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30f3/zunda.mp3",
+    "no7": "kana/audio/kata-u30f3/no7.mp3",
+    "metan": "kana/audio/kata-u30f3/metan.mp3"
+   },
+   "origin": "尔",
+   "mnemonic": "One dot + an up-stroke — bottom-up (vs ソ).",
+   "position": "ん",
+   "pron": {
+    "zh": "唯一的單獨輔音;絕不出現在詞首(如 パン)。",
+    "en": "The only standalone consonant; never starts a word (e.g. パン).",
+    "ja": "「ン」は語頭に立たない。"
+   },
+   "example": {
+    "w": "パン",
+    "r": "パン",
+    "romaji": "pan",
+    "zh": "麵包(ン 在詞尾)",
+    "en": "bread (ン at the end)"
+   },
+   "trivia": {
+    "zh": "「ン」和 ん 一樣,絕不出現在詞首(如 パン)。",
+    "en": "Like ん, 「ン」 never starts a word (e.g. パン).",
+    "ja": "「ン」も「ん」と同様、語頭に立ちません(例:パン)。"
+   },
+   "lookalikes": [
+    "kata:ソ",
+    "kata:ノ"
+   ],
+   "tips": {
+    "zh": [
+     "ソ 第二笔由上往下;ン 第二笔由下往上挑。",
+     "ノ 只有一撇;ソ 加一点(往下);ン 加一点(往上)。"
+    ],
+    "en": [
+     "ソ's stroke goes top-down; ン's sweeps bottom-up.",
+     "ノ is a single stroke; ソ adds a downward dot; ン adds an upward dot."
+    ],
+    "ja": [
+     "ソは上から下、ンは下から上へ。",
+     "ノは一画、ソ・ンは点の向きで区別。"
+    ]
+   }
+  },
+  {
+   "id": "kata:ガ",
+   "kana": "ガ",
+   "romaji": "ga",
+   "accepts": [
+    "ga"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ac/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ac/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ac/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ac/zunda.mp3",
+    "no7": "kana/audio/kata-u30ac/no7.mp3",
+    "metan": "kana/audio/kata-u30ac/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ギ",
+   "kana": "ギ",
+   "romaji": "gi",
+   "accepts": [
+    "gi"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ae/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ae/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ae/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ae/zunda.mp3",
+    "no7": "kana/audio/kata-u30ae/no7.mp3",
+    "metan": "kana/audio/kata-u30ae/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:グ",
+   "kana": "グ",
+   "romaji": "gu",
+   "accepts": [
+    "gu"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b0/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b0/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b0/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b0/zunda.mp3",
+    "no7": "kana/audio/kata-u30b0/no7.mp3",
+    "metan": "kana/audio/kata-u30b0/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ゲ",
+   "kana": "ゲ",
+   "romaji": "ge",
+   "accepts": [
+    "ge"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b2/zunda.mp3",
+    "no7": "kana/audio/kata-u30b2/no7.mp3",
+    "metan": "kana/audio/kata-u30b2/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ゴ",
+   "kana": "ゴ",
+   "romaji": "go",
+   "accepts": [
+    "go"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b4/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b4/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b4/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b4/zunda.mp3",
+    "no7": "kana/audio/kata-u30b4/no7.mp3",
+    "metan": "kana/audio/kata-u30b4/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ザ",
+   "kana": "ザ",
+   "romaji": "za",
+   "accepts": [
+    "za"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b6/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b6/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b6/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b6/zunda.mp3",
+    "no7": "kana/audio/kata-u30b6/no7.mp3",
+    "metan": "kana/audio/kata-u30b6/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ジ",
+   "kana": "ジ",
+   "romaji": "ji",
+   "accepts": [
+    "ji"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b8/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b8/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b8/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b8/zunda.mp3",
+    "no7": "kana/audio/kata-u30b8/no7.mp3",
+    "metan": "kana/audio/kata-u30b8/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ズ",
+   "kana": "ズ",
+   "romaji": "zu",
+   "accepts": [
+    "zu"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30ba/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30ba/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30ba/yurei.mp3",
+    "zunda": "kana/audio/kata-u30ba/zunda.mp3",
+    "no7": "kana/audio/kata-u30ba/no7.mp3",
+    "metan": "kana/audio/kata-u30ba/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ゼ",
+   "kana": "ゼ",
+   "romaji": "ze",
+   "accepts": [
+    "ze"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30bc/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30bc/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30bc/yurei.mp3",
+    "zunda": "kana/audio/kata-u30bc/zunda.mp3",
+    "no7": "kana/audio/kata-u30bc/no7.mp3",
+    "metan": "kana/audio/kata-u30bc/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ゾ",
+   "kana": "ゾ",
+   "romaji": "zo",
+   "accepts": [
+    "zo"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30be/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30be/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30be/yurei.mp3",
+    "zunda": "kana/audio/kata-u30be/zunda.mp3",
+    "no7": "kana/audio/kata-u30be/no7.mp3",
+    "metan": "kana/audio/kata-u30be/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ダ",
+   "kana": "ダ",
+   "romaji": "da",
+   "accepts": [
+    "da"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c0/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c0/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c0/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c0/zunda.mp3",
+    "no7": "kana/audio/kata-u30c0/no7.mp3",
+    "metan": "kana/audio/kata-u30c0/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヂ",
+   "kana": "ヂ",
+   "romaji": "ji",
+   "accepts": [
+    "ji",
+    "di",
+    "zi"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c2/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c2/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c2/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c2/zunda.mp3",
+    "no7": "kana/audio/kata-u30c2/no7.mp3",
+    "metan": "kana/audio/kata-u30c2/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヅ",
+   "kana": "ヅ",
+   "romaji": "zu",
+   "accepts": [
+    "zu",
+    "du"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c5/zunda.mp3",
+    "no7": "kana/audio/kata-u30c5/no7.mp3",
+    "metan": "kana/audio/kata-u30c5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:デ",
+   "kana": "デ",
+   "romaji": "de",
+   "accepts": [
+    "de"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c7/zunda.mp3",
+    "no7": "kana/audio/kata-u30c7/no7.mp3",
+    "metan": "kana/audio/kata-u30c7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ド",
+   "kana": "ド",
+   "romaji": "do",
+   "accepts": [
+    "do"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c9/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c9/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c9/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c9/zunda.mp3",
+    "no7": "kana/audio/kata-u30c9/no7.mp3",
+    "metan": "kana/audio/kata-u30c9/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:バ",
+   "kana": "バ",
+   "romaji": "ba",
+   "accepts": [
+    "ba"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d0/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d0/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d0/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d0/zunda.mp3",
+    "no7": "kana/audio/kata-u30d0/no7.mp3",
+    "metan": "kana/audio/kata-u30d0/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ビ",
+   "kana": "ビ",
+   "romaji": "bi",
+   "accepts": [
+    "bi"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d3/zunda.mp3",
+    "no7": "kana/audio/kata-u30d3/no7.mp3",
+    "metan": "kana/audio/kata-u30d3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ブ",
+   "kana": "ブ",
+   "romaji": "bu",
+   "accepts": [
+    "bu"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d6/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d6/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d6/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d6/zunda.mp3",
+    "no7": "kana/audio/kata-u30d6/no7.mp3",
+    "metan": "kana/audio/kata-u30d6/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ベ",
+   "kana": "ベ",
+   "romaji": "be",
+   "accepts": [
+    "be"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d9/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d9/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d9/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d9/zunda.mp3",
+    "no7": "kana/audio/kata-u30d9/no7.mp3",
+    "metan": "kana/audio/kata-u30d9/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ボ",
+   "kana": "ボ",
+   "romaji": "bo",
+   "accepts": [
+    "bo"
+   ],
+   "type": "dakuon",
+   "row": null,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30dc/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30dc/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30dc/yurei.mp3",
+    "zunda": "kana/audio/kata-u30dc/zunda.mp3",
+    "no7": "kana/audio/kata-u30dc/no7.mp3",
+    "metan": "kana/audio/kata-u30dc/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:パ",
+   "kana": "パ",
+   "romaji": "pa",
+   "accepts": [
+    "pa"
+   ],
+   "type": "handakuon",
+   "row": null,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d1/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d1/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d1/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d1/zunda.mp3",
+    "no7": "kana/audio/kata-u30d1/no7.mp3",
+    "metan": "kana/audio/kata-u30d1/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ピ",
+   "kana": "ピ",
+   "romaji": "pi",
+   "accepts": [
+    "pi"
+   ],
+   "type": "handakuon",
+   "row": null,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d4/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d4/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d4/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d4/zunda.mp3",
+    "no7": "kana/audio/kata-u30d4/no7.mp3",
+    "metan": "kana/audio/kata-u30d4/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:プ",
+   "kana": "プ",
+   "romaji": "pu",
+   "accepts": [
+    "pu"
+   ],
+   "type": "handakuon",
+   "row": null,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d7/zunda.mp3",
+    "no7": "kana/audio/kata-u30d7/no7.mp3",
+    "metan": "kana/audio/kata-u30d7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ペ",
+   "kana": "ペ",
+   "romaji": "pe",
+   "accepts": [
+    "pe"
+   ],
+   "type": "handakuon",
+   "row": null,
+   "col": 3,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30da/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30da/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30da/yurei.mp3",
+    "zunda": "kana/audio/kata-u30da/zunda.mp3",
+    "no7": "kana/audio/kata-u30da/no7.mp3",
+    "metan": "kana/audio/kata-u30da/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ポ",
+   "kana": "ポ",
+   "romaji": "po",
+   "accepts": [
+    "po"
+   ],
+   "type": "handakuon",
+   "row": null,
+   "col": 4,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30dd/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30dd/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30dd/yurei.mp3",
+    "zunda": "kana/audio/kata-u30dd/zunda.mp3",
+    "no7": "kana/audio/kata-u30dd/no7.mp3",
+    "metan": "kana/audio/kata-u30dd/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:キャ",
+   "kana": "キャ",
+   "romaji": "kya",
+   "accepts": [
+    "kya"
+   ],
+   "type": "yoon",
+   "row": 0,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30adu30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30adu30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30adu30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30adu30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30adu30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30adu30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:キュ",
+   "kana": "キュ",
+   "romaji": "kyu",
+   "accepts": [
+    "kyu"
+   ],
+   "type": "yoon",
+   "row": 0,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30adu30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30adu30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30adu30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30adu30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30adu30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30adu30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:キョ",
+   "kana": "キョ",
+   "romaji": "kyo",
+   "accepts": [
+    "kyo"
+   ],
+   "type": "yoon",
+   "row": 0,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30adu30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30adu30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30adu30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30adu30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30adu30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30adu30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:シャ",
+   "kana": "シャ",
+   "romaji": "sha",
+   "accepts": [
+    "sha",
+    "sya"
+   ],
+   "type": "yoon",
+   "row": 1,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b7u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b7u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b7u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b7u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30b7u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30b7u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:シュ",
+   "kana": "シュ",
+   "romaji": "shu",
+   "accepts": [
+    "shu",
+    "syu"
+   ],
+   "type": "yoon",
+   "row": 1,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b7u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b7u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b7u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b7u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30b7u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30b7u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ショ",
+   "kana": "ショ",
+   "romaji": "sho",
+   "accepts": [
+    "sho",
+    "syo"
+   ],
+   "type": "yoon",
+   "row": 1,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b7u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b7u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b7u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b7u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30b7u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30b7u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:チャ",
+   "kana": "チャ",
+   "romaji": "cha",
+   "accepts": [
+    "cha",
+    "tya"
+   ],
+   "type": "yoon",
+   "row": 2,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c1u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c1u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c1u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c1u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30c1u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30c1u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:チュ",
+   "kana": "チュ",
+   "romaji": "chu",
+   "accepts": [
+    "chu",
+    "tyu"
+   ],
+   "type": "yoon",
+   "row": 2,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c1u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c1u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c1u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c1u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30c1u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30c1u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:チョ",
+   "kana": "チョ",
+   "romaji": "cho",
+   "accepts": [
+    "cho",
+    "tyo"
+   ],
+   "type": "yoon",
+   "row": 2,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30c1u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30c1u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30c1u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30c1u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30c1u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30c1u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ニャ",
+   "kana": "ニャ",
+   "romaji": "nya",
+   "accepts": [
+    "nya"
+   ],
+   "type": "yoon",
+   "row": 3,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cbu30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cbu30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cbu30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cbu30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30cbu30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30cbu30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ニュ",
+   "kana": "ニュ",
+   "romaji": "nyu",
+   "accepts": [
+    "nyu"
+   ],
+   "type": "yoon",
+   "row": 3,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cbu30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cbu30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cbu30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cbu30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30cbu30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30cbu30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ニョ",
+   "kana": "ニョ",
+   "romaji": "nyo",
+   "accepts": [
+    "nyo"
+   ],
+   "type": "yoon",
+   "row": 3,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30cbu30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30cbu30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30cbu30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30cbu30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30cbu30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30cbu30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヒャ",
+   "kana": "ヒャ",
+   "romaji": "hya",
+   "accepts": [
+    "hya"
+   ],
+   "type": "yoon",
+   "row": 4,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d2u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d2u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d2u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d2u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30d2u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30d2u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヒュ",
+   "kana": "ヒュ",
+   "romaji": "hyu",
+   "accepts": [
+    "hyu"
+   ],
+   "type": "yoon",
+   "row": 4,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d2u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d2u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d2u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d2u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30d2u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30d2u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ヒョ",
+   "kana": "ヒョ",
+   "romaji": "hyo",
+   "accepts": [
+    "hyo"
+   ],
+   "type": "yoon",
+   "row": 4,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d2u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d2u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d2u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d2u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30d2u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30d2u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ミャ",
+   "kana": "ミャ",
+   "romaji": "mya",
+   "accepts": [
+    "mya"
+   ],
+   "type": "yoon",
+   "row": 5,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30dfu30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30dfu30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30dfu30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30dfu30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30dfu30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30dfu30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ミュ",
+   "kana": "ミュ",
+   "romaji": "myu",
+   "accepts": [
+    "myu"
+   ],
+   "type": "yoon",
+   "row": 5,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30dfu30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30dfu30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30dfu30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30dfu30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30dfu30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30dfu30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ミョ",
+   "kana": "ミョ",
+   "romaji": "myo",
+   "accepts": [
+    "myo"
+   ],
+   "type": "yoon",
+   "row": 5,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30dfu30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30dfu30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30dfu30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30dfu30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30dfu30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30dfu30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:リャ",
+   "kana": "リャ",
+   "romaji": "rya",
+   "accepts": [
+    "rya"
+   ],
+   "type": "yoon",
+   "row": 6,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30eau30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30eau30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30eau30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30eau30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30eau30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30eau30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:リュ",
+   "kana": "リュ",
+   "romaji": "ryu",
+   "accepts": [
+    "ryu"
+   ],
+   "type": "yoon",
+   "row": 6,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30eau30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30eau30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30eau30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30eau30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30eau30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30eau30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:リョ",
+   "kana": "リョ",
+   "romaji": "ryo",
+   "accepts": [
+    "ryo"
+   ],
+   "type": "yoon",
+   "row": 6,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30eau30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30eau30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30eau30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30eau30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30eau30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30eau30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ギャ",
+   "kana": "ギャ",
+   "romaji": "gya",
+   "accepts": [
+    "gya"
+   ],
+   "type": "yoon",
+   "row": 7,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30aeu30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30aeu30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30aeu30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30aeu30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30aeu30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30aeu30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ギュ",
+   "kana": "ギュ",
+   "romaji": "gyu",
+   "accepts": [
+    "gyu"
+   ],
+   "type": "yoon",
+   "row": 7,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30aeu30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30aeu30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30aeu30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30aeu30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30aeu30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30aeu30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ギョ",
+   "kana": "ギョ",
+   "romaji": "gyo",
+   "accepts": [
+    "gyo"
+   ],
+   "type": "yoon",
+   "row": 7,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30aeu30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30aeu30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30aeu30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30aeu30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30aeu30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30aeu30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ジャ",
+   "kana": "ジャ",
+   "romaji": "ja",
+   "accepts": [
+    "ja",
+    "jya",
+    "zya"
+   ],
+   "type": "yoon",
+   "row": 8,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b8u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b8u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b8u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b8u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30b8u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30b8u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ジュ",
+   "kana": "ジュ",
+   "romaji": "ju",
+   "accepts": [
+    "ju",
+    "jyu",
+    "zyu"
+   ],
+   "type": "yoon",
+   "row": 8,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b8u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b8u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b8u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b8u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30b8u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30b8u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ジョ",
+   "kana": "ジョ",
+   "romaji": "jo",
+   "accepts": [
+    "jo",
+    "jyo",
+    "zyo"
+   ],
+   "type": "yoon",
+   "row": 8,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30b8u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30b8u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30b8u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30b8u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30b8u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30b8u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ビャ",
+   "kana": "ビャ",
+   "romaji": "bya",
+   "accepts": [
+    "bya"
+   ],
+   "type": "yoon",
+   "row": 9,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d3u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d3u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d3u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d3u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30d3u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30d3u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ビュ",
+   "kana": "ビュ",
+   "romaji": "byu",
+   "accepts": [
+    "byu"
+   ],
+   "type": "yoon",
+   "row": 9,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d3u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d3u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d3u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d3u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30d3u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30d3u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ビョ",
+   "kana": "ビョ",
+   "romaji": "byo",
+   "accepts": [
+    "byo"
+   ],
+   "type": "yoon",
+   "row": 9,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d3u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d3u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d3u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d3u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30d3u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30d3u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ピャ",
+   "kana": "ピャ",
+   "romaji": "pya",
+   "accepts": [
+    "pya"
+   ],
+   "type": "yoon",
+   "row": 10,
+   "col": 0,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d4u30e3/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d4u30e3/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d4u30e3/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d4u30e3/zunda.mp3",
+    "no7": "kana/audio/kata-u30d4u30e3/no7.mp3",
+    "metan": "kana/audio/kata-u30d4u30e3/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ピュ",
+   "kana": "ピュ",
+   "romaji": "pyu",
+   "accepts": [
+    "pyu"
+   ],
+   "type": "yoon",
+   "row": 10,
+   "col": 1,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d4u30e5/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d4u30e5/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d4u30e5/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d4u30e5/zunda.mp3",
+    "no7": "kana/audio/kata-u30d4u30e5/no7.mp3",
+    "metan": "kana/audio/kata-u30d4u30e5/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  },
+  {
+   "id": "kata:ピョ",
+   "kana": "ピョ",
+   "romaji": "pyo",
+   "accepts": [
+    "pyo"
+   ],
+   "type": "yoon",
+   "row": 10,
+   "col": 2,
+   "script": "kata",
+   "audio": {
+    "aoyama": "kana/audio/kata-u30d4u30e7/aoyama.mp3",
+    "kyushu": "kana/audio/kata-u30d4u30e7/kyushu.mp3",
+    "yurei": "kana/audio/kata-u30d4u30e7/yurei.mp3",
+    "zunda": "kana/audio/kata-u30d4u30e7/zunda.mp3",
+    "no7": "kana/audio/kata-u30d4u30e7/no7.mp3",
+    "metan": "kana/audio/kata-u30d4u30e7/metan.mp3"
+   },
+   "origin": "",
+   "mnemonic": "",
+   "position": "",
+   "pron": null,
+   "example": null,
+   "trivia": {
+    "zh": "片假名由僧侶取漢字偏旁簡化而來,最初用於替漢文標注讀音。",
+    "en": "Katakana was created by Buddhist monks from fragments of kanji, originally to annotate the readings of Chinese texts.",
+    "ja": "カタカナは僧侶が漢字の一部を取って作り、漢文の読みを示すために使われました。"
+   },
+   "lookalikes": [],
+   "tips": {
+    "zh": [],
+    "en": [],
+    "ja": []
+   }
+  }
+ ],
+ "special": [
+  {
+   "type": "sokuon",
+   "title": "Sokuon 促音 (small っ/ッ)",
+   "kana": "ッ",
+   "note": "A small つ/ツ marks a doubled (geminate) consonant — a short pause before the next sound. Romaji doubles the following consonant: きって = kitte, ベッド = beddo. It is never pronounced 'tsu' on its own."
+  },
+  {
+   "type": "chouon",
+   "title": "Long vowels 長音",
+   "kana": "ー",
+   "note": "Katakana lengthens any vowel with a single bar ー (e.g. コーヒー kōhī, ラーメン rāmen). The bar follows the direction of writing."
+  }
+ ],
+ "confusion": [
+  [
+   "kata:シ",
+   "kata:ツ"
+  ],
+  [
+   "kata:ソ",
+   "kata:ン"
+  ],
+  [
+   "kata:ノ",
+   "kata:ソ",
+   "kata:ン"
+  ],
+  [
+   "kata:ク",
+   "kata:ワ",
+   "kata:ケ"
+  ],
+  [
+   "kata:ア",
+   "kata:マ"
+  ],
+  [
+   "kata:ナ",
+   "kata:メ"
+  ],
+  [
+   "kata:チ",
+   "kata:テ"
+  ],
+  [
+   "kata:ス",
+   "kata:ヌ",
+   "kata:フ"
+  ],
+  [
+   "kata:コ",
+   "kata:ユ"
+  ],
+  [
+   "kata:ウ",
+   "kata:ワ"
+  ],
+  [
+   "kata:ル",
+   "kata:レ"
+  ],
+  [
+   "kata:カ",
+   "kata:ケ"
+  ],
+  [
+   "kata:セ",
+   "kata:ヤ"
   ]
+ ]
 }
