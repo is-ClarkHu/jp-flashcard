@@ -7,10 +7,14 @@ library still comes from convert.py + raw_data/ (gitignored); this is the only
 deck shipped publicly. Re-run to regenerate, then run scripts/sample-tts.py to
 add the six VOICEVOX voices.
 """
+import argparse
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 OUT = Path("data/sample")
+HERE = Path(__file__).resolve().parent
 
 # Each word: (front, reading, meaning_zh, meaning_en). Explanations + the
 # Japanese gloss are generated below so the data stays compact and consistent.
@@ -326,7 +330,7 @@ def card(list_id, idx, w):
     }
 
 
-def main():
+def build():
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = {"curricula": []}
     total = 0
@@ -346,6 +350,33 @@ def main():
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     lists = sum(len(ls) for _, ls in CURRICULA)
     print(f"Built {total} words across {lists} lists in {len(CURRICULA)} curricula -> {OUT}")
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Build the sample demo deck (content, "
+                                 "and optionally its audio + rich explanations).")
+    ap.add_argument("--explain", action="store_true",
+                    help="also generate rich explanations via LLM (needs an API key)")
+    ap.add_argument("--tts", action="store_true",
+                    help="also synthesize the six VOICEVOX voices (needs VOICEVOX running)")
+    ap.add_argument("--provider", default="deepseek", help="LLM provider for --explain")
+    ap.add_argument("--model", default=None)
+    ap.add_argument("--api-key", default=None, help="overrides the key from env / .env")
+    args = ap.parse_args()
+
+    # Always rebuild content first. The two enrichment steps run AFTER, in order,
+    # because they merge into the freshly written JSON (a bare `build()` would wipe
+    # the audio links + explanations, so re-run them together via these flags).
+    build()
+    if args.explain:
+        cmd = [sys.executable, str(HERE / "sample-explain.py"), "--provider", args.provider]
+        if args.model:
+            cmd += ["--model", args.model]
+        if args.api_key:
+            cmd += ["--api-key", args.api_key]
+        subprocess.run(cmd, check=False)
+    if args.tts:
+        subprocess.run([sys.executable, str(HERE / "sample-tts.py")], check=False)
 
 
 if __name__ == "__main__":
