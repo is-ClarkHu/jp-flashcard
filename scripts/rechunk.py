@@ -193,7 +193,10 @@ def main() -> None:
     ap.add_argument("--data-dir", default="data", type=Path)
     ap.add_argument("--chunk-size", default=30, type=int,
                     help="words per study list (default: 30)")
-    ap.add_argument("--map-out", default="", type=Path,
+    # Path("") is Path("."), not an empty/falsy path.  Using it as the default
+    # made the completed rechunk fail at the final step by trying to write JSON
+    # to the current directory.  Keep the sentinel as None instead.
+    ap.add_argument("--map-out", default=None, type=Path,
                     help="where to write the old-id -> new-id map "
                          "(default: <data-dir>/../.rechunk-map.json)")
     ap.add_argument("--dry-run", action="store_true",
@@ -259,7 +262,7 @@ def main() -> None:
 
     write_manifest(data_dir, manifest, args.dry_run)
 
-    map_path = args.map_out or data_dir.parent / ".rechunk-map.json"
+    map_path = args.map_out if args.map_out is not None else data_dir.parent / ".rechunk-map.json"
     if not args.dry_run:
         map_path.write_text(json.dumps({
             "chunk_size": args.chunk_size,

@@ -4,6 +4,7 @@ raw_data/
 # --- Exported user progress (personal data; never commit) ---
 *.progress.json
 *-progress-*.json
+.rechunk-map.json
 
 # --- Secrets ---
 .env
