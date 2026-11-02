@@ -1,20 +1,51 @@
 # jp-flashcard
 
-A fully local, single-user **Japanese vocabulary flashcard app** — the core Quizlet
-experience (flip / self-test / shuffle / favorites) plus six-voice audio,
-multi-round study tracking, two-layer AI explanations, an analytics dashboard, and
-portable packaging (run it as a **website** or a **desktop app**, with one-click
-progress migration).
+[![Live demo](https://img.shields.io/badge/demo-live-6b9a76)](https://is-clarkhu.github.io/jp-flashcard/)
+[![Deploy demo to GitHub Pages](https://github.com/is-ClarkHu/jp-flashcard/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/is-ClarkHu/jp-flashcard/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-No ads. No server. No login. **Offline-first** — the only optional network call is
-the on-demand "Explain deeper" feature, which uses *your own* API key and is cached
-forever after the first fetch.
+A local, single-user **Japanese vocabulary flashcard app**: flip cards, self-test
+with a wrong book, six-voice audio, a kana (五十音) trainer, two-layer AI
+explanations and an analytics dashboard. No ads, no server, no login. It runs as a
+website, a single offline HTML file, or a desktop app.
 
-> **What this repo ships:** the **app + the `convert.py` data tool**, plus a tiny
-> built-in **demo deck** so it runs the moment you clone it. It does **not** ship a
-> full vocabulary library — you build your own from your own source files with
-> `convert.py` (see [Build your own library](#build-your-own-library)). This keeps
-> the project to code you can freely share, not third-party word lists.
+**[Open the live demo →](https://is-clarkhu.github.io/jp-flashcard/)** The demo
+site carries only a self-authored sample deck (214 words in 18 lists, six
+VOICEVOX voices each) and the kana set. It contains no copyrighted word lists. It
+works the moment it loads and needs no API key; "Explain deeper" is the only
+feature that ever asks for one.
+
+The app itself is not the hard part. The hard part is shipping it four different
+ways and keeping a learner's progress alive across all of them. Most of this
+README is about that.
+
+---
+
+## Screenshots
+
+**Flip cards.** Japanese on the front, meaning on the back, with per-word audio
+and an offline explanation brief (ZH / EN / JP) one click away.
+
+![Flip card front and back, with the explanation panel open](assets/flip.png)
+
+**Analytics dashboard.** Check-in heatmap and streak, daily volume, per-course
+progress rings, accuracy over sessions, wrong-answer distribution.
+
+![Analytics dashboard](assets/dashboard.png)
+
+**Kana trainer.** Gojūon board tinted by mastery, and a detail panel with the
+source kanji, pronunciation notes, an example word and look-alike tips.
+
+![Hiragana board with the detail panel for し](assets/kana.png)
+
+**Self-test and wrong book.** Self-graded Known / Unknown on a shuffled list;
+every miss lands in the wrong book, which drains as you get words right.
+
+![Self-test in progress next to the wrong book](assets/selftest.png)
+
+> The screenshots use the bundled sample deck and a simulated study history
+> (about ten weeks of rounds written into IndexedDB), not a real study record.
+> The full vocabulary library is built locally and never committed.
 
 ---
 
