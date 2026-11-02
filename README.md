@@ -58,9 +58,10 @@ npm install
 npm run dev            # http://localhost:5173
 ```
 
-A fresh clone runs immediately on a small bundled **demo deck** (`data/sample/`) so
-you can try every feature right away. To study real material, build your own library
-(next section); the app loads it automatically and the demo steps aside.
+A fresh clone runs straight away on the bundled sample deck (`data/sample/`) and
+the kana set (`data/kana/`), exactly like the live demo. To study real material,
+build your own library (see [Building a library](#building-a-library)); the app
+loads it automatically and the sample steps aside.
 
 ---
 
@@ -191,11 +192,193 @@ desktop app, use per-account **Export / Import**.
 
 ---
 
-## Build your own library
+## Building a library
 
-`convert.py` reads `raw_data/`, extracts each card's Japanese word + reading +
-meaning, shuffles each source file and splits it into fixed-size study lists, and
-writes the JSON library + `manifest.json` into `data/`.
+The repo ships no vocabulary library. `convert.py` builds one from your own files
+in `raw_data/`: it reads each source, extracts word, reading and meaning, shuffles
+each file deterministically and splits it into study lists, then writes JSON plus
+`manifest.json` into `data/`. Optional steps fill gaps with an LLM and generate
+audio with a local TTS engine. Every step can be re-run without losing earlier
+work.
+
+| Stage | Tool | The judgment call |
+| --- | --- | --- |
+| Parse | `convert.py` | Parse by **character script, not by column**: a kanji token is the written form, a pure-kana token is the reading (or the written form for kana-only words), Latin and numbers are the meaning. Source layouts vary, and script survives that where column positions don't. Text is **NFKC-normalized** so Kangxi-radical variants and full/half-width forms fold to one canonical form. Embedded images are ignored (text only, no OCR); scanned PDFs are reported, not silently OCR-ed. |
+| Shuffle and split | `convert.py --seed --chunk-size` | Each source file is shuffled with a fixed `--seed` (default 42) and cut into lists of `--chunk-size` words (default 50). Same seed, same lists, **same card ids across runs**, which is what lets every later stage merge by id. |
+| Duplicates and conflicts | `convert.py` | Checked globally. A *duplicate* (same word, same or unknown reading) is kept with `duplicate_of` pointing at the first occurrence. A *conflict* (same written form, different non-empty reading) keeps both and prints a warning. Nothing is silently merged. |
+| Gaps | `convert.py` | A reading or meaning missing from the source **stays empty**. It is not a parser error and the parser does not make one up; enrichment fills it later. |
+| Re-run | `convert.py` | Previously generated readings, meanings, explanations and audio paths are merged back **by card id**, filling only empty fields. A plain re-run never wipes enrichment, and already-filled cards are skipped, so nothing is billed twice. |
+| Enrich | `convert.py --fill-meanings`, `--explain` | Batched LLM calls (a few dozen requests for a whole library) fill **missing** meaning languages and write explanations. A meaning that came from the source is never overwritten. Uses a **build-time** key from `.env`, which is unrelated to the in-app key. |
+| Readings | `scripts/fill_readings.py` | Free and offline. Trusts source data first (the card's own kana `meaning_ja`, then furigana in parentheses or a kana-only front), and falls back to pykakasi only for what is left. |
+| Audio | `convert.py --tts` | Six voices per word from a local VOICEVOX engine, no cloud. Resumable: existing clips are kept unless you pass `--force`. |
+| Re-split | `scripts/rechunk.py` | Changing the list size through `convert.py` would assign new ids and drop all enrichment. `rechunk.py` re-slices the built library in place, moves audio folders to the new ids and writes an old→new id map. |
+
+**Two separate keys.** The build-time key above generates the static library
+written into `data/` (your dev machine only; it lives in `.env`, which is
+gitignored). It has nothing to do with the in-app **Settings** key used live by
+"Explain deeper", which is stored per device in the browser. Neither ever reaches
+the repo, an exported progress file, or `save.json`.
+
+Full `convert.py` usage is in the [reference](#reference) below.
+
+---
+
+## Decisions
+
+Choices not fully specified up front. Parsing, id stability, merging and key
+handling are covered in the two sections above.
+
+1. **Flat courses.** Each top-level `raw_data/` folder is one parallel course on
+   the home screen, modeled in `manifest.json` as one curriculum per course with a
+   single group, keeping the `curriculum → group → list` schema.
+2. **The repo ships tools, not word lists.** Only the self-authored sample deck
+   and the kana set are committed. The app falls back to `data/sample/` when no
+   library is built, so a clone and the hosted demo always have something to run.
+   Built installers inline the full library, so they are for private
+   distribution only.
+3. **Wrong-book rule.** An "Unknown" increments `wrong_count`; a "Known"
+   decrements it and removes the word from the wrong book at 0.
+4. **Kana mastery is a streak.** A kana counts as mastered after 3 correct
+   answers in a row; one miss resets the streak and sends it back to review.
+5. **Stack:** Vite + vanilla JS (no framework). Dynamic data in IndexedDB,
+   settings in localStorage. Dashboard charts are hand-rolled SVG (no chart
+   library) to stay fully offline and light on dependencies.
+6. **Durable storage is a file, not the browser.** IndexedDB is the working
+   store; `save.json` is the source of truth on desktop. See
+   [Where the data lives](#where-the-data-lives).
+
+---
+
+## Reference
+
+<details>
+<summary><strong>Features and keyboard shortcuts</strong></summary>
+
+- **Browse** by course → list, large 3D flip cards (Japanese ⇄ meaning).
+- **Multi-voice audio**: a voice picker with six bundled VOICEVOX voices plus an
+  "Auto (system)" browser `ja-JP` fallback. Per-word mp3 is pre-generated offline
+  by `convert.py --tts`; in-app you get speech rate, auto-play on flip, and a
+  fixed-or-random auto-play voice. Tapping a voice on a card makes it current for
+  that word.
+- **Self-test**: self-graded Known / Unknown, always shuffled, with a wrong book
+  that grows on misses and clears as you get them right.
+- **Per-list scopes**: study or test **All**, **★ favorites**, or **✗ wrong**
+  words within any list.
+- **Multi-round tracking**: each finished round is logged; the home screen shows
+  times studied, last accuracy, and an accuracy-over-rounds sparkline per list.
+- **Kana (五十音) trainer**: hiragana and katakana, 104 kana each (seion, dakuon,
+  handakuon, yōon). A gojūon board tinted by mastery with a detail panel (source
+  kanji, pronunciation notes, example word, look-alike tips, trivia, a link to the
+  same sound in the other script). Four study modes: Recognize, Listen & ID,
+  Romaji input (auto-graded, accepts Hepburn and common alternatives), and
+  Look-alikes. Plus a per-script review list and dashboard. Six VOICEVOX voices
+  per kana, committed with the repo. The data is generated by
+  `scripts/gen-kana.mjs` (`node scripts/gen-kana.mjs`).
+- **AI explanations (two layers)**: an offline static brief (`explain_*`) plus an
+  on-demand online deep-dive (your API key), answered in ZH / EN / JP and cached.
+  Kana get their own prompt (origin, strokes, look-alikes), not a vocab one.
+- **Analytics dashboard**: check-in heatmap + streak, daily volume, level-progress
+  rings, accuracy trend, wrong-answer distribution, and a "when you learn best"
+  time-of-day analysis.
+- **Multiple profiles**: separate accounts, each with its own progress.
+- **Backup & migration**: export all progress to one JSON file; import it on
+  another machine (merge or replace).
+- **Light / dark theme**, responsive down to mobile.
+
+| Context | Keys |
+|---|---|
+| Browse | `←` / `→` prev/next · `Space` flip · `F` or `↑` or click ★ to favorite |
+| Self-test | `Space` flip · `→` Known · `←` Unknown · `F` favorite |
+
+</details>
+
+<details>
+<summary><strong>Packaging: three build targets</strong></summary>
+
+```bash
+# 1. Hosted website: serve the build with any static server
+npm run build                 # -> dist/  (library fetched from data/ at runtime)
+npm run preview               # local server to check it; or deploy dist/ anywhere
+
+# 2. Standalone single file: opens straight from file:// (double-click)
+npm run build:standalone      # -> dist-standalone/index.html  (ONE self-contained
+                              #    file: JS, CSS, and the whole library inlined)
+
+# 3. Electron desktop app: double-clickable .dmg / .exe
+npm install                   # first pulls electron + electron-builder
+npm run electron              # run the desktop app locally
+npm run build:electron        # -> release/  (.dmg on macOS, .exe on Windows)
+```
+
+- The **single-file** build inlines everything because Chrome blocks both `fetch`
+  and ES-module loading from `file://`; inlining sidesteps both. The mp3 audio is
+  not inlined, so the bundled voices don't play in that target; use the hosted
+  build or Electron for audio.
+- **Electron** serves `dist/` over a custom `app://` protocol (so the app's
+  relative `fetch` works without disabling web security) and bundles the library.
+- All three are fully offline; the only network call is the optional Layer-2
+  "Explain deeper" (your own API key, from Settings).
+- The live demo is target 1, built by `.github/workflows/deploy-pages.yml` on
+  every push to `main`. The runner only sees committed files, so the published
+  site can only contain the sample deck and the kana set.
+
+</details>
+
+<details>
+<summary><strong>Desktop app (Electron): which command when, installers, persistence check</strong></summary>
+
+| Command | Use it for | Loads | DevTools |
+|---|---|---|---|
+| `npm run dev` | **Everyday development**: pure web, hot reload, browser DevTools. Electron not involved. | Vite dev server in your browser | browser |
+| `npm run electron:dev` | **Debugging Electron-specific behavior** (esp. persistence) with hot reload. | Vite dev server, in an Electron window | auto-opened |
+| `npm run electron` | A final check of the **built** app exactly as it ships (same `app://` origin as the installer). | built `dist/` over `app://` | no |
+| `npm run build:electron` | **Producing the installer** for distribution. | (writes `release/`) | n/a |
+
+```bash
+npm install                   # one-time: pulls electron + electron-builder
+npm run dev                   # daily web dev (browser, hot reload)
+npm run electron:dev          # debug inside Electron (dev server + auto DevTools)
+npm run electron              # run the built app as it ships (app:// origin)
+npm run build:electron        # build installers into release/
+npm run app:mac               # rebuild and (re)install into /Applications (Apple Silicon)
+```
+
+> **Heads-up:** `electron:dev` loads the dev server (a `http://localhost` origin),
+> so its IndexedDB lives in a *separate* bucket from the shipped app's `app://`
+> origin. It shares the same `save.json`, though, because the file belongs to the
+> main process. The packaged app, or `npm run electron`, is the true
+> production-origin check.
+
+Output of `build:electron` lands in **`release/`** (gitignored):
+
+- **macOS:** `JP Flashcards-<version>.dmg`
+- **Windows:** `JP Flashcards Setup <version>.exe` (NSIS, one-click per-user
+  install; can be built on Windows or cross-built from macOS)
+
+The installers are **unsigned**, so first launch needs a manual bypass. macOS:
+right-click → Open. Windows: SmartScreen shows "unknown publisher"; click "More
+info" → "Run anyway".
+
+IndexedDB for the desktop app lives under the app's user-data directory:
+
+- **macOS:** `~/Library/Application Support/JP Flashcards/IndexedDB/`
+- **Windows:** `%APPDATA%/JP Flashcards/IndexedDB/`
+
+**Verify persistence (30 seconds):** launch the app → create an account and study
+a few cards (favorite one, mark some Known/Unknown so the wrong book and a round
+are written) → fully **quit** (⌘Q / close) → relaunch → your account and progress
+are still there.
+
+> ⚠️ **Private distribution only.** A built `.dmg` / `.exe` **inlines the full
+> vocabulary library**, which may be built from copyrighted sources. **Do not
+> commit the binaries and do not attach them to a public GitHub Release.** Share
+> them privately. Only the source (app code, `convert.py`, the `data/sample/`
+> demo and `data/kana/`) belongs in this repository.
+
+</details>
+
+<details>
+<summary><strong><code>convert.py</code>: full usage</strong></summary>
 
 ```bash
 # one-time Python setup for the data tool
@@ -208,10 +391,10 @@ python3 -m venv venv
 ./venv/bin/python convert.py --seed 7          # different (reproducible) shuffle
 ```
 
-Once `data/manifest.json` exists, `npm run dev` loads it automatically instead of the
-demo deck.
+Once `data/manifest.json` exists, `npm run dev` loads it automatically instead of
+the demo deck.
 
-### Where to drop raw files
+#### Where to drop raw files
 
 Each **top-level folder under `raw_data/` is one course**:
 
@@ -221,16 +404,14 @@ raw_data/
   MyDeck/          # any name becomes a course of that name
 ```
 
-- A folder named `N1`–`N5` becomes course `N5` (uppercased).
+- A folder named `N1` to `N5` becomes that course (uppercased).
 - A folder named `Duolinguo`/`Duolingo` becomes course `Duolingo`.
 - Any other folder name becomes a course with that name.
 
-Supported files: **`.pdf`** (e.g. print-to-PDF flashcards), `.xlsx`, `.xls`, `.csv`.
-The parser keys off character script (kanji = written form, kana = reading,
-Latin/number = meaning) and NFKC-normalizes text, so it adapts to several column
-layouts. Embedded images are ignored (text only, no OCR).
+Supported files: **`.pdf`** (e.g. print-to-PDF flashcards), `.xlsx`, `.xls`,
+`.csv`. Embedded images are ignored (text only, no OCR).
 
-### LLM enrichment (optional, build-time, multi-provider)
+#### LLM enrichment (optional, build-time, multi-provider)
 
 Source data is often missing meaning languages and never has explanations. Two
 separate, idempotent steps fill those into the library:
@@ -241,24 +422,32 @@ cp .env.example .env                            # then put your provider key in 
 ./venv/bin/python convert.py --explain          # generate Layer-1 explanations
 ```
 
-- **Provider** — default **`deepseek`** (DeepSeek-V3 `deepseek-chat`: cheap, fast,
-  plenty good for glosses/explanations). `--provider` also accepts `anthropic`,
-  `openai`, `gemini`, `moonshot`, `mistral`; each reads its key from the matching env
-  var / `.env` (`DEEPSEEK_API_KEY`, `ANTHROPIC_API_KEY`, …) — see `.env.example`.
-- **Batched, not per-word** — each request sends a batch of cards and the model
+- **Provider**: default **`deepseek`** (DeepSeek-V3 `deepseek-chat`: cheap, fast,
+  plenty good for glosses and explanations). `--provider` also accepts
+  `anthropic`, `openai`, `gemini`, `moonshot`, `mistral`; each reads its key from
+  the matching env var / `.env` (`DEEPSEEK_API_KEY`, `ANTHROPIC_API_KEY`, …). See
+  `.env.example`.
+- **Batched, not per-word**: each request sends a batch of cards and the model
   returns a JSON array, so the whole library is a few dozen requests. Tune with
   `--batch-size` (auto: 30 for meanings, 12 for explanations).
-- `--limit N` enriches only the first N cards that need it — a cheap way to test a
-  provider/prompt before the full run (e.g. `--explain --limit 5`).
-- `--model` overrides the provider's default model; `--only`/`--force` scope a re-run.
-- `--fill-meanings` only fills empty languages; never overwrites a source meaning.
-- `--explain` generates `explain_zh/en/ja` (example sentence + usage) from scratch.
+- `--limit N` enriches only the first N cards that need it: a cheap way to test a
+  provider or prompt before the full run (e.g. `--explain --limit 5`).
+- `--model` overrides the provider's default model; `--only` / `--force` scope a
+  re-run.
+- `--fill-meanings` only fills empty languages; never overwrites a source
+  meaning.
+- `--explain` generates `explain_zh/en/ja` (example sentence + usage) from
+  scratch.
 - Both skip already-filled cards, so re-runs don't re-bill.
+- `--fill-meanings` does not touch `reading`; use `scripts/fill_readings.py` for
+  that (dry run by default, `--apply` to write).
 
-### Generate audio (VOICEVOX)
+The in-app Settings supports the same six providers for "Explain deeper".
+
+#### Generate audio (VOICEVOX)
 
 Pre-generate per-word pronunciation for all six bundled voices with the local
-[VOICEVOX](https://voicevox.hiroshiba.jp/) engine — no cloud, no API key:
+[VOICEVOX](https://voicevox.hiroshiba.jp/) engine: no cloud, no API key.
 
 ```bash
 # First launch the VOICEVOX app (serves http://127.0.0.1:50021) and install ffmpeg.
@@ -266,145 +455,29 @@ Pre-generate per-word pronunciation for all six bundled voices with the local
 ./venv/bin/python convert.py --tts --only N5 --limit 20  # scope a quick test run
 ```
 
-Clips land in `data/<course>/audio/<id>/<voice>.mp3` and are linked into each card's
-`audio` map. The run is resumable — existing clips are kept (paths re-linked) unless
-you pass `--force`. The voice list lives in `src/speakers.js`, mirrored by the
-`TTS_SPEAKERS` table in `convert.py`; keep the two in sync. Override the engine URL
-with `VOICEVOX_HOST` if it isn't on the default port.
+Clips land in `data/<course>/audio/<id>/<voice>.mp3` and are linked into each
+card's `audio` map. The run is resumable: existing clips are kept (paths
+re-linked) unless you pass `--force`. The voice list lives in `src/speakers.js`,
+mirrored by the `TTS_SPEAKERS` table in `convert.py`; keep the two in sync.
+Override the engine URL with `VOICEVOX_HOST` if it isn't on the default port.
 
-> **Two separate keys.** The key above is **build-time** — it generates the static
-> library written into `data/` (your dev machine only; goes in `.env`, gitignored).
-> It is unrelated to the in-app **Settings** key used live by "Explain deeper", which
-> is stored per-device in the browser. The app's Settings supports the same six
-> providers.
+The sample deck and the kana set have their own generators
+(`scripts/sample-tts.py`, `scripts/kana-tts.py`, `scripts/build-sample.py`,
+`scripts/sample-explain.py`).
 
-Re-running `convert.py` merges previously generated meanings / explanations / audio
-paths from the existing `data/` (matched by stable card id), so a plain re-run never
-wipes enrichment.
-
----
-
-## Packaging (3 targets)
+#### Re-split an existing library
 
 ```bash
-# 1. Hosted website  — serve the build with any static server
-npm run build                 # -> dist/  (library fetched from data/ at runtime)
-npm run preview               # local server to check it; or deploy dist/ anywhere
-
-# 2. Standalone single file — opens straight from file:// (double-click)
-npm run build:standalone      # -> dist-standalone/index.html  (ONE self-contained
-                              #    file: JS, CSS, and the whole library inlined)
-
-# 3. Electron desktop app    — double-clickable .dmg / .exe
-npm install                   # first pulls electron + electron-builder
-npm run electron              # run the desktop app locally
-npm run build:electron        # -> release/  (.dmg on macOS, .exe on Windows)
+./venv/bin/python scripts/rechunk.py --chunk-size 30 --dry-run
+./venv/bin/python scripts/rechunk.py --chunk-size 30
 ```
 
-- The **single-file** build inlines everything because Chrome blocks both `fetch` and
-  ES-module loading from `file://`; inlining sidesteps both.
-- **Electron** serves `dist/` over a custom `app://` protocol (so the app's relative
-  `fetch` works without disabling web security) and bundles the library.
-- All three are fully offline; the only network call is the optional Layer-2
-  "Explain deeper" (your own API key, from Settings).
+</details>
 
-### Desktop app (Electron) — details
+<details>
+<summary><strong>Data models and IndexedDB stores</strong></summary>
 
-**Which command when:**
-
-| Command | Use it for | Loads | DevTools |
-|---|---|---|---|
-| `npm run dev` | **Everyday development** — pure web, hot reload, browser DevTools. Electron not involved. | Vite dev server in your browser | browser |
-| `npm run electron:dev` | **Debugging Electron-specific behavior** (esp. IndexedDB persistence) with hot reload. | Vite dev server, in an Electron window | auto-opened |
-| `npm run electron` | A final check of the **built** app exactly as it ships (same `app://` origin as the installer). | built `dist/` over `app://` | no |
-| `npm run build:electron` | **Producing the installer** for distribution. | — (writes `release/`) | — |
-
-```bash
-npm install                   # one-time: pulls electron + electron-builder
-npm run dev                   # daily web dev (browser, hot reload)
-npm run electron:dev          # debug inside Electron (dev server + auto DevTools)
-npm run electron              # run the built app as it ships (app:// origin)
-npm run build:electron        # build installers into release/
-```
-
-> **Heads-up:** `electron:dev` loads the dev server (a `http://localhost` origin), so
-> its IndexedDB lives in a *separate* bucket from the shipped app's `app://` origin.
-> It's perfect for confirming the *mechanism* (data survives restart), but the
-> packaged app — or `npm run electron` — is the true production-origin check.
-
-Output of `build:electron` lands in **`release/`** (gitignored):
-
-- **macOS:** `JP Flashcards-<version>.dmg`
-- **Windows:** `JP Flashcards Setup <version>.exe` (configured; build it on a Windows
-  machine, or cross-build from macOS with Wine installed)
-
-The installers are **unsigned**, so first launch needs a manual bypass — macOS:
-right-click → Open; Windows: "More info" → "Run anyway".
-
-**Why the desktop build matters — durable storage.** All your data (accounts,
-favorites, study log, wrong book, rounds, explanation cache) lives in **IndexedDB**.
-The desktop app loads from a stable, secure `app://` origin and uses Electron's
-persistent profile, so that data survives quits, restarts, and app updates. It is
-stored under the app's user-data directory:
-
-- **macOS:** `~/Library/Application Support/JP Flashcards/IndexedDB/`
-- **Windows:** `%APPDATA%/JP Flashcards/IndexedDB/`
-
-> Storage is keyed by the app's `productName` ("JP Flashcards"). Don't rename it in
-> `package.json` once you have real progress — a new name = a new (empty) profile.
-
-**Verify persistence (30 seconds):** launch the app → create an account and study a
-few cards (favorite one, mark some Known/Unknown so the wrong book and a round are
-written) → fully **quit** (⌘Q / close) → relaunch → your account and progress are
-still there.
-
-> ⚠️ **Private distribution only.** A built `.dmg` / `.exe` **inlines the full
-> vocabulary library**, which may be built from copyrighted sources. **Do not commit
-> the binaries and do not attach them to a public GitHub Release.** Share them
-> privately. Only the source (app code + `convert.py` + the small `data/sample/`
-> demo) belongs in this repository.
-
----
-
-## Project structure
-
-```
-jp-flashcard/
-├── index.html
-├── package.json            # vite + electron scripts, electron-builder config
-├── vite.config.js          # base "./", publicDir "data", standalone single-file mode
-├── convert.py              # data-prep: raw_data/ -> data/ (+ optional LLM enrichment)
-├── requirements.txt        # Python deps for convert.py
-├── .env.example            # build-time provider keys for convert.py (copy to .env)
-├── scripts/inline-data.mjs # inlines the library for the standalone build
-├── electron/
-│   ├── main.cjs            # serves dist/ over the app:// protocol
-│   └── preload.cjs
-├── raw_data/               # gitignored; your disposable raw files
-├── data/                   # build output (gitignored); only data/sample/ is committed
-│   └── sample/             # the small demo deck that ships with the repo
-├── src/
-│   ├── main.js             # app init, hash routing, home / deck / favorites / settings / backup
-│   ├── deck.js             # library loading (with sample fallback), Deck cursor, shuffle
-│   ├── card.js             # single card render + 3D flip
-│   ├── tts.js              # audio layer: per-voice VOICEVOX mp3 + browser TTS fallback
-│   ├── speakers.js         # the six bundled VOICEVOX voices (key, label, style id)
-│   ├── quiz.js             # self-test mode + wrong book + round/session logging
-│   ├── db.js               # IndexedDB wrapper (all dynamic stores + export/import)
-│   ├── accounts.js         # multiple profiles
-│   ├── explain.js          # AI explanation: static Layer 1 + online Layer 2 (cached)
-│   ├── dashboard.js        # analytics dashboard (hand-rolled SVG charts)
-│   ├── progress.js         # study log / rounds / wrong-book bookkeeping
-│   ├── migrate.js          # export/import progress JSON
-│   └── settings.js         # user settings (localStorage)
-└── styles/main.css         # Japanese-refined visual style, light + dark
-```
-
----
-
-## Data models
-
-### Vocab JSON (one file per list)
+#### Vocab JSON (one file per list)
 
 ```json
 {
@@ -428,121 +501,112 @@ jp-flashcard/
 }
 ```
 
-See `data/sample/` for a complete, runnable two-list example.
+See `data/sample/` for a complete, runnable example (18 lists).
 
-### `manifest.json`
+#### `manifest.json`
 
 `curriculum → group → list`. The home screen browses courses, then lists. The app
 reads `data/manifest.json` if you've built a library, otherwise falls back to
 `data/sample/manifest.json`.
 
-### IndexedDB stores (dynamic user data)
+#### Kana JSON
+
+`data/kana/hiragana.json` and `katakana.json`, one entry per kana:
+`{ id: "hira:あ", kana, romaji, accepts[], type, row, col, script, origin,
+position, pron, example, mnemonic, lookalikes[], tips, trivia, audio }`. Both
+files are generated; edit `scripts/gen-kana.mjs`, not the JSON.
+
+#### IndexedDB stores (dynamic user data)
 
 ```
 favorites      { word_id }
-study_log      { timestamp, date, hour, lists_studied, cards_seen, known, unknown }
+study_log      { timestamp, date, hour, lists_studied, cards_seen, known, unknown, ... }
 wrong_book     { word_id, wrong_count, last_wrong_date }
 rounds         { list_id, times_studied, last_studied, history:[{round,date,known,unknown}] }
 explain_cache  { key:"{word_id}:{lang}", text, generated_at }
 seen           { list_id, last_seen }
+browse_log     { date, count, hours[24] }     # per-day card views from browsing
 course_state   { course, round }
-kana_progress  { id, ... }            # 五十音 rolling accuracy
+kana_progress  { id, attempts, correct, streak, last_result, updated }
 saves          { id, name, stores, settings, counts }   # one per account
 meta           { key, value }         # internal (e.g. last file-sync marker)
 ```
 
-Settings (default face, speech rate, auto-play, theme, explanation language, API key,
-model) live in `localStorage`.
+Settings (default face, speech rate, auto-play, voice, theme, explanation
+language, API keys, models) live in `localStorage`.
 
-### Where your progress is stored — and how to not lose it
+</details>
 
-> **TL;DR — for daily study, use the packaged Electron app.** It saves everything
-> to one local file, so it never gets lost. The dev server in a browser is for
-> development only.
+<details>
+<summary><strong>Project structure</strong></summary>
 
-Browser storage (IndexedDB **and** localStorage) is isolated **per origin** —
-`scheme://host:port` — and also per browser. The same app opened different ways
-therefore reads **different, independent stores**:
+```
+jp-flashcard/
+├── index.html
+├── package.json            # vite + electron scripts, electron-builder config
+├── vite.config.js          # base "./", publicDir "data", standalone single-file mode
+├── convert.py              # data-prep: raw_data/ -> data/ (+ optional LLM enrichment, TTS)
+├── requirements.txt        # Python deps for convert.py
+├── .env.example            # build-time provider keys for convert.py (copy to .env)
+├── .github/workflows/
+│   └── deploy-pages.yml    # builds and publishes the live demo
+├── assets/                 # README screenshots
+├── scripts/
+│   ├── inline-data.mjs     # inlines the library for the standalone build
+│   ├── gen-kana.mjs        # generator (source of truth) for data/kana/*.json
+│   ├── kana-tts.py         # six VOICEVOX voices for every kana
+│   ├── build-sample.py     # builds the data/sample/ demo deck
+│   ├── sample-tts.py       # six VOICEVOX voices for the demo deck
+│   ├── sample-explain.py   # Layer-1 explanations for the demo deck
+│   ├── fill_readings.py    # fills empty readings offline
+│   ├── rechunk.py          # re-splits a built library without losing enrichment
+│   ├── electron-dev.mjs    # `npm run electron:dev`
+│   └── install-mac.mjs     # `npm run app:mac`
+├── electron/
+│   ├── main.cjs            # serves dist/ over app://; owns save.json + backups
+│   └── preload.cjs         # exposes window.jpStore (load / save / reveal)
+├── raw_data/               # gitignored; your disposable raw files
+├── data/                   # build output (gitignored) except:
+│   ├── sample/             # the demo deck (JSON + audio)
+│   └── kana/               # hiragana / katakana JSON + audio
+├── src/
+│   ├── main.js             # app init, hash routing, home / deck / favorites / settings / backup
+│   ├── deck.js             # library loading (with sample fallback), Deck cursor, shuffle
+│   ├── card.js             # single card render + 3D flip
+│   ├── tts.js              # audio layer: per-voice VOICEVOX mp3 + browser TTS fallback
+│   ├── speakers.js         # the six bundled VOICEVOX voices (key, label, style id)
+│   ├── quiz.js             # self-test mode + wrong book + round/session logging
+│   ├── kana.js             # kana trainer: board, detail panel, 4 modes, review, dashboard
+│   ├── db.js               # IndexedDB wrapper (all dynamic stores + export/import + write hook)
+│   ├── filestore.js        # save.json mirror: snapshot, debounced save, boot reconcile
+│   ├── accounts.js         # multiple profiles
+│   ├── explain.js          # AI explanation: static Layer 1 + online Layer 2 (cached)
+│   ├── dashboard.js        # analytics dashboard (hand-rolled SVG charts)
+│   ├── progress.js         # study log / rounds / wrong-book bookkeeping
+│   ├── migrate.js          # export/import progress JSON
+│   └── settings.js         # user settings (localStorage)
+└── styles/main.css         # Japanese-refined visual style, light + dark
+```
 
-| How you open it | Origin | Storage |
-| --- | --- | --- |
-| Packaged Electron app (recommended) | `app://app` | Electron userData |
-| Electron loading the dev server | `http://localhost:5173` | Electron userData |
-| `npm run dev` in Chrome/Safari | `http://localhost:5173` | that browser's profile |
-| The standalone single file (double-click) | `file://` | that browser's profile |
+</details>
 
-These do **not** share data and do **not** erase each other. Open the app a
-different way (a different port because `5173` was taken — Vite silently jumps to
-`5174` — a different browser, packaged vs dev) and you'll see a *fresh empty
-store*. Your old data is still there under the original origin; you're just
-looking at a different box. Clearing a browser's site data, however, **deletes**
-that origin's store for good.
+<details>
+<summary><strong>Privacy and offline</strong></summary>
 
-**The fix:** the Electron app persists the whole database to a single
-origin-independent file and treats it as the source of truth:
+Everything runs locally. The library lives on your machine; your progress lives
+in IndexedDB (and, on desktop, in `save.json`) and never leaves unless you export
+it. The single optional network call is "Explain deeper", which goes directly to
+the LLM provider you choose in Settings (Claude / ChatGPT / Gemini / DeepSeek /
+Moonshot / Mistral) with the key you enter there (stored locally, stripped from
+progress exports and from `save.json`).
 
-- **`<userData>/save.json`** — full mirror (all accounts + active progress +
-  settings) written atomically after every change. On macOS, `<userData>` is
-  `~/Library/Application Support/JP Flashcards/`.
-- **`<userData>/backups/`** — the last ~20 timestamped copies.
-- On launch the app restores from `save.json`, so even a wiped/!changed origin
-  comes back. Settings → **Accounts** has **Open save folder** / **Back up now**.
-- **API keys are never written to the file** (they stay in `localStorage`); after
-  a site-data clear, re-enter them in Settings.
+</details>
 
-Running in a plain browser (dev/debug) shows a banner in Settings → Accounts:
-there's no file there, so storage is per-origin only. To move data between a
-browser and the app, use per-account **Export / Import**.
+<details>
+<summary><strong>License</strong></summary>
 
----
+[MIT](LICENSE) © 2026 Jiahe Hu. The vocabulary content you generate with
+`convert.py` from your own sources is yours and is **not** part of this
+repository.
 
-## Decisions
-
-Choices not fully specified up front, recorded here.
-
-1. **Flat courses.** Each top-level `raw_data/` folder is one parallel course on the
-   home screen, modeled in `manifest.json` as one curriculum per course with a single
-   group, keeping the `curriculum → group → list` schema.
-2. **Lists are word-chunks.** Each source file is shuffled (deterministic `--seed`, so
-   lists and card IDs are stable across runs) and split into lists of `--chunk-size`
-   words (default **50**).
-3. **PDF parsing is script-based, not column-based.** Parsing keys off character
-   script: a kanji token is the written form (`front`), a pure-kana token is the
-   `reading` (or `front` for kana-only words), Latin/number tokens are the `meaning`.
-   Text is NFKC-normalized so font variants and full/half-width forms fold to canon.
-4. **Embedded images are ignored** (text only, no OCR). Scanned PDFs are reported, not
-   silently OCR-ed.
-5. **Source gaps stay empty, not invented.** Cards with no reading/meaning in the
-   source stay empty until LLM enrichment; they are not parser errors.
-6. **Duplicates vs conflicts** (global): a *duplicate* (same word, same/unknown
-   reading) is kept with `duplicate_of` set to the first occurrence. A *conflict*
-   (same written form, different non-empty reading) keeps both and prints a warning;
-   nothing is silently merged.
-7. **Wrong-book rule.** An "Unknown" increments `wrong_count`; a "Known" decrements it
-   and removes the word from the wrong book at 0.
-8. **Stack:** Vite + vanilla JS (no framework). Dynamic data in IndexedDB, settings in
-   localStorage. Dashboard charts are hand-rolled SVG (no chart library) to stay fully
-   offline and dependency-light.
-9. **The API key is never written into an exported progress file** — nor into the
-   Electron `save.json`. Keys stay in `localStorage` on the machine that entered them.
-10. **Durable storage is a file, not the browser.** The Electron app mirrors the whole
-    database to `<userData>/save.json` (atomic write + rotating backups) and restores
-    from it on launch, so user data survives the per-origin IndexedDB split and
-    cleared site data. A plain browser has no file and runs IndexedDB-only (debug).
-
----
-
-## Privacy & offline
-
-Everything runs locally. The library lives on your machine; your progress lives in
-your browser's IndexedDB and never leaves unless you export it. The single optional
-network call is "Explain deeper", which goes directly to the LLM provider you choose
-in Settings (Claude / ChatGPT / Gemini / DeepSeek / Moonshot / Mistral) with the key
-you enter there (stored locally, stripped from progress exports).
-
----
-
-## License
-
-[MIT](LICENSE) © 2026 Jiahe Hu. The vocabulary content you generate with `convert.py`
-from your own sources is yours and is **not** part of this repository.
+</details>
