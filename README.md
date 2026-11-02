@@ -64,67 +64,130 @@ you can try every feature right away. To study real material, build your own lib
 
 ---
 
-## Features
+## Four ways to run it
 
-- **Browse** by course → list, large 3D flip cards (Japanese ⇄ meaning).
-- **Multi-voice audio** — a voice picker with six bundled VOICEVOX voices plus an
-  "Auto (system)" browser `ja-JP` fallback. Per-word mp3 is pre-generated offline by
-  `convert.py --tts`; in-app you get speech-rate, auto-play-on-flip, and a
-  fixed-or-random auto-play voice. Tapping a voice on a card makes it current for
-  that word.
-- **Self-test** — self-graded Known / Unknown, always shuffled, with a wrong book
-  that grows on misses and clears as you get them right.
-- **Per-list scopes** — study/test **All**, **★ favorites**, or **✗ wrong** words
-  within any list.
-- **Multi-round tracking** — each finished round is logged; the home screen shows
-  times studied, last accuracy, and an accuracy-over-rounds sparkline per list.
-- **AI explanations (two layers)** — an offline static brief (`explain_*`) plus an
-  on-demand online deep-dive (your API key), answered in ZH / EN / JP and cached.
-- **Analytics dashboard** — check-in heatmap + streak, daily volume, level-progress
-  rings, accuracy trend, wrong-answer distribution, and a "when you learn best"
-  time-of-day analysis.
-- **Multiple profiles** — separate accounts, each with its own progress.
-- **Backup & migration** — export all progress to one JSON file; import it on
-  another machine (merge or replace).
-- **Light / dark theme**, responsive down to mobile.
+The same code ships four ways. Each one opens the app under a different
+**origin** (`scheme://host:port`), and browser storage (IndexedDB **and**
+localStorage) is isolated per origin and per browser. So each way below reads and
+writes its own, independent store:
 
-### Keyboard shortcuts
+| How you open it | Origin | Storage | Mirrored to `save.json` |
+| --- | --- | --- | --- |
+| Packaged Electron app (recommended) | `app://app` | Electron userData | yes |
+| Electron loading the dev server (`npm run electron:dev`) | `http://localhost:5173` | Electron userData | yes |
+| `npm run dev` in Chrome/Safari | `http://localhost:5173` | that browser's profile | no |
+| The standalone single file (double-click) | `file://` | that browser's profile | no |
 
-| Context | Keys |
-|---|---|
-| Browse | `←` / `→` prev/next · `Space` flip · click ★ to favorite |
-| Self-test | `Space` flip · `→` Known · `←` Unknown · `F` favorite |
+The hosted live demo is one more origin of the third kind: its own store, in
+whichever browser you open it in.
+
+These stores do **not** share data and do **not** erase each other. Open the app
+a different way (a different port, a different browser, packaged vs dev) and you
+see a fresh, empty store. Your old data is still there under the original origin;
+you are just looking in a different box. Clearing a browser's site data, however,
+**deletes** that origin's store for good.
 
 ---
 
-## How it works
+## Where the data lives
+
+### Three classes of data, kept apart
 
 ```
 raw_data/        your own vocab files (PDF / xlsx / xls / csv). Disposable, gitignored.
    │
    ▼  convert.py            reads raw_data/, extracts cards, shuffles + splits into
    │                        lists, (optionally) LLM-enriches, writes the library.
-data/            build output the app reads at runtime (gitignored, except data/sample/):
+data/            build output the app reads at runtime (gitignored, except data/sample/ and data/kana/):
    ├── manifest.json        course -> list index
    ├── N5/list01.json …     one JSON file per study list
-   ├── audio/               pre-generated pronunciation (added later by --tts)
-   └── sample/              the small demo deck that ships with the repo
+   ├── <course>/audio/      pre-generated pronunciation (added by --tts)
+   ├── sample/              the demo deck that ships with the repo
+   └── kana/                the kana set that ships with the repo
    │
    ▼  the app (static SPA)
    ├── reads data/ (read-only); falls back to data/sample/ if no library is built
    └── writes user data -> IndexedDB (favorites / study log / wrong book / rounds / cache)
 ```
 
-**Three strictly separated data classes:**
-
-1. **Raw input** (`raw_data/`) — disposable; only an input to conversion;
+1. **Raw input** (`raw_data/`): disposable; only an input to conversion;
    gitignored. Deletable at any time without breaking the app.
-2. **Static library** (`data/`) — the vocab content (+ audio later). Built by you
-   from your own sources and **not committed** (only `data/sample/` is). It travels
-   *with* your own app package when you build one.
-3. **Dynamic user data** (IndexedDB) — favorites, check-ins, wrong answers, study
-   rounds, explanation cache, settings. Your personal progress — the **only** thing
-   exported/imported during migration.
+2. **Static library** (`data/`): the vocab content and audio. Built by you from
+   your own sources and **not committed** (only `data/sample/` and `data/kana/`
+   are). It travels *with* your own app package when you build one.
+3. **Dynamic user data** (IndexedDB): favorites, check-ins, wrong answers, study
+   rounds, kana progress, explanation cache, settings. Your personal progress, and
+   the **only** thing exported or imported during migration.
+
+The first two are easy: they are files, rebuilt on demand. The third is the one
+that can be lost.
+
+### The problem: progress is keyed by origin
+
+IndexedDB is the right live store for a static web app: fast, transactional, no
+server. But it belongs to an origin, and the table above shows how many origins
+this one app has. This was found the hard way. During daily study in Safari at
+`localhost:5173`, port 5173 was taken one day and Vite silently moved to `5174`.
+The app opened on an empty store and looked like a wiped save. Nothing had been
+lost; the data was intact under `:5173`. But from the learner's side, "my progress
+is gone" and "my progress is in another box" look identical.
+
+A stable origin alone does not fix this. The packaged Electron app does load from
+a fixed, secure `app://app` origin, and its IndexedDB does survive quits,
+restarts and updates (checked by a quit and relaunch test). But that store is
+still tied to one origin and one profile directory, and the profile directory is
+keyed by the app's `productName`. Rename the app, run the dev build, or clear
+site data, and you are back to an empty box.
+
+### The fix: one file, owned by the main process
+
+The Electron app mirrors the whole database to a single, origin-independent file
+and treats it as the source of truth. IndexedDB stays the live working store, so
+the rest of the app did not change.
+
+- **`<userData>/save.json`**: a full mirror (all accounts, active progress,
+  settings). On macOS `<userData>` is `~/Library/Application Support/JP Flashcards/`;
+  on Windows it is `%APPDATA%/JP Flashcards/`.
+- **`<userData>/backups/`**: the last 20 timestamped copies, rotated on each
+  write.
+- **Written by the main process only.** The renderer reaches it through a small
+  preload bridge (`window.jpStore` with `load` / `save` / `reveal`). There is one
+  main process no matter which origin a window loaded, so the packaged app and
+  `electron:dev` share the same file. A single-instance lock keeps it to one
+  writer.
+- **Atomic writes.** Each save goes to a temp file in the same folder and is then
+  renamed over `save.json`, so a crash mid-write cannot leave a half-written file.
+- **Every change is captured.** `src/db.js` fires a write hook on every
+  read-write transaction (except the internal `meta` store and `explain_cache`).
+  `src/filestore.js` debounces those into one save after 1.5 s of quiet, and also
+  flushes on `pagehide` / `visibilitychange`.
+
+On launch, `bootReconcile()` runs **before** any account is loaded and decides
+which side wins:
+
+| On launch | What happens |
+| --- | --- |
+| No file, or the file is unreadable | Seed the file from IndexedDB. A broken or empty file never overwrites a non-empty database. |
+| File is valid and at least as new as the last sync marker | The file wins: restore it into IndexedDB (keeping this machine's API keys). |
+| IndexedDB is newer than the file (e.g. a previous write failed) | IndexedDB wins: rewrite the file. |
+
+Deleting the app's IndexedDB folder and relaunching brings everything back from
+`save.json`. Settings → **Accounts** has **Open save folder** and **Back up now**.
+
+Two things never go into the file:
+
+- **API keys.** They stay in this machine's `localStorage`, and they are also
+  stripped from progress exports. After a site-data clear, re-enter them in
+  Settings.
+- **`explain_cache`.** It can be regenerated and would bloat the file.
+
+In a plain browser there is no bridge, so the app runs IndexedDB-only and shows a
+banner in Settings → Accounts saying so. To move data between a browser and the
+desktop app, use per-account **Export / Import**.
+
+> **Don't rename `productName`** ("JP Flashcards") in `package.json` once you have
+> real progress. It decides the userData folder: a new name means a new, empty
+> profile and a new `save.json` location.
 
 ---
 
